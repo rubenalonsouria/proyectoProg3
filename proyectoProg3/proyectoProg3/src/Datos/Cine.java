@@ -6,4 +6,7 @@ public abstract class Cine{
 	 * 
 	 */
 
+	protected String nombreCine;
+	protected String localizacion;
+	
 }
