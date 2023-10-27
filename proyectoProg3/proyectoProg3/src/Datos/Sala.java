@@ -1,5 +1,7 @@
 package Datos;
 
-public class Sala extends Cine{
+import java.util.ArrayList;
 
+public class Sala extends Cine{
+	 protected ArrayList<Integer> numerosButacas;
 }

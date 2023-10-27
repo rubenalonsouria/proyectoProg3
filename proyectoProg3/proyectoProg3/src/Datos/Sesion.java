@@ -8,7 +8,7 @@ public class Sesion extends Pelicula{
 	// Igual mejor de cine
 
 	protected Pelicula pelicula;
-	protected int numSala;
+	protected Sala sala;
 	protected LocalDate fecha;
 	protected boolean variable3D;
 }
