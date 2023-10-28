@@ -16,7 +16,7 @@ public class VentanaPrincipal extends JFrame {
 
 		/*
 		 * Con absolute layout no se anade el segundo bottonn de momento ponemos un flow
-		 * layot para qeu sea funcional iniciarSesion.setBounds(825, 200, 122, 38);
+		 * layout para que sea funcional iniciarSesion.setBounds(825, 200, 122, 38);
 		 * registrarse.setBounds(825, 110, 122, 38);
 		 */
 
@@ -31,6 +31,7 @@ public class VentanaPrincipal extends JFrame {
 		add(iniciarSesion);
 		add(registrarse);
 		setVisible(true);
+		setTitle("DeustoCine");
 		setBounds(100, 100, 1200, 800);
 		setLayout(new FlowLayout()); // En el futuro lo pondremos null y lo pondremos manualmente
 		setLocationRelativeTo(null);

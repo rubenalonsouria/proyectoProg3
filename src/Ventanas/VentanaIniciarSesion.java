@@ -78,6 +78,7 @@ public class VentanaIniciarSesion extends JFrame {
 		add(btnNewButton_1);
 
 		setVisible(true);
+		setTitle("Iniciar sesión");
 		setBounds(100, 100, 800, 200);
 		setLayout(new FlowLayout()); // En el futuro lo pondremos null y lo pondremos manualmente
 		setLocationRelativeTo(null);
