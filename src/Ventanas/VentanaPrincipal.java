@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 public class VentanaPrincipal extends JFrame {
 	protected JFrame ventanaPrincipal;
@@ -33,16 +34,21 @@ public class VentanaPrincipal extends JFrame {
 
 		});
 
-		labelLogo = new JLabel(new ImageIcon("deustocinelogo.png"));
+		JPanel panelBotonesAcciones = new JPanel();
+		JPanel panelLogo = new JPanel();
 		
-		add(iniciarSesion);
-		add(registrarse);
+		labelLogo = new JLabel(new ImageIcon("deustocinelogo2.png"));
+		
+		add(panelBotonesAcciones, BorderLayout.NORTH);
+		add(panelLogo, BorderLayout.CENTER);
+		panelBotonesAcciones.add(registrarse);
+		panelBotonesAcciones.add(iniciarSesion);
+		panelLogo.add(labelLogo);
+
 		setVisible(true);
 		setTitle("DeustoCine");
-		add(labelLogo, BorderLayout.SOUTH);
 		pack();
 		setBounds(100, 100, 1200, 800);
-		setLayout(new FlowLayout()); // En el futuro lo pondremos null y lo pondremos manualmente
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(VentanaPrincipal.EXIT_ON_CLOSE);
 
