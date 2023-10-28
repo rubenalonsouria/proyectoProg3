@@ -1,4 +1,4 @@
-package Datos;
+package Pelicula;
 
 public enum Genero {
 

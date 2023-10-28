@@ -1,15 +1,44 @@
-package Datos;
+package Entradas;
 
-public class Entrada extends Sesion{
+import Cine.Sesion;
+import Pelicula.Pelicula;
+import Usuarios.Cliente;
 
-	protected int precio;
+public class Entrada extends Pelicula{
+//PENSAR MEJOR ATRIBUTOS ESTA PROVISIONAL
+	protected double precio;
 	protected Cliente cliente;
 	protected Sesion sesion;
 	
-private double calcularPrecio() {
-//Mirar qeu nos conviene mas, si public o private o static
-		// TODO Auto-generated method stub
-		return 0;
+	
+	
+	
+	
+	public Entrada(double precio, Cliente cliente, Sesion sesion) {
+		super();
+		this.precio = precio;
+		this.cliente = cliente;
+		this.sesion = sesion;
 	}
+	public double getPrecio() {
+		return precio;
+	}
+	public void setPrecio(double precio) {
+		this.precio = precio;
+	}
+	public Cliente getCliente() {
+		return cliente;
+	}
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+	public Sesion getSesion() {
+		return sesion;
+	}
+	public void setSesion(Sesion sesion) {
+		this.sesion = sesion;
+	}
+	
+	
 
 }

@@ -1,4 +1,4 @@
-package Datos;
+package Cine;
 
 public abstract class Cine{
 	/*Hay qeu repasar lo de las clases hijas y madres 

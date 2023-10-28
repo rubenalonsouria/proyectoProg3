@@ -1,8 +1,11 @@
-package Datos;
+package Usuarios;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import Entradas.Compra;
+import Pelicula.Pelicula;
 
 public class Cliente extends Usuario{
 	
@@ -10,8 +13,8 @@ public class Cliente extends Usuario{
 	protected MetodoDePago metodoDePago;//Esto no en el momento de creacion del cliente sera null
 	protected int numeroTarjeta;		//Una vez que reserve se pediran datos depago y se actualizaran.
 	protected int puntos;	//Por cada compra almacena puntos que 100 = 1$ de descuento
-	protected Map<Pelicula, ArrayList<String>> historialDeCompras; //Almacenaremos la Pelicula como clave y en la ArrayList
-																   //guardaremos la fecha de compra, numero entradas y precio.
+	protected Map<Pelicula, ArrayList<Compra>> historialDeCompras; //Almacenaremos la Pelicula como clave y en la ArrayList
+																   //guardaremos las compras para esa pelicula.
 	
 	//constructor
 	public Cliente(String correo, String password, String nombre, String apellido, String dni,
@@ -59,11 +62,11 @@ public class Cliente extends Usuario{
 		this.puntos = puntos;
 	}
 
-	public Map<Pelicula, ArrayList<String>> getHistorialDeCompras() {
+	public Map<Pelicula, ArrayList<Compra>> getHistorialDeCompras() {
 		return historialDeCompras;
 	}
 
-	public void setHistorialDeCompras(Map<Pelicula, ArrayList<String>> historialDeCompras) {
+	public void setHistorialDeCompras(Map<Pelicula, ArrayList<Compra>> historialDeCompras) {
 		this.historialDeCompras = historialDeCompras;
 	}
 	//ToString

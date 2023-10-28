@@ -1,6 +1,9 @@
-package Datos;
+package Pelicula;
 
 import java.util.ArrayList;
+
+import Cine.Cine;
+import Entradas.Entrada;
 
 public abstract class Pelicula extends Cine{
 	
@@ -11,5 +14,8 @@ public abstract class Pelicula extends Cine{
 	protected ArrayList<String> directores = new ArrayList<>();
 	protected Genero genero;
 	protected Valoracion estrellas; // Hay que crear en la ventana que se visualice por estrellas.
+	
+	
+	
 	
 }

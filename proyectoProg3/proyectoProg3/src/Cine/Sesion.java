@@ -1,6 +1,8 @@
-package Datos;
+package Cine;
 
 import java.time.LocalDate;
+
+import Pelicula.Pelicula;
 
 public class Sesion extends Pelicula{
 	//La sesion es de pelicula, qeu seran las horas en las que estara disponible
