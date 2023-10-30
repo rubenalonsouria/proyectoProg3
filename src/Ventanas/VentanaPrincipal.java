@@ -31,7 +31,7 @@ public class VentanaPrincipal extends JFrame {
 			new VentanaIniciarSesion(ventanaPrincipal);
 		});
 		registrarse.addActionListener((e) -> {
-
+			new VentanaRegistro();
 		});
 
 		JPanel panelBotonesAcciones = new JPanel();
