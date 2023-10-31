@@ -1,9 +1,5 @@
 package Entradas;
-
 import java.time.LocalDate;
-
-import javax.swing.JFrame;
-
 import Cine.Cine;
 import Pelicula.Pelicula;
 import Usuarios.Cliente;

@@ -1,7 +1,11 @@
 package Entradas;
 
-import Cine.Sesion;
+import java.util.ArrayList;
+
+import Pelicula.Genero;
 import Pelicula.Pelicula;
+import Pelicula.Sesion;
+import Pelicula.Valoracion;
 import Usuarios.Cliente;
 
 public class Entrada extends Pelicula{
@@ -10,12 +14,11 @@ public class Entrada extends Pelicula{
 	protected Cliente cliente;
 	protected Sesion sesion;
 	
-	
-	
-	
-	
-	public Entrada(double precio, Cliente cliente, Sesion sesion) {
-		super();
+	public Entrada(String titulo, int duracion, String sinopsis, ArrayList<String> actores,
+			ArrayList<String> directores, Genero genero, Valoracion estrellas, double precio, Cliente cliente,
+			Sesion sesion) {
+		super(titulo, duracion, sinopsis, actores, directores, genero, estrellas);
+		
 		this.precio = precio;
 		this.cliente = cliente;
 		this.sesion = sesion;
@@ -37,6 +40,11 @@ public class Entrada extends Pelicula{
 	}
 	public void setSesion(Sesion sesion) {
 		this.sesion = sesion;
+	}
+	
+	@Override
+	public String toString() {
+		return "Entrada [precio=" + precio + ", cliente=" + cliente + ", sesion=" + sesion + "]";
 	}
 	
 	

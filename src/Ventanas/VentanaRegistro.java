@@ -1,5 +1,4 @@
 package Ventanas;
-
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 
@@ -10,6 +9,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class VentanaRegistro extends JFrame{
+	private static final long serialVersionUID = 1L;
+
 	public VentanaRegistro() {
 		setBounds(400, 100, 800, 500); 
 		

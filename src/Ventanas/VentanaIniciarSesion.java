@@ -5,8 +5,6 @@ import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-
-import javax.security.auth.login.AccountNotFoundException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -15,6 +13,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class VentanaIniciarSesion extends JFrame {
+	private static final long serialVersionUID = 1L;
 	private JFrame ventanaPricipal;
 	private JTextField textField; // Poner el nobre de cada componente con el que es
 	private JLabel lblNewLabel, lblNewLabel_1;
