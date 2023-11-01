@@ -1,4 +1,4 @@
-package Ventanas;
+package gui;
 import java.awt.BorderLayout;
 import java.awt.Image;
 
@@ -38,7 +38,7 @@ public class VentanaPrincipal extends JFrame {
 		JPanel panelBotonesAcciones = new JPanel();
 		JPanel panelLogo = new JPanel();
 		
-		ImageIcon icono = new ImageIcon("deustocinelogo2.png");
+		ImageIcon icono = new ImageIcon("images/deustocinelogo2.png");
 		Image imagen = icono.getImage().getScaledInstance(500, 400, Image.SCALE_SMOOTH);
 		labelLogo = new JLabel(new ImageIcon(imagen));
 		

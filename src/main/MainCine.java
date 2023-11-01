@@ -1,13 +1,13 @@
-package Datos;
+package main;
 import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
 import Usuarios.Usuario;
-import Ventanas.VentanaIniciarSesionTesting;
-import Ventanas.VentanaPrincipal;
-import Ventanas.VentanaPrincipalTesting;
+import gui.VentanaIniciarSesionTesting;
+import gui.VentanaPrincipal;
+import gui.VentanaPrincipalTesting;
 
 public class MainCine {
 public static void main(String[] args) {
