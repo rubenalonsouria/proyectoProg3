@@ -1,5 +1,4 @@
 package Usuarios;
-
 import java.time.LocalDate;
 
 import Cine.Cine;
@@ -15,5 +14,28 @@ public class Administrador extends Usuario {
 		super(correo, password, nombre, apellido, dni, fechaNacimineto);
 		id = id + 1;
 	}
+
+	public Cine getCine() {
+		return cine;
+	}
+
+	public void setCine(Cine cine) {
+		this.cine = cine;
+	}
+
+	public Pelicula getPeliculas() {
+		return peliculas;
+	}
+
+	public void setPeliculas(Pelicula peliculas) {
+		this.peliculas = peliculas;
+	}
+
+	@Override
+	public String toString() {
+		return "Administrador [cine=" + cine + ", peliculas=" + peliculas + "]";
+	}
+	
+	
 
 }

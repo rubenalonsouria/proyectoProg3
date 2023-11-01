@@ -1,9 +1,5 @@
 package Ventanas;
-
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.FlowLayout;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -11,6 +7,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class VentanaPrincipal extends JFrame {
+//por que hay que poner serialVersionUID = 1L PREGUNTAR
+	
+	private static final long serialVersionUID = 1L;
 	protected JFrame ventanaPrincipal;
 	protected JButton iniciarSesion, registrarse;
 	protected JLabel labelLogo;

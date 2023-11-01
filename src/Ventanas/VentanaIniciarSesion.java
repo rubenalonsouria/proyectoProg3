@@ -5,8 +5,6 @@ import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-
-import javax.security.auth.login.AccountNotFoundException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -15,6 +13,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class VentanaIniciarSesion extends JFrame {
+	private static final long serialVersionUID = 1L;
 	private JFrame ventanaPricipal;
 	private JTextField textField; // Poner el nobre de cada componente con el que es
 	private JLabel lblNewLabel, lblNewLabel_1;
@@ -40,8 +39,8 @@ public class VentanaIniciarSesion extends JFrame {
 
 		btnNewButton.addActionListener((e) -> {
 			try {
-				Scanner sc = new Scanner(new FileReader("usuarios")); //ERROR EN LECTURA Y SI ERES UN ADMINISTRADOR TIENE QEU APARECER QUE ES ADMIN
-				String usuario = sc.nextLine();						// Y TIENE PODERES EXTRA o que aparezca una ventana administrador(diferente a la de cliente					
+				Scanner sc = new Scanner(new FileReader("Ficheros/usuarios")); //ERROR EN LECTURA Y SI ERES UN ADMINISTRADOR TIENE QEU APARECER QUE ES ADMIN
+				//String usuario = sc.nextLine();						// Y TIENE PODERES EXTRA o que aparezca una ventana administrador(diferente a la de cliente					
 				String linea;										// que es la principal)
 				while (sc.hasNext()) {
 					linea = sc.nextLine();
@@ -61,7 +60,7 @@ public class VentanaIniciarSesion extends JFrame {
 				JOptionPane.showMessageDialog(null, "Primero registrate","ERROR",JOptionPane.WARNING_MESSAGE);
 			}
 			else {
-				if (contrasenaField == mapaUsuarios.get(correoField)) {
+				if (contrasenaField.equals(mapaUsuarios.get(correoField))) {
 					JOptionPane.showMessageDialog(null, "Inicio Sesion correcto","ERROR",JOptionPane.OK_OPTION);
 				}else {
 					JOptionPane.showMessageDialog(null, "Contrasena incorrecta","ERROR",JOptionPane.ERROR_MESSAGE);
