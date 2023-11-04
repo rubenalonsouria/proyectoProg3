@@ -1,6 +1,8 @@
 package gui;
 
+import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -24,11 +27,11 @@ public class VentanaIniciarSesion extends JFrame {
 	public VentanaIniciarSesion(JFrame ventanaAnterior) {
 
 		ventanaPricipal = ventanaAnterior;
-		lblNewLabel = new JLabel("Correo");
-		lblNewLabel_1 = new JLabel("contrasena");
-		textField = new JTextField(15);
-		password = new JPasswordField(15);
-		btnNewButton = new JButton("iniciar");
+		lblNewLabel = new JLabel("Correo Electrónico:");
+		lblNewLabel_1 = new JLabel("Contraseña:");
+		textField = new JTextField("", 15);
+		password = new JPasswordField("", 15);
+		btnNewButton = new JButton("Iniciar");
 		btnNewButton_1 = new JButton("Volver");
 
 		// Para cancelar y volver a la ventana principal
@@ -69,17 +72,25 @@ public class VentanaIniciarSesion extends JFrame {
 			}
 		});
 
-		add(lblNewLabel);
-		add(textField);
-		add(lblNewLabel_1);
-		add(password);
-		add(btnNewButton);
-		add(btnNewButton_1);
+		JLabel lCabecera = new JLabel("Identificate con tus datos de inicio de sesión:");
+		add( lCabecera, BorderLayout.NORTH );
+		JPanel panelIniciarSesion = new JPanel(new GridLayout(2, 2));
+		JPanel panelAcciones = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		
+		add(panelIniciarSesion, BorderLayout.CENTER);
+		add(panelAcciones, BorderLayout.SOUTH);
+		
+		panelIniciarSesion.add(lblNewLabel);
+		panelIniciarSesion.add(textField);
+		panelIniciarSesion.add(lblNewLabel_1);
+		panelIniciarSesion.add(password);
+		panelAcciones.add(btnNewButton);
+		panelAcciones.add(btnNewButton_1);
 
 		setVisible(true);
 		setTitle("Iniciar sesión");
 		setBounds(100, 100, 800, 200);
-		setLayout(new FlowLayout()); // En el futuro lo pondremos null y lo pondremos manualmente
+		//setLayout(new FlowLayout()); // En el futuro lo pondremos null y lo pondremos manualmente
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(VentanaIniciarSesion.EXIT_ON_CLOSE);
 	}
