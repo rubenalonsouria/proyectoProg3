@@ -14,16 +14,15 @@ import javax.swing.JTextField;
 
 public class VentanaIniciarSesion extends JFrame {
 	private static final long serialVersionUID = 1L;
-	private JFrame ventanaPricipal;
 	private JTextField textField; // Poner el nobre de cada componente con el que es
 	private JLabel lblNewLabel, lblNewLabel_1;
 	private JPasswordField password;
 	private JButton btnNewButton, btnNewButton_1;
 	private Map<String, String> mapaUsuarios = new HashMap<String, String>();
 
-	public VentanaIniciarSesion(JFrame ventanaAnterior) {
+	public VentanaIniciarSesion(JFrame ventanaPrincipal) {
 
-		ventanaPricipal = ventanaAnterior;
+		
 		lblNewLabel = new JLabel("Correo");
 		lblNewLabel_1 = new JLabel("contrasena");
 		textField = new JTextField(15);
@@ -34,7 +33,7 @@ public class VentanaIniciarSesion extends JFrame {
 		// Para cancelar y volver a la ventana principal
 		btnNewButton_1.addActionListener((e) -> {
 			setVisible(false);
-			ventanaAnterior.setVisible(true);
+			ventanaPrincipal.setVisible(true);
 		});
 
 		btnNewButton.addActionListener((e) -> {

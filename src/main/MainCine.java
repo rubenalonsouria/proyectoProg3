@@ -17,7 +17,7 @@ public static void main(String[] args) {
 		//iniciar ventana
 	//VentanaPrincipalTesting ventanaPrincipalTesting = new VentanaPrincipalTesting();
 	VentanaPrincipal ventanaPrincipal = new VentanaPrincipal();
-	VentanaPrincipalAdminTesting ventanaAdminTest= new VentanaPrincipalAdminTesting();
+	//VentanaPrincipalAdminTesting ventanaAdminTest= new VentanaPrincipalAdminTesting();
 	
 	//VentanaIniciarSesionTesting ventanaIniciarSesionTesting = new VentanaIniciarSesionTesting();
 	

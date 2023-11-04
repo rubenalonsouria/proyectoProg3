@@ -14,7 +14,6 @@ public class VentanaPrincipalAdminTesting extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel a;
-	private JTextField txtMirarQueMas;
 	private JTextField txtTerminarDeHacer;
 	
 /*
@@ -34,7 +33,7 @@ public class VentanaPrincipalAdminTesting extends JFrame {
 		txtTerminarDeHacer = new JTextField();
 		txtTerminarDeHacer.setText("Terminar de hacer y poner para que vea estadisticas");
 		txtTerminarDeHacer.setColumns(30);
-		txtMirarQueMas.setColumns(30);
+		txtTerminarDeHacer.setColumns(30);
 		add(txtTerminarDeHacer);
 		setVisible(true);
 	}
