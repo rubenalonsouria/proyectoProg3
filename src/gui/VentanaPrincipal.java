@@ -32,7 +32,8 @@ public class VentanaPrincipal extends JFrame {
 			new VentanaIniciarSesion(ventanaPrincipal);
 		});
 		registrarse.addActionListener((e) -> {
-			new VentanaRegistro();
+			setVisible(false);
+			new VentanaRegistro(ventanaPrincipal);
 		});
 
 		JPanel panelBotonesAcciones = new JPanel();
@@ -51,9 +52,10 @@ public class VentanaPrincipal extends JFrame {
 		setVisible(true);
 		setTitle("DeustoCine");
 		pack();
-		setBounds(100, 100, 1200, 800);
+		setBounds(100, 100, 600, 600);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(VentanaPrincipal.EXIT_ON_CLOSE);
+		setResizable(false);
 
 	}
 
