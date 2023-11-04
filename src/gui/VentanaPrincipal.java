@@ -1,61 +1,56 @@
 package gui;
 import java.awt.BorderLayout;
-import java.awt.Image;
+import java.awt.Font;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 
 public class VentanaPrincipal extends JFrame {
 //por que hay que poner serialVersionUID = 1L PREGUNTAR
 	
 	private static final long serialVersionUID = 1L;
-	protected JFrame ventanaPrincipal;
-	protected JButton iniciarSesion, registrarse;
-	protected JLabel labelLogo;
+	protected JButton identificarse;
+	protected JPanel panelNorte, panelCentro;
+	protected JList<?> listaPeliculas;
+	
 
 	public VentanaPrincipal() {
-		iniciarSesion = new JButton("Iniciar Sesion");
-		registrarse = new JButton("Registrarse");
-		ventanaPrincipal = this;
-
-		/*
-		 * Con absolute layout no se anade el segundo bottonn de momento ponemos un flow
-		 * layout para que sea funcional iniciarSesion.setBounds(825, 200, 122, 38);
-		 * registrarse.setBounds(825, 110, 122, 38);
-		 */
-
-		iniciarSesion.addActionListener((e) -> {
-			setVisible(false);
-			new VentanaIniciarSesion(ventanaPrincipal);
-		});
-		registrarse.addActionListener((e) -> {
-			setVisible(false);
-			new VentanaRegistro(ventanaPrincipal);
-		});
-
-		JPanel panelBotonesAcciones = new JPanel();
-		JPanel panelLogo = new JPanel();
 		
-		ImageIcon icono = new ImageIcon("images/deustocinelogo2.png");
-		Image imagen = icono.getImage().getScaledInstance(500, 400, Image.SCALE_SMOOTH);
-		labelLogo = new JLabel(new ImageIcon(imagen));
+		panelNorte = new JPanel();
+		panelCentro = new JPanel();
+		listaPeliculas = new JList();//Aqui anadir un Jlist con botones que contenga la imagen y el titulo de la peli
 		
-		add(panelBotonesAcciones, BorderLayout.NORTH);
-		add(panelLogo, BorderLayout.CENTER);
-		panelBotonesAcciones.add(registrarse);
-		panelBotonesAcciones.add(iniciarSesion);
-		panelLogo.add(labelLogo);
-
+		identificarse = new JButton("Identificarse");
+		identificarse.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		identificarse.addActionListener((e)->{
+			setVisible(false);
+			JFrame ventanaPrincipal = this;
+			new VentanaIdentificarse(ventanaPrincipal);
+			
+		});
+		
+		
+		//Ventana
+		setLayout(new BorderLayout(0, 0));
+		panelCentro.add(listaPeliculas);
+		panelNorte.add(identificarse);
+		
+		add(panelNorte, BorderLayout.NORTH);
+		add(panelCentro, BorderLayout.CENTER);
+		
+		
+		
+		setBounds(100, 100, 1200, 800);
+		setLocationRelativeTo(null);
+		setResizable(false);
 		setVisible(true);
 		setTitle("DeustoCine");
-		pack();
-		setBounds(100, 100, 600, 600);
-		setLocationRelativeTo(null);
-		setDefaultCloseOperation(VentanaPrincipal.EXIT_ON_CLOSE);
-		setResizable(false);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		
 
 	}
 

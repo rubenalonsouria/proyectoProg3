@@ -80,7 +80,9 @@ public class VentanaIniciarSesion extends JFrame {
 				}
 			}
 		});
-
+		
+		
+		//Ventana
 		JLabel lCabecera = new JLabel("Identificate con tus datos de inicio de sesión:");
 		lCabecera.setForeground(Color.BLUE);
 		add(lCabecera, BorderLayout.NORTH);

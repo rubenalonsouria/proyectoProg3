@@ -1,15 +1,8 @@
 package gui;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import java.awt.Color;
-import java.awt.Window.Type;
-import java.awt.GridLayout;
-import javax.swing.JPanel;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class VentanaPrincipalTesting {
 
