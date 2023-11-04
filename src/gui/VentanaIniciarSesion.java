@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -21,7 +22,6 @@ public class VentanaIniciarSesion extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JFrame ventanaPricipal;
 	private JTextField textField; // Poner el nobre de cada componente con el que es
-	private Dimension dimension;
 	private JLabel lblNewLabel, lblNewLabel_1;
 	private JPasswordField password;
 	private JButton btnNewButton, btnNewButton_1;
@@ -35,7 +35,6 @@ public class VentanaIniciarSesion extends JFrame {
 		lblNewLabel_1 = new JLabel("Contraseña:");
 		textField = new JTextField("");
 		password = new JPasswordField("");
-		dimension = new Dimension(25,15);
 		btnNewButton = new JButton("Iniciar");
 		btnNewButton_1 = new JButton("Volver");
 		recuerdameButton = new JCheckBox("Recuerdame", false);
@@ -79,8 +78,10 @@ public class VentanaIniciarSesion extends JFrame {
 		});
 
 		JLabel lCabecera = new JLabel("Identificate con tus datos de inicio de sesión:");
+		lCabecera.setForeground(Color.BLUE);
 		add( lCabecera, BorderLayout.NORTH );
-		JPanel panelIniciarSesion = new JPanel(new GridLayout(2, 2));
+		
+		JPanel panelIniciarSesion = new JPanel(new GridLayout(5, 5));
 		JPanel panelAcciones = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		
 		add(panelIniciarSesion, BorderLayout.CENTER);
@@ -88,7 +89,6 @@ public class VentanaIniciarSesion extends JFrame {
 		
 		panelIniciarSesion.add(lblNewLabel);
 		panelIniciarSesion.add(textField);
-		textField.setPreferredSize(dimension);
 		panelIniciarSesion.add(lblNewLabel_1);
 		panelIniciarSesion.add(password);
 		panelAcciones.add(recuerdameButton);
@@ -100,7 +100,7 @@ public class VentanaIniciarSesion extends JFrame {
 		setVisible(true);
 		setTitle("Iniciar sesión");
 		setBounds(100, 100, 800, 200);
-		//setLayout(new FlowLayout()); // En el futuro lo pondremos null y lo pondremos manualmente
+		setResizable(false);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(VentanaIniciarSesion.EXIT_ON_CLOSE);
 	}

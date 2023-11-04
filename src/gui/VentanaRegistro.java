@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,7 +22,6 @@ import Usuarios.Usuario;
 
 public class VentanaRegistro extends JFrame {
 	private static final long serialVersionUID = 1L;
-	protected JPanel panel1, panel2;
 	protected JTextField nameTextField, surnameTextField, correoTextField, telTextField, ageTextField, fechaNacimiento,
 			dniTextField;
 	protected JLabel nameLabel, surnameLabel, ageLabel, correoLabel, contraseñaLabel, dniLabel, telLabel,
@@ -30,8 +30,6 @@ public class VentanaRegistro extends JFrame {
 	protected JButton botonRegistrarse, botonVolver;
 	
 	public VentanaRegistro(JFrame ventanaPrincipal) {
-		panel1 = new JPanel();
-		add(panel1, BorderLayout.WEST);
 
 		nameLabel = new JLabel("Nombre: ");
 		nameTextField = new JTextField(20);
@@ -91,7 +89,7 @@ public class VentanaRegistro extends JFrame {
 					JOptionPane.showMessageDialog(null, "Comprueba que el numero de tlf solo contenga numeros ",
 							"ERROR", JOptionPane.WARNING_MESSAGE);
 				} else if (telTextField.getText().matches("\\d+")) {
-					JOptionPane.showMessageDialog(null, "Comprueba que el nombre y apellido solo contine letras ",
+					JOptionPane.showMessageDialog(null, "Comprueba que el nombre y apellido solo contiene letras ",
 							"ERROR", JOptionPane.WARNING_MESSAGE);
 				} else {
 					JOptionPane.showMessageDialog(null, "Comprueba nombre, apellido y telefono", "ERROR",
@@ -108,31 +106,39 @@ public class VentanaRegistro extends JFrame {
 			setVisible(false);
 		});
 
-		panel1.add(nameLabel);
-		panel1.add(nameTextField);
-		panel1.add(surnameLabel);
-		panel1.add(surnameTextField);
+		JPanel panelRegistroL = new JPanel(new GridLayout(7, 0));
+		JPanel panelRegistroF = new JPanel(new GridLayout(7, 0));
+		JPanel panelAcciones = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		
+		add(panelRegistroF, BorderLayout.CENTER);
+		add(panelRegistroL, BorderLayout.WEST);
+		add(panelAcciones, BorderLayout.SOUTH);
+		
+		panelRegistroL.add(nameLabel);
+		panelRegistroF.add(nameTextField);
+		panelRegistroL.add(surnameLabel);
+		panelRegistroF.add(surnameTextField);
 		// panel1.add(ageLabel);
 		// panel1.add(ageTextField);
-		panel1.add(correoLabel);
-		panel1.add(correoTextField);
-		panel1.add(contraseñaLabel);
-		panel1.add(contraseñaTextField);
-		panel1.add(telLabel);
-		panel1.add(telTextField);
-		panel1.add(dniLabel);
-		panel1.add(dniTextField);
-		panel1.add(fechaNacimientoLabel);
-		panel1.add(fechaNacimiento);
-		panel1.add(botonRegistrarse);
-		panel1.add(botonVolver);
+		panelRegistroL.add(correoLabel);
+		panelRegistroF.add(correoTextField);
+		panelRegistroL.add(contraseñaLabel);
+		panelRegistroF.add(contraseñaTextField);
+		panelRegistroL.add(telLabel);
+		panelRegistroF.add(telTextField);
+		panelRegistroL.add(dniLabel);
+		panelRegistroF.add(dniTextField);
+		panelRegistroL.add(fechaNacimientoLabel);
+		panelRegistroF.add(fechaNacimiento);
+		panelAcciones.add(botonRegistrarse);
+		panelAcciones.add(botonVolver);
 
-		panel1.setLayout(new GridLayout(8, 2));
-		add(panel1, BorderLayout.WEST);
+		//panelRegistro.setLayout(new GridLayout(8, 2));
+		//add(panel1, BorderLayout.WEST);
 
 		setBounds(400, 100, 800, 500);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		setTitle("REGISTRO");
+		setTitle("Registro");
 		setVisible(true);
 	}
 }
