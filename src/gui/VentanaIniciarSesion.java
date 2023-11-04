@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -26,7 +27,7 @@ public class VentanaIniciarSesion extends JFrame {
 	private JPasswordField password;
 	private JButton btnNewButton, btnNewButton_1;
 	private JCheckBox recuerdameButton;
-	private Map<String, String> mapaUsuarios = new HashMap<String, String>();
+	private Map<String, String[]> mapaUsuarios = new HashMap<>();
 
 	public VentanaIniciarSesion(JFrame ventanaAnterior) {
 
@@ -44,18 +45,22 @@ public class VentanaIniciarSesion extends JFrame {
 			setVisible(false);
 			ventanaAnterior.setVisible(true);
 		});
-
+		//Para iniciar Sesion
 		btnNewButton.addActionListener((e) -> {
 			try {
-				Scanner sc = new Scanner(new FileReader("Ficheros/usuarios")); //ERROR EN LECTURA Y SI ERES UN ADMINISTRADOR TIENE QEU APARECER QUE ES ADMIN
-				//String usuario = sc.nextLine();						// Y TIENE PODERES EXTRA o que aparezca una ventana administrador(diferente a la de cliente					
-				String linea;										// que es la principal)
+				/*SI ERES UN ADMINISTRADOR TIENE QEU APARECER QUE ES ADMIN Y TIENE PODERES EXTRA o que aparezca una 
+				 * ventana administrador(diferente a la de cliente que es la principal)*/
+				Scanner sc = new Scanner(new FileReader("Ficheros/usuarios")); 
+				String usuario = sc.nextLine(); //Primera linea no la queremos						 
+				String linea;  
 				while (sc.hasNext()) {
 					linea = sc.nextLine();
-					String[] partes = linea.split(";");
+					String[] partes = linea.split(",");
 					String correo = partes[0];
 					String contrasena = partes[1];
-					mapaUsuarios.put(correo, contrasena);
+					String admin = partes[7];
+					String[] values = { contrasena, admin };
+					mapaUsuarios.put(correo, values);
 				}
 				sc.close();
 			} catch (Exception ex) {
@@ -65,13 +70,12 @@ public class VentanaIniciarSesion extends JFrame {
 			String contrasenaField = password.getText();
 			String correoField = textField.getText();
 			if (!mapaUsuarios.containsKey(correoField)) {
-				JOptionPane.showMessageDialog(null, "Primero registrate","ERROR",JOptionPane.WARNING_MESSAGE);
-			}
-			else {
-				if (contrasenaField.equals(mapaUsuarios.get(correoField))) {
-					JOptionPane.showMessageDialog(null, "Inicio Sesion correcto","ERROR",JOptionPane.OK_OPTION);
-				}else {
-					JOptionPane.showMessageDialog(null, "Contrasena incorrecta","ERROR",JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Primero registrate", "ERROR", JOptionPane.WARNING_MESSAGE);
+			} else {
+				if (contrasenaField.equals(mapaUsuarios.get(correoField)[0])) {
+					JOptionPane.showMessageDialog(null, "Inicio Sesion correcto", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(null, "Contrasena incorrecta", "ERROR", JOptionPane.ERROR_MESSAGE);
 
 				}
 			}
@@ -79,14 +83,14 @@ public class VentanaIniciarSesion extends JFrame {
 
 		JLabel lCabecera = new JLabel("Identificate con tus datos de inicio de sesión:");
 		lCabecera.setForeground(Color.BLUE);
-		add( lCabecera, BorderLayout.NORTH );
-		
+		add(lCabecera, BorderLayout.NORTH);
+
 		JPanel panelIniciarSesion = new JPanel(new GridLayout(5, 5));
 		JPanel panelAcciones = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		
+
 		add(panelIniciarSesion, BorderLayout.CENTER);
 		add(panelAcciones, BorderLayout.SOUTH);
-		
+
 		panelIniciarSesion.add(lblNewLabel);
 		panelIniciarSesion.add(textField);
 		panelIniciarSesion.add(lblNewLabel_1);
@@ -94,8 +98,6 @@ public class VentanaIniciarSesion extends JFrame {
 		panelAcciones.add(recuerdameButton);
 		panelAcciones.add(btnNewButton);
 		panelAcciones.add(btnNewButton_1);
-
-		
 
 		setVisible(true);
 		setTitle("Iniciar sesión");
