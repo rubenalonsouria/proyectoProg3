@@ -21,7 +21,6 @@ public class VentanaPrincipal extends JFrame {
 	protected JList<?> listaPeliculas;
 	ImageIcon iconoIdentificarse = new ImageIcon("images/iconoCuenta.png");
 	
-	
 	public VentanaPrincipal() {
 		
 		panelCuenta = new JPanel(new FlowLayout(FlowLayout.RIGHT));
@@ -44,12 +43,15 @@ public class VentanaPrincipal extends JFrame {
 		setLayout(new BorderLayout(0, 0));
 		
 		add(panelCuenta, BorderLayout.NORTH);
+		
 		panelCuenta.setBackground(Color.CYAN);
 		panelCuenta.setBorder(BorderFactory.createLineBorder( Color.GRAY ));
 		add(panelCentro, BorderLayout.CENTER);
 		
+		
 		panelCentro.add(listaPeliculas);
 		panelCuenta.add(identificarse);
+		
 		
 		identificarse.setToolTipText("Iniciar sesión o registrarse");
 		identificarse.setIcon(iconoIdentificarse);
