@@ -15,7 +15,7 @@ public class VentanaPrincipal extends JFrame {
 //por que hay que poner serialVersionUID = 1L PREGUNTAR
 	
 	private static final long serialVersionUID = 1L;
-	protected JButton identificarse;
+	protected JButton identificarse, admin;
 	protected JPanel panelCuenta, panelCentro;
 	protected JList<?> listaPeliculas;
 	protected ImageIcon iconoIdentificarse; 
@@ -33,13 +33,22 @@ public class VentanaPrincipal extends JFrame {
 		identificarse = new JButton();		
 		identificarse.setToolTipText("Iniciar sesión o registrarse");
 		identificarse.setIcon(iconoIdentificarse);
+		
 		identificarse.addActionListener((e)->{
 			setVisible(false);
 			new VentanaIdentificarse(ventanaPrincipal);
 			
 		});
 		
+		admin = new JButton("Admin");
+		admin.setToolTipText("Ventana Administrador");
 		
+		admin.addActionListener((e)->{
+			setVisible(false);
+			new VentanaPrincipalAdmin();
+			
+		});
+
 		//Ventana
 		setLayout(new BorderLayout(0, 0));
 		add(panelCuenta, BorderLayout.NORTH);
@@ -48,8 +57,8 @@ public class VentanaPrincipal extends JFrame {
 		panelCuenta.setBorder(BorderFactory.createLineBorder( Color.GRAY ));
 		add(panelCentro, BorderLayout.CENTER);
 		
-		
 		panelCentro.add(listaPeliculas);
+		panelCuenta.add(admin);
 		panelCuenta.add(identificarse);
 		
 		setBounds(100, 100, 1200, 800);
