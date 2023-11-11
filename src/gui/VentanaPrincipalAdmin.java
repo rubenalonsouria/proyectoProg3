@@ -34,6 +34,7 @@ public class VentanaPrincipalAdmin extends JFrame{
 		identificarse.setToolTipText("Iniciar sesión o registrarse");
 		identificarse.setIcon(iconoIdentificarse);
 		
+		
 		identificarse.addActionListener((e)->{
 			setVisible(false);
 			new VentanaIdentificarse(ventanaPrincipalAdmin);
