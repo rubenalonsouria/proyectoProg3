@@ -23,6 +23,7 @@ public class VentanaPrincipal extends JFrame {
 	protected JPanel panelCuenta, panelCentro, panelCines;
 	protected JList<?> listaPeliculas;
 	protected ImageIcon iconoIdentificarse, iconoZubi, iconoMax, iconoBoulevard,iconoGarbera; 
+	protected JLabel labelBilbao, labelBarakaldo, labelVitoria, labelSanSebastian;
 	
 	public VentanaPrincipal() {
 		JFrame ventanaPrincipal = this;
@@ -102,7 +103,12 @@ public class VentanaPrincipal extends JFrame {
 			
 		});
 		
-		JPanel panelCines = new JPanel(new GridLayout(2, 2));
+		 labelBilbao = new JLabel("CINE ZUBIARTE BILBAO");
+	     labelBarakaldo = new JLabel("CINE MAX CENTER BARAKALDO");
+	     labelVitoria = new JLabel("CINE GARBERA SAN SEBASTIAN");
+         labelSanSebastian = new JLabel("CINE BOULEVARD VITORIA");
+		
+		JPanel panelCines = new JPanel(new GridLayout(2,2 ));
 		
 		//Ventana
 		setLayout(new BorderLayout(0, 0));
@@ -121,6 +127,10 @@ public class VentanaPrincipal extends JFrame {
 		panelCines.add(cineBarakaldo);
 		panelCines.add(cineVitoria);
 		panelCines.add(cineSanSebastian);
+		panelCines.add(labelBilbao);
+		panelCines.add(labelBarakaldo);
+		panelCines.add(labelVitoria);
+		panelCines.add(labelSanSebastian);
 		
 		setBounds(100, 100, 1200, 800);
 		setLocationRelativeTo(null);
