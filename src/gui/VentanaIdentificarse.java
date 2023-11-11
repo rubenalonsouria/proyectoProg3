@@ -1,8 +1,6 @@
 package gui;
 import java.awt.BorderLayout;
 import java.awt.Image;
-import java.awt.Window.Type;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -31,11 +29,11 @@ public class VentanaIdentificarse extends JFrame {
 
 		iniciarSesion.addActionListener((e) -> {
 			setVisible(false);
-			new VentanaIniciarSesion(ventanaIdentificacion);
+			new VentanaIniciarSesion(ventanaIdentificacion, ventanaPricipal);
 		});
 		registrarse.addActionListener((e) -> {
 			setVisible(false);
-			new VentanaRegistro(ventanaIdentificacion);
+			new VentanaRegistro(ventanaIdentificacion,ventanaPricipal);
 		});
 		volver.addActionListener((e)->{
 			setVisible(false);

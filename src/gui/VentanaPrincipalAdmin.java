@@ -19,7 +19,8 @@ public class VentanaPrincipalAdmin extends JFrame{
 	protected JList<?> listaPeliculas;
 	protected ImageIcon iconoIdentificarse; 
 	
-	public VentanaPrincipalAdmin() {
+	
+	public VentanaPrincipalAdmin(JFrame ventanaPrincipal) {
 		JFrame ventanaPrincipalAdmin = this;
 		
 		panelCuenta = new JPanel(new FlowLayout(FlowLayout.RIGHT));
@@ -39,12 +40,12 @@ public class VentanaPrincipalAdmin extends JFrame{
 			
 		});
 		
-		volver = new JButton("Volver");
-		volver.setToolTipText("Volver a Ventana Principal");
+		volver = new JButton("Vision Usuario");
+		volver.setToolTipText("Volver a la vista Usuario");
 		
 		volver.addActionListener((e)->{
 			setVisible(false);
-			new VentanaPrincipal();
+			ventanaPrincipal.setVisible(true);	
 			
 		});
 		

@@ -29,7 +29,7 @@ public class VentanaRegistro extends JFrame {
 	protected JPasswordField contraseñaTextField;
 	protected JButton botonRegistrarse, botonVolver;
 	
-	public VentanaRegistro(JFrame ventanaPrincipal) {
+	public VentanaRegistro(JFrame ventanaAnterior, JFrame ventanaPrincipal) {
 
 		nameLabel = new JLabel("Nombre: ");
 		nameTextField = new JTextField(20);
@@ -78,7 +78,7 @@ public class VentanaRegistro extends JFrame {
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
-				new VentanaIniciarSesion(ventanaPrincipal);
+				new VentanaIniciarSesion(ventanaAnterior, ventanaPrincipal);
 				setVisible(false);
 				JOptionPane.showMessageDialog(null, "Te has registrado correctamente",
 						null, JOptionPane.INFORMATION_MESSAGE);
@@ -102,7 +102,7 @@ public class VentanaRegistro extends JFrame {
 
 		botonVolver = new JButton("Volver");
 		botonVolver.addActionListener((e) -> {
-			ventanaPrincipal.setVisible(true);
+			ventanaAnterior.setVisible(true);
 			setVisible(false);
 		});
 

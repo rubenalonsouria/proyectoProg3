@@ -21,17 +21,20 @@ import javax.swing.JTextField;
 
 public class VentanaIniciarSesion extends JFrame {
 	private static final long serialVersionUID = 1L;
-	private JFrame ventanaPricipal;
+	private  VentanaPrincipal ventanaPrincipal;
 	private JTextField textField; // Poner el nobre de cada componente con el que es
 	private JLabel lblNewLabel, lblNewLabel_1;
 	private JPasswordField password;
-	private JButton btnNewButton, btnNewButton_1;
+	private JButton btnNewButton, btnNewButton_1, botonAdminSi, botonAdminNo;
+	private JPanel panelAdmin;
 	private JCheckBox recuerdameButton;
 	private Map<String, String[]> mapaUsuarios = new HashMap<>();
+	
+	
 
-	public VentanaIniciarSesion(JFrame ventanaAnterior) {
+	public VentanaIniciarSesion(JFrame ventanaAnterior, JFrame ventanaPrincipal) {
 
-		ventanaPricipal = ventanaAnterior;
+
 		lblNewLabel = new JLabel("Correo Electrónico:");
 		lblNewLabel_1 = new JLabel("Contraseña:");
 		textField = new JTextField("");
@@ -45,14 +48,17 @@ public class VentanaIniciarSesion extends JFrame {
 			setVisible(false);
 			ventanaAnterior.setVisible(true);
 		});
-		//Para iniciar Sesion
+		// Para iniciar Sesion
 		btnNewButton.addActionListener((e) -> {
 			try {
-				/*SI ERES UN ADMINISTRADOR TIENE QEU APARECER QUE ES ADMIN Y TIENE PODERES EXTRA o que aparezca una 
-				 * ventana administrador(diferente a la de cliente que es la principal)*/
-				Scanner sc = new Scanner(new FileReader("Ficheros/usuarios")); 
-				String usuario = sc.nextLine(); //Primera linea no la queremos						 
-				String linea;  
+				/*
+				 * SI ERES UN ADMINISTRADOR TIENE QEU APARECER QUE ES ADMIN Y TIENE PODERES
+				 * EXTRA o que aparezca una ventana administrador(diferente a la de cliente que
+				 * es la principal)
+				 */
+				Scanner sc = new Scanner(new FileReader("Ficheros/usuarios"));
+				String usuario = sc.nextLine(); // Primera linea no la queremos
+				String linea;
 				while (sc.hasNext()) {
 					linea = sc.nextLine();
 					String[] partes = linea.split(",");
@@ -64,25 +70,52 @@ public class VentanaIniciarSesion extends JFrame {
 				}
 				sc.close();
 			} catch (Exception ex) {
-				// TODO Auto-generated catch block
 				ex.printStackTrace();
 			}
+
 			String contrasenaField = password.getText();
 			String correoField = textField.getText();
+
 			if (!mapaUsuarios.containsKey(correoField)) {
 				JOptionPane.showMessageDialog(null, "Primero registrate", "ERROR", JOptionPane.WARNING_MESSAGE);
 			} else {
 				if (contrasenaField.equals(mapaUsuarios.get(correoField)[0])) {
-					JOptionPane.showMessageDialog(null, "Inicio Sesion correcto", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+					// Comprobacion si es admin
+					if (mapaUsuarios.get(correoField)[1] == "false") {
+						JOptionPane.showMessageDialog(null, "Inicio Sesion correcto", "ERROR",JOptionPane.INFORMATION_MESSAGE);
+						setVisible(false);
+					} else {
+						/*
+						 * opcion de con un panel panelAdmin = new JPanel(new GridLayout(1,2));
+						 * botonAdminNo = new JButton("No"); botonAdminSi = new JButton("Si");
+						 * panelAdmin.add(botonAdminNo); panelAdmin.add(botonAdminSi);
+						 */
+						
+						Object t = "Se ha detectado que eres administrador" + "/n"// arreglar el barra n para qeu haga												
+								+ "Quieres iniciar Sesion como admin?";			// una nueva fila
+						int respuesta = JOptionPane.showConfirmDialog(null, t);
+
+						if (respuesta == 0) {
+							ventanaPrincipal.setVisible(true);
+							//Poner boton adminVisible a true pero no funciona
+							VentanaPrincipal.admin.setVisible(true);
+							
+							setVisible(false);
+							
+						} else if (respuesta == 1) {
+							password.setText("");
+							textField.setText("");
+						}
+					}
+
 				} else {
 					JOptionPane.showMessageDialog(null, "Contrasena incorrecta", "ERROR", JOptionPane.ERROR_MESSAGE);
 
 				}
 			}
 		});
-		
-		
-		//Ventana
+
+		// Ventana
 		JLabel lCabecera = new JLabel("Identificate con tus datos de inicio de sesión:");
 		lCabecera.setForeground(Color.BLUE);
 		add(lCabecera, BorderLayout.NORTH);
