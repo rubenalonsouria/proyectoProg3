@@ -3,11 +3,15 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 
@@ -15,10 +19,10 @@ public class VentanaPrincipal extends JFrame {
 //por que hay que poner serialVersionUID = 1L PREGUNTAR
 	
 	private static final long serialVersionUID = 1L;
-	protected JButton identificarse, admin;
+	protected JButton identificarse, admin, cineBilbao, cineBarakaldo, cineVitoria, cineSanSebastian;
 	protected JPanel panelCuenta, panelCentro;
 	protected JList<?> listaPeliculas;
-	protected ImageIcon iconoIdentificarse; 
+	protected ImageIcon iconoIdentificarse, iconoZubi, iconoMax, iconoBoulevard,iconoGarbera; 
 	
 	public VentanaPrincipal() {
 		JFrame ventanaPrincipal = this;
@@ -48,6 +52,54 @@ public class VentanaPrincipal extends JFrame {
 			new VentanaPrincipalAdmin();
 			
 		});
+		
+		iconoZubi = new ImageIcon("images/BilbaoZubi.png");
+		
+		cineBilbao = new JButton();		
+		cineBilbao.setToolTipText("");
+		cineBilbao.setIcon(iconoZubi);
+		
+		cineBilbao.addActionListener((e)->{
+			setVisible(false);
+			new VentanaCineBilbao();
+			
+		});
+		
+		iconoMax = new ImageIcon("images/BarakaldoMaxCenter.png");
+		
+		cineBarakaldo = new JButton();		
+		cineBarakaldo.setToolTipText("");
+		cineBarakaldo.setIcon(iconoMax);
+		
+		cineBarakaldo.addActionListener((e)->{
+			setVisible(false);
+			new VentanaCineBarakaldo();
+			
+		});
+		
+		iconoBoulevard = new ImageIcon("images/Vitoriaboulevard.png");
+		
+		cineVitoria = new JButton();		
+		cineVitoria.setToolTipText("");
+		cineVitoria.setIcon(iconoBoulevard);
+		
+		cineVitoria.addActionListener((e)->{
+			setVisible(false);
+			new VentanaCineVitoria();
+			
+		});
+		
+		iconoGarbera = new ImageIcon("images/SanSebastianGarbera.png");
+		
+		cineSanSebastian = new JButton();		
+		cineSanSebastian.setToolTipText("");
+		cineSanSebastian.setIcon(iconoGarbera);
+		
+		cineSanSebastian.addActionListener((e)->{
+			setVisible(false);
+			new VentanaCineSanSebastian();
+			
+		});
 
 		//Ventana
 		setLayout(new BorderLayout(0, 0));
@@ -60,6 +112,10 @@ public class VentanaPrincipal extends JFrame {
 		panelCentro.add(listaPeliculas);
 		panelCuenta.add(admin);
 		panelCuenta.add(identificarse);
+		panelCentro.add(cineBilbao);
+		panelCentro.add(cineBarakaldo);
+		panelCentro.add(cineVitoria);
+		panelCentro.add(cineSanSebastian);
 		
 		setBounds(100, 100, 1200, 800);
 		setLocationRelativeTo(null);
@@ -69,5 +125,5 @@ public class VentanaPrincipal extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	}
-
+	
 }
