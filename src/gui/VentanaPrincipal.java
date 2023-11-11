@@ -9,6 +9,7 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -24,17 +25,32 @@ public class VentanaPrincipal extends JFrame {
 	protected ImageIcon iconoIdentificarse, iconoZubi, iconoMax, iconoBoulevard, iconoGarbera;
 	public static JButton admin;
 
-	public VentanaPrincipal() {//Ordenar todo segun en el panel qeu sea 
-								//si no es mucho lio para buscar en la ventana
+	/*
+	 * public VentanaPrincipal() {//Ordenar todo segun en el panel qeu sea //si no
+	 * es mucho lio para buscar en la ventana
+	 * 
+	 * protected JButton identificarse, admin, cineBilbao, cineBarakaldo,
+	 * cineVitoria, cineSanSebastian; protected JPanel panelCuenta, panelCentro,
+	 * panelCines; protected JList<?> listaPeliculas; protected ImageIcon
+	 * iconoIdentificarse, iconoZubi, iconoMax, iconoBoulevard, iconoGarbera;
+	 * protected JLabel labelBilbao, labelBarakaldo, labelVitoria,
+	 * labelSanSebastian;
+	 */
+
+	public VentanaPrincipal() {
 		JFrame ventanaPrincipal = this;
 		
 		// Peliculas
 		panelCentro = new JPanel();
+
 		tablaPeliculas = new JTable();// Aqui anadir un Jlist con botones que contenga la imagen y el titulo de la
 										// peli
 
 		// Utilidad Ventana
 		panelCuenta = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		panelCinesInforamcion = new JPanel();
+		
+
 		
 		iconoIdentificarse = new ImageIcon("images/iconoCuenta.png");
 		identificarse = new JButton();
@@ -111,7 +127,16 @@ public class VentanaPrincipal extends JFrame {
 		});
 
 		// Ventana
-		setLayout(new BorderLayout());
+		setLayout(new BorderLayout());		
+		 JLabel labelBilbao = new JLabel("CINE ZUBIARTE BILBAO");
+	     JLabel labelBarakaldo = new JLabel("CINE MAX CENTER BARAKALDO");
+	     JLabel labelVitoria = new JLabel("CINE GARBERA SAN SEBASTIAN");
+         JLabel labelSanSebastian = new JLabel("CINE BOULEVARD VITORIA");
+		
+		JPanel panelCines = new JPanel(new GridLayout(2,2 ));
+		
+		//Ventana
+		setLayout(new BorderLayout(0, 0));
 		add(panelCuenta, BorderLayout.NORTH);
 		
 		panelCuenta.setBackground(Color.CYAN);
@@ -120,8 +145,20 @@ public class VentanaPrincipal extends JFrame {
 		add(panelCentro, BorderLayout.CENTER);
 
 		panelCentro.add(tablaPeliculas);
+		add(panelCines, BorderLayout.CENTER);
+		
+		panelCentro.add(tablaPeliculas);
 		panelCuenta.add(admin);
 		panelCuenta.add(identificarse);
+
+		panelCines.add(cineBilbao);
+		panelCines.add(cineBarakaldo);
+		panelCines.add(cineVitoria);
+		panelCines.add(cineSanSebastian);
+		panelCines.add(labelBilbao);
+		panelCines.add(labelBarakaldo);
+		panelCines.add(labelVitoria);
+		panelCines.add(labelSanSebastian);
 		
 		add(panelCinesInforamcion, BorderLayout.WEST);
 		panelCinesInforamcion.add(cineBilbao);
