@@ -100,7 +100,9 @@ public class VentanaPrincipal extends JFrame {
 			new VentanaCineSanSebastian();
 			
 		});
-
+		
+		JPanel panelCentro = new JPanel(new GridLayout(2, 2));
+		
 		//Ventana
 		setLayout(new BorderLayout(0, 0));
 		add(panelCuenta, BorderLayout.NORTH);
