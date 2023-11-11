@@ -20,7 +20,7 @@ public class VentanaPrincipal extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	protected JButton identificarse, admin, cineBilbao, cineBarakaldo, cineVitoria, cineSanSebastian;
-	protected JPanel panelCuenta, panelCentro;
+	protected JPanel panelCuenta, panelCentro, panelCines;
 	protected JList<?> listaPeliculas;
 	protected ImageIcon iconoIdentificarse, iconoZubi, iconoMax, iconoBoulevard,iconoGarbera; 
 	
@@ -29,6 +29,7 @@ public class VentanaPrincipal extends JFrame {
 		
 		panelCuenta = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		panelCentro = new JPanel();
+		panelCines = new JPanel();
 		
 		listaPeliculas = new JList();//Aqui anadir un Jlist con botones que contenga la imagen y el titulo de la peli
 		
@@ -101,7 +102,7 @@ public class VentanaPrincipal extends JFrame {
 			
 		});
 		
-		JPanel panelCentro = new JPanel(new GridLayout(2, 2));
+		JPanel panelCines = new JPanel(new GridLayout(2, 2));
 		
 		//Ventana
 		setLayout(new BorderLayout(0, 0));
@@ -111,13 +112,15 @@ public class VentanaPrincipal extends JFrame {
 		panelCuenta.setBorder(BorderFactory.createLineBorder( Color.GRAY ));
 		add(panelCentro, BorderLayout.CENTER);
 		
+		add(panelCines, BorderLayout.CENTER);
+		
 		panelCentro.add(listaPeliculas);
 		panelCuenta.add(admin);
 		panelCuenta.add(identificarse);
-		panelCentro.add(cineBilbao);
-		panelCentro.add(cineBarakaldo);
-		panelCentro.add(cineVitoria);
-		panelCentro.add(cineSanSebastian);
+		panelCines.add(cineBilbao);
+		panelCines.add(cineBarakaldo);
+		panelCines.add(cineVitoria);
+		panelCines.add(cineSanSebastian);
 		
 		setBounds(100, 100, 1200, 800);
 		setLocationRelativeTo(null);
