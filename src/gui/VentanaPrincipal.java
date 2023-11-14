@@ -18,7 +18,7 @@ public class VentanaPrincipal extends JFrame {
 //por que hay que poner serialVersionUID = 1L PREGUNTAR
 
 	private static final long serialVersionUID = 1L;
-	protected JButton identificarse, cineBilbao, cineBarakaldo, cineVitoria, cineSanSebastian;
+	protected JButton identificarse, cineBilbao, cineBarakaldo, cineVitoria, cineSanSebastian, cine;
 	protected JPanel panelCuenta, panelCentro, panelCinesInforamcion;
 	protected JTable tablaPeliculas;
 	protected DefaultTableModel modeloPeliculas;
@@ -47,7 +47,7 @@ public class VentanaPrincipal extends JFrame {
 										// peli
 
 		// Utilidad Ventana
-		panelCuenta = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		panelCuenta = new JPanel(new BorderLayout());
 		panelCinesInforamcion = new JPanel();
 		
 
@@ -63,6 +63,9 @@ public class VentanaPrincipal extends JFrame {
 
 		});
 
+		cine = new JButton("Cines");
+		cine.setToolTipText("Información sobre los cines disponibles");
+		
 		admin = new JButton("Admin");
 		admin.setToolTipText("Ventana Administrador");
 		admin.setVisible(false);
@@ -148,8 +151,9 @@ public class VentanaPrincipal extends JFrame {
 		add(panelCines, BorderLayout.CENTER);
 		
 		panelCentro.add(tablaPeliculas);
-		panelCuenta.add(admin);
-		panelCuenta.add(identificarse);
+		panelCuenta.add(admin, BorderLayout.EAST);
+		panelCuenta.add(identificarse, BorderLayout.EAST);
+		panelCuenta.add(cine, BorderLayout.WEST);
 
 		panelCines.add(cineBilbao);
 		panelCines.add(cineBarakaldo);
