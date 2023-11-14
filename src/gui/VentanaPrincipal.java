@@ -151,7 +151,7 @@ public class VentanaPrincipal extends JFrame {
 		
 		
 		panelCentro.add(tablaPeliculas);
-		panelCuenta.add(admin, BorderLayout.EAST);
+		panelCuenta.add(admin, BorderLayout.CENTER);
 		panelCuenta.add(identificarse, BorderLayout.EAST);
 		panelCuenta.add(cine, BorderLayout.WEST);
 		
