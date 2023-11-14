@@ -78,12 +78,16 @@ public class VentanaIniciarSesion extends JFrame {
 
 			if (!mapaUsuarios.containsKey(correoField)) {
 				JOptionPane.showMessageDialog(null, "Primero registrate", "ERROR", JOptionPane.WARNING_MESSAGE);
+				
 			} else {
+				
 				if (contrasenaField.equals(mapaUsuarios.get(correoField)[0])) {
+					
 					// Comprobacion si es admin
-					if (mapaUsuarios.get(correoField)[1] == "false") {
+					if (mapaUsuarios.get(correoField)[1].equals("false")) {
 						JOptionPane.showMessageDialog(null, "Inicio Sesion correcto", "ERROR",JOptionPane.INFORMATION_MESSAGE);
 						setVisible(false);
+						
 					} else {
 						/*
 						 * opcion de con un panel panelAdmin = new JPanel(new GridLayout(1,2));
@@ -91,7 +95,7 @@ public class VentanaIniciarSesion extends JFrame {
 						 * panelAdmin.add(botonAdminNo); panelAdmin.add(botonAdminSi);
 						 */
 						
-						Object t = "Se ha detectado que eres administrador" + "/n"// arreglar el barra n para qeu haga												
+						Object t = "Se ha detectado que eres administrador" + "\n"// arreglar el barra n para qeu haga												
 								+ "Quieres iniciar Sesion como admin?";			// una nueva fila
 						int respuesta = JOptionPane.showConfirmDialog(null, t);
 
@@ -99,7 +103,6 @@ public class VentanaIniciarSesion extends JFrame {
 							ventanaPrincipal.setVisible(true);
 							//Poner boton adminVisible a true pero no funciona
 							VentanaPrincipal.admin.setVisible(true);
-							
 							setVisible(false);
 							
 						} else if (respuesta == 1) {
