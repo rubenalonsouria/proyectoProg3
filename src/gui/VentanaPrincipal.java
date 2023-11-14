@@ -82,7 +82,7 @@ public class VentanaPrincipal extends JFrame {
 		
 		// Panel Cines
 		panelCinesInforamcion = new JPanel(new GridLayout(4,1)); //Modificable segun cantidad de cines
-		iconoZubi = new ImageIcon("images/BilbaoZubi.png");
+		iconoZubi = new ImageIcon("images/BilbaoZubi.jpg");
 		cineBilbao = new JButton();
 		cineBilbao.setToolTipText("");
 		cineBilbao.setIcon(iconoZubi);
@@ -93,7 +93,7 @@ public class VentanaPrincipal extends JFrame {
 
 		});
 
-		iconoMax = new ImageIcon("images/BarakaldoMaxCenter.png");
+		iconoMax = new ImageIcon("images/BarakaldoMaxCenter.jpg");
 
 		cineBarakaldo = new JButton();
 		cineBarakaldo.setToolTipText("");
@@ -105,7 +105,7 @@ public class VentanaPrincipal extends JFrame {
 
 		});
 
-		iconoBoulevard = new ImageIcon("images/Vitoriaboulevard.png");
+		iconoBoulevard = new ImageIcon("images/Vitoriaboulevard.jpg");
 
 		cineVitoria = new JButton();
 		cineVitoria.setToolTipText("");
@@ -117,7 +117,7 @@ public class VentanaPrincipal extends JFrame {
 
 		});
 
-		iconoGarbera = new ImageIcon("images/SanSebastianGarbera.png");
+		iconoGarbera = new ImageIcon("images/SanSebastianGarbera.jpg");
 
 		cineSanSebastian = new JButton();
 		cineSanSebastian.setToolTipText("");
@@ -130,13 +130,13 @@ public class VentanaPrincipal extends JFrame {
 		});
 
 		// Ventana
-		setLayout(new BorderLayout());		
+		 setLayout(new BorderLayout());		
 		 JLabel labelBilbao = new JLabel("CINE ZUBIARTE BILBAO");
 	     JLabel labelBarakaldo = new JLabel("CINE MAX CENTER BARAKALDO");
-	     JLabel labelVitoria = new JLabel("CINE GARBERA SAN SEBASTIAN");
-         JLabel labelSanSebastian = new JLabel("CINE BOULEVARD VITORIA");
-		
-		JPanel panelCines = new JPanel(new GridLayout(2,2 ));
+	     JLabel labelSanSebastian = new JLabel("CINE BOULEVARD VITORIA");
+		 JLabel labelVitoria = new JLabel("CINE GARBERA SAN SEBASTIAN");
+		 
+		JPanel panelCines = new JPanel(new GridLayout(2, 2));
 		
 		//Ventana
 		setLayout(new BorderLayout(0, 0));
@@ -148,13 +148,14 @@ public class VentanaPrincipal extends JFrame {
 		add(panelCentro, BorderLayout.CENTER);
 
 		panelCentro.add(tablaPeliculas);
-		add(panelCines, BorderLayout.CENTER);
+		
 		
 		panelCentro.add(tablaPeliculas);
 		panelCuenta.add(admin, BorderLayout.EAST);
 		panelCuenta.add(identificarse, BorderLayout.EAST);
 		panelCuenta.add(cine, BorderLayout.WEST);
-
+		
+		add(panelCines, BorderLayout.CENTER);
 		panelCines.add(cineBilbao);
 		panelCines.add(cineBarakaldo);
 		panelCines.add(cineVitoria);
@@ -164,11 +165,7 @@ public class VentanaPrincipal extends JFrame {
 		panelCines.add(labelVitoria);
 		panelCines.add(labelSanSebastian);
 		
-		add(panelCinesInforamcion, BorderLayout.WEST);
-		panelCinesInforamcion.add(cineBilbao);
-		panelCinesInforamcion.add(cineBarakaldo);
-		panelCinesInforamcion.add(cineVitoria);
-		panelCinesInforamcion.add(cineSanSebastian);
+		
 
 		setBounds(100, 100, 1200, 800);
 		setLocationRelativeTo(null);
