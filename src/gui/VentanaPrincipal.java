@@ -133,8 +133,8 @@ public class VentanaPrincipal extends JFrame {
 		 setLayout(new BorderLayout());		
 		 JLabel labelBilbao = new JLabel("CINE ZUBIARTE BILBAO");
 	     JLabel labelBarakaldo = new JLabel("CINE MAX CENTER BARAKALDO");
-	     JLabel labelSanSebastian = new JLabel("CINE BOULEVARD VITORIA");
-		 JLabel labelVitoria = new JLabel("CINE GARBERA SAN SEBASTIAN");
+	     JLabel labelVitoria = new JLabel("CINE BOULEVARD VITORIA");
+		 JLabel labelSanSebastian = new JLabel("CINE GARBERA SAN SEBASTIAN");
 		 
 		JPanel panelCines = new JPanel(new GridLayout(2, 2));
 		
