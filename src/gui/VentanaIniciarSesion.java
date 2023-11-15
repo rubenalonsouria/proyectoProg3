@@ -100,11 +100,11 @@ public class VentanaIniciarSesion extends JFrame {
 						int respuesta = JOptionPane.showConfirmDialog(null, t);
 
 						if (respuesta == 0) {
-							ventanaPrincipal.setVisible(true);
+							
 							//Poner boton adminVisible a true pero no funciona
 							VentanaPrincipal.admin.setVisible(true);
 							setVisible(false);
-							
+							ventanaPrincipal.setVisible(true);
 						} else if (respuesta == 1) {
 							password.setText("");
 							textField.setText("");
