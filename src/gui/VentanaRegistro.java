@@ -69,7 +69,7 @@ public class VentanaRegistro extends JFrame {
 			//Comprobamos la informacion y si es correcta escribimos en fichero y creamos cliente
 			if (name.matches("[a-zA-Z]+") && apellidos.matches("[a-zA-Z]+") && telTextField.getText().matches("\\d+")) {
 				int telefono = Integer.parseInt(telTextField.getText());
-				Cliente cliente = new Cliente(correo, contrasena, name, apellidos, dni, null, telefono);
+				Cliente cliente = new Cliente(correo, contrasena, name, apellidos, dni, null, telefono, false);
 				
 				//Escritura
 				try (FileWriter fileWriter = new FileWriter("Ficheros/usuarios", true)) {

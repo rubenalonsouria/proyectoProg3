@@ -10,8 +10,9 @@ public class Administrador extends Usuario {
 
 	// Constructor
 	public Administrador(String correo, String password, String nombre, String apellido, String dni,
-			LocalDate fechaNacimineto) {
-		super(correo, password, nombre, apellido, dni, fechaNacimineto);
+			LocalDate fechaNacimineto, boolean admin) {
+		super(correo, password, nombre, apellido, dni, fechaNacimineto, admin);
+		admin = true;
 		id = id + 1;
 	}
 

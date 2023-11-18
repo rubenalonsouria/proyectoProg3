@@ -10,10 +10,11 @@ public abstract class Usuario {
 	protected String apellido;
 	protected String dni;
 	protected LocalDate fechaNacimineto; // Si es tu cumpleanos descuento, COMPROBAR funcionamiento localDate.
+	protected boolean admin;
 
 	// Constructor con todos los atributos
 	public Usuario(String correo, String password, String nombre, String apellido, String dni,
-			LocalDate fechaNacimineto) {
+			LocalDate fechaNacimineto, boolean admin) {
 		super();
 		this.correo = correo;
 		this.password = password;

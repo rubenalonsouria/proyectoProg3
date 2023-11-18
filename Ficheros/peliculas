@@ -1,2 +1,3 @@
-Titulo;
-Barbie
+Titulo,duracion,sinopsis,actores(Array),directores(Array),genero,Valoracion
+Barbie,125,Una pelicula rosa,[Barbi,ken],[Manuel,Laura],FANTASIA,null
+Piratas,180,Piratas y explosiones fuertes,[jack,juan],[Director,director2],FANTASIA,null

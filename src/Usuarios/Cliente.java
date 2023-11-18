@@ -18,14 +18,15 @@ public class Cliente extends Usuario{
 	
 	//constructor
 	public Cliente(String correo, String password, String nombre, String apellido, String dni,
-			LocalDate fechaNacimineto, int numeroTelefono){
-		super(correo, password, nombre, apellido, dni, fechaNacimineto);
+			LocalDate fechaNacimineto, int numeroTelefono, boolean admin){
+		super(correo, password, nombre, apellido, dni, fechaNacimineto, admin);
 		
 		this.numeroTelefono = numeroTelefono;
 		this.metodoDePago = null;
 		this.numeroTarjeta = 0;
 		this.puntos = 0;
 		this.historialDeCompras = new HashMap<>();
+		this.admin = false;
 		id = id+1;
 	}
 	
