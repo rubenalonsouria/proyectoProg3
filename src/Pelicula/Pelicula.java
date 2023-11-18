@@ -1,9 +1,12 @@
 package Pelicula;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+
 public abstract class Pelicula{
 	
 	protected String titulo;
+	protected ImageIcon poster;
 	protected int duracion;
 	protected String sinopsis;
 	protected ArrayList<String> actores = new ArrayList<>();
@@ -30,6 +33,14 @@ public abstract class Pelicula{
 
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
+	}
+	
+	public ImageIcon getPoster() {
+		return poster;
+	}
+
+	public void setPoster(ImageIcon poster) {
+		this.poster = poster;
 	}
 
 	public int getDuracion() {

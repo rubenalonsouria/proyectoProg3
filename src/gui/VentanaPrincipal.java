@@ -66,6 +66,13 @@ public class VentanaPrincipal extends JFrame {
 		cine = new JButton("Cines");
 		cine.setToolTipText("Información sobre los cines disponibles");
 		
+		cine.addActionListener((e) -> {
+			setVisible(false);
+			new VentanaInfoCine();
+
+		});
+
+		
 		admin = new JButton("Admin");
 		admin.setToolTipText("Ventana Administrador");
 		admin.setVisible(false);
@@ -148,9 +155,7 @@ public class VentanaPrincipal extends JFrame {
 		add(panelCentro, BorderLayout.CENTER);
 
 		panelCentro.add(tablaPeliculas);
-		
-		
-		panelCentro.add(tablaPeliculas);
+
 		panelCuenta.add(admin, BorderLayout.CENTER);
 		panelCuenta.add(identificarse, BorderLayout.EAST);
 		panelCuenta.add(cine, BorderLayout.WEST);
