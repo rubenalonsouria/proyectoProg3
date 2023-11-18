@@ -1,10 +1,14 @@
 package main;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import Pelicula.Pelicula;
 import gui.VentanaPrincipal;
 
 
 public class MainCine {
+	private ArrayList<Pelicula> listaPeliculas = new ArrayList<>();
 	
 public static void main(String[] args) {
 		//Cargar todo lo que esta en ficheros
@@ -23,9 +27,11 @@ public static void main(String[] args) {
 			String directoresArray = partes[4];
 			String genero = partes[5];
 			String valoracion = partes[6];
-			
+			//Hay que pasar los strings a lo que pida la clase
+		//	new Pelicula(titulo, Integer.parseInt(duracion), sipnosis, actoresArray, directoresArray, genero, valoracion) {
+			};
 			//	mapaUsuarios.put(correo, values);
-		}
+	//	}
 		sc.close();
 	} catch (Exception e) {
 		e.printStackTrace();
