@@ -6,11 +6,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class VentanaConBusqueda extends JFrame {
-    private JTextField campoBusqueda;
+    
+    private static final long serialVersionUID = 1L;
+	private JTextField campoBusqueda;
     private JButton buscar;
+    protected JPanel panelCuenta, panelCuentaIzquierda, panelCuentaDerecha, panelCine, panelCinesInforamcion;
 
     public VentanaConBusqueda() {
-        
+		
+    	
         setTitle("Ventana con Búsqueda");
         setSize(400, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -43,4 +47,6 @@ public class VentanaConBusqueda extends JFrame {
         String textoBusqueda = campoBusqueda.getText();
         JOptionPane.showMessageDialog(this, "Realizando búsqueda con: " + textoBusqueda);
     }
+    
+    
 }

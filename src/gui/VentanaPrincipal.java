@@ -95,9 +95,9 @@ public class VentanaPrincipal extends JFrame {
 				buscar.setToolTipText("Buscador de peliculas");
 				
 				buscar.addActionListener((e) -> {
-					setVisible(false);
+					setVisible(true);
 					new VentanaConBusqueda();
-
+//hay que hcer que la bulsar el boton buscar se abra la VentanaConBusqueda
 				});
 		
 		//Boton Admin
