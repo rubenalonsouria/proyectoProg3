@@ -19,8 +19,8 @@ public class VentanaPrincipal extends JFrame {
 //por que hay que poner serialVersionUID = 1L PREGUNTAR
 
 	private static final long serialVersionUID = 1L;
-	protected JButton identificarse, cineBilbao, cineBarakaldo, cineVitoria, cineSanSebastian, cine;
-	protected JPanel panelCuenta, panelCentro, panelCinesInforamcion;
+	protected JButton identificarse, cine, peliculas, promociones, cineBilbao, cineBarakaldo, cineVitoria, cineSanSebastian;
+	protected JPanel panelCuenta, panelCuentaIzquierda, panelCuentaDerecha, panelCentro, panelCinesInforamcion;
 	protected JTable tablaPeliculas;
 	protected DefaultTableModel modeloPeliculas;
 	protected ImageIcon iconoIdentificarse, iconoZubi, iconoMax, iconoBoulevard, iconoGarbera;
@@ -48,6 +48,8 @@ public class VentanaPrincipal extends JFrame {
 								
 		// Utilidad Ventana
 		panelCuenta = new JPanel(new BorderLayout());
+		panelCuentaIzquierda = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		panelCuentaDerecha = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		panelCinesInforamcion = new JPanel();
 		
 		//Botones y más de panelCuenta
@@ -78,6 +80,17 @@ public class VentanaPrincipal extends JFrame {
 
 		});
 
+		//Boton Peliculas (Ventana Principal)
+		peliculas = new JButton("Películas");
+		peliculas.setToolTipText("Todas las películas disponibles");
+		
+		peliculas.addActionListener((e) -> {
+			setVisible(false);
+			new VentanaPrincipal();
+
+		});
+		
+		
 		//Boton Admin
 		admin = new JButton("Admin");
 		admin.setToolTipText("Ventana Administrador");
@@ -93,63 +106,7 @@ public class VentanaPrincipal extends JFrame {
 
 		});
 		
-		// Panel Cines
-		panelCinesInforamcion = new JPanel(new GridLayout(4,1)); //Modificable segun cantidad de cines
-		iconoZubi = new ImageIcon("images/BilbaoZubi.jpg");
-		cineBilbao = new JButton();
-		cineBilbao.setToolTipText("");
-		cineBilbao.setIcon(iconoZubi);
-
-		cineBilbao.addActionListener((e) -> {
-			setVisible(false);
-			new VentanaCineBilbao();
-
-		});
-
-		iconoMax = new ImageIcon("images/BarakaldoMaxCenter.jpg");
-
-		cineBarakaldo = new JButton();
-		cineBarakaldo.setToolTipText("");
-		cineBarakaldo.setIcon(iconoMax);
-
-		cineBarakaldo.addActionListener((e) -> {
-			setVisible(false);
-			new VentanaCineBarakaldo();
-
-		});
-
-		iconoBoulevard = new ImageIcon("images/Vitoriaboulevard.jpg");
-
-		cineVitoria = new JButton();
-		cineVitoria.setToolTipText("");
-		cineVitoria.setIcon(iconoBoulevard);
-
-		cineVitoria.addActionListener((e) -> {
-			setVisible(false);
-			new VentanaCineVitoria();
-
-		});
-
-		iconoGarbera = new ImageIcon("images/SanSebastianGarbera.jpg");
-
-		cineSanSebastian = new JButton();
-		cineSanSebastian.setToolTipText("");
-		cineSanSebastian.setIcon(iconoGarbera);
-
-		cineSanSebastian.addActionListener((e) -> {
-			setVisible(false);
-			new VentanaCineSanSebastian();
-
-		});
-
-		// Ventana
-		 setLayout(new BorderLayout());		
-		 JLabel labelBilbao = new JLabel("CINE ZUBIARTE BILBAO");
-	     JLabel labelBarakaldo = new JLabel("CINE MAX CENTER BARAKALDO");
-	     JLabel labelVitoria = new JLabel("CINE BOULEVARD VITORIA");
-		 JLabel labelSanSebastian = new JLabel("CINE GARBERA SAN SEBASTIAN");
-		 
-		JPanel panelCines = new JPanel(new GridLayout(2, 2));
+		
 		
 		//Ventana
 		setLayout(new BorderLayout(0, 0));
@@ -158,23 +115,24 @@ public class VentanaPrincipal extends JFrame {
 		panelCuenta.setBackground(Color.CYAN);
 		panelCuenta.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 		
+		panelCuentaIzquierda.setBackground(Color.CYAN);
+		//panelCuentaIzquierda.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+		
+		panelCuentaDerecha.setBackground(Color.CYAN);
+		//panelCuentaDerecha.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+		
+		panelCuenta.add(panelCuentaIzquierda, BorderLayout.WEST);
+		panelCuenta.add(panelCuentaDerecha, BorderLayout.EAST);
+		
 		add(panelCentro, BorderLayout.CENTER);
 		panelCentro.add(tablaPeliculas);
 		
-		panelCuenta.add(admin, BorderLayout.CENTER);
-		panelCuenta.add(identificarse, BorderLayout.EAST);
-		//panelCuenta.add(labelLogo, BorderLayout.WEST);
-		panelCuenta.add(cine, BorderLayout.WEST);
-		
-		add(panelCines, BorderLayout.CENTER);
-		panelCines.add(cineBilbao);
-		panelCines.add(cineBarakaldo);
-		panelCines.add(cineVitoria);
-		panelCines.add(cineSanSebastian);
-		panelCines.add(labelBilbao);
-		panelCines.add(labelBarakaldo);
-		panelCines.add(labelVitoria);
-		panelCines.add(labelSanSebastian);
+		panelCuentaDerecha.add(admin, BorderLayout.CENTER);
+		panelCuentaDerecha.add(identificarse, BorderLayout.EAST);
+		panelCuentaIzquierda.add(labelLogo, BorderLayout.WEST);
+		panelCuentaIzquierda.add(cine, BorderLayout.WEST);
+		panelCuentaIzquierda.add(peliculas, BorderLayout.WEST);
+
 		
 		
 
