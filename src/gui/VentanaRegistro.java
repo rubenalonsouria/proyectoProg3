@@ -50,8 +50,8 @@ public class VentanaRegistro extends JFrame {
 		telTextField = new JTextField(20);
 
 		fechaNacimientoLabel = new JLabel("Fecha Nacimiento: ");
-		fechaNacimiento = new JTextField(20);// formas para darle el formato correcto al localDate
-		fechaNacimiento.setEditable(false); // De momento el usuario se crea con su cumplea;os en NULL.
+		fechaNacimiento = new JTextField("dd--MM-yyyy");// formas para darle el formato correcto al localDate
+		fechaNacimiento.setEditable(true); // De momento el usuario se crea con su cumpleaños en NULL.
 
 		dniLabel = new JLabel("Dni:");
 		dniTextField = new JTextField(20);

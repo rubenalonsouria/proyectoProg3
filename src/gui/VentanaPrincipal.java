@@ -19,7 +19,7 @@ public class VentanaPrincipal extends JFrame {
 //por que hay que poner serialVersionUID = 1L PREGUNTAR
 
 	private static final long serialVersionUID = 1L;
-	protected JButton identificarse, cine, peliculas, promociones, cineBilbao, cineBarakaldo, cineVitoria, cineSanSebastian;
+	protected JButton identificarse, buscar, cine, peliculas, promociones, cineBilbao, cineBarakaldo, cineVitoria, cineSanSebastian;
 	protected JPanel panelCuenta, panelCuentaIzquierda, panelCuentaDerecha, panelCentro, panelCinesInforamcion;
 	protected JTable tablaPeliculas;
 	protected DefaultTableModel modeloPeliculas;
@@ -79,7 +79,7 @@ public class VentanaPrincipal extends JFrame {
 			new VentanaInfoCine();
 
 		});
-
+		
 		//Boton Peliculas (Ventana Principal)
 		peliculas = new JButton("Películas");
 		peliculas.setToolTipText("Todas las películas disponibles");
@@ -90,6 +90,15 @@ public class VentanaPrincipal extends JFrame {
 
 		});
 		
+		//Boton Busqueda
+				buscar = new JButton("Buscar");
+				buscar.setToolTipText("Buscador de peliculas");
+				
+				buscar.addActionListener((e) -> {
+					setVisible(false);
+					new VentanaConBusqueda();
+
+				});
 		
 		//Boton Admin
 		admin = new JButton("Admin");
@@ -132,6 +141,7 @@ public class VentanaPrincipal extends JFrame {
 		panelCuentaIzquierda.add(labelLogo, BorderLayout.WEST);
 		panelCuentaIzquierda.add(cine, BorderLayout.WEST);
 		panelCuentaIzquierda.add(peliculas, BorderLayout.WEST);
+		panelCuentaIzquierda.add(buscar, BorderLayout.WEST);
 
 		
 		
