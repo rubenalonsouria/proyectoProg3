@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -23,6 +24,7 @@ public class VentanaPrincipal extends JFrame {
 	protected JTable tablaPeliculas;
 	protected DefaultTableModel modeloPeliculas;
 	protected ImageIcon iconoIdentificarse, iconoZubi, iconoMax, iconoBoulevard, iconoGarbera;
+	protected JLabel labelLogo;
 	public static JButton admin;
 
 	/*
@@ -42,16 +44,19 @@ public class VentanaPrincipal extends JFrame {
 		
 		// Peliculas
 		panelCentro = new JPanel();
-
-		tablaPeliculas = new JTable();// Aqui anadir un Jlist con botones que contenga la imagen y el titulo de la
-										// peli
-
+		tablaPeliculas = new JTable();// Aqui anadir un Jlist con botones que contenga la imagen y el titulo de la peli
+								
 		// Utilidad Ventana
 		panelCuenta = new JPanel(new BorderLayout());
 		panelCinesInforamcion = new JPanel();
 		
-
+		//Botones y más de panelCuenta
+		//Logo Deusto		
+		ImageIcon icono = new ImageIcon("images/deustocinelogo.png");
+		Image logo = icono.getImage();
+		labelLogo = new JLabel(new ImageIcon(logo));
 		
+		//Boton Identificarse
 		iconoIdentificarse = new ImageIcon("images/iconoCuenta.png");
 		identificarse = new JButton();
 		identificarse.setToolTipText("Iniciar sesión o registrarse");
@@ -63,6 +68,7 @@ public class VentanaPrincipal extends JFrame {
 
 		});
 
+		//Boton Cine
 		cine = new JButton("Cines");
 		cine.setToolTipText("Información sobre los cines disponibles");
 		
@@ -72,7 +78,7 @@ public class VentanaPrincipal extends JFrame {
 
 		});
 
-		
+		//Boton Admin
 		admin = new JButton("Admin");
 		admin.setToolTipText("Ventana Administrador");
 		admin.setVisible(false);
@@ -153,11 +159,11 @@ public class VentanaPrincipal extends JFrame {
 		panelCuenta.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 		
 		add(panelCentro, BorderLayout.CENTER);
-
 		panelCentro.add(tablaPeliculas);
-
+		
 		panelCuenta.add(admin, BorderLayout.CENTER);
 		panelCuenta.add(identificarse, BorderLayout.EAST);
+		//panelCuenta.add(labelLogo, BorderLayout.WEST);
 		panelCuenta.add(cine, BorderLayout.WEST);
 		
 		add(panelCines, BorderLayout.CENTER);
