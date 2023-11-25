@@ -3,6 +3,7 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 
@@ -35,43 +36,57 @@ public class VentanaInfoCine extends JFrame{
 		panelCinesInforamcion = new JPanel();
 		panelCine = new JPanel(new GridLayout(0, 2, 10, 10));
 		
-		//Imagenes Cine y descripciones
+		//Imagenes Cine fuente y descripciones
 		ImageIcon iconoBarakaldo = new ImageIcon("images/BarakaldoMaxCenter.jpg");
 		Image logoBarakaldo = iconoBarakaldo.getImage();
 		labelBara = new JLabel(new ImageIcon(logoBarakaldo));
 		
-        JTextArea descripcionBara = new JTextArea("test");
+		Font font = new Font("Arial", Font.BOLD, 20);
+		
+        JTextArea descripcionBara = new JTextArea(
+        		"Max Center es un centro comercial de Baracaldo, en la provincia vasca de Vizcaya. "
+        		+ "Es la mayor zona de ocio y restauración de la provincia.");
         descripcionBara.setLineWrap(true);
         descripcionBara.setWrapStyleWord(true);
         descripcionBara.setEditable(false);
+        descripcionBara.setFont(font);
 		
 		ImageIcon iconoZubi = new ImageIcon("images/BilbaoZubi.jpg");
 		Image logoZubi = iconoZubi.getImage();
 		labelZubi = new JLabel(new ImageIcon(logoZubi));
 		
-        JTextArea descripcionZubi = new JTextArea("test");
+        JTextArea descripcionZubi = new JTextArea(
+        		"Tiendas variadas, restaurantes y cine en un centro comercial cubierto"
+        		+ " y elegante con un diseño que aporta sensación de amplitud.");
         descripcionZubi.setLineWrap(true);
         descripcionZubi.setWrapStyleWord(true);
         descripcionZubi.setEditable(false);
-		
+		descripcionZubi.setFont(font);
+        
 		ImageIcon iconoGarbera = new ImageIcon("images/SanSebastianGarbera.jpg");
 		Image logoGarbera = iconoGarbera.getImage();
 		labelGarbe = new JLabel(new ImageIcon(logoGarbera));
 		
-        JTextArea descripcionGarbe = new JTextArea("test");
+        JTextArea descripcionGarbe = new JTextArea(
+        		"Centro comercial moderno con boutiques chic, "
+        		+ "artículos para el hogar y varios restaurantes.");
         descripcionGarbe.setLineWrap(true);
         descripcionGarbe.setWrapStyleWord(true);
         descripcionGarbe.setEditable(false);
-		
+		descripcionGarbe.setFont(font);
+        
 		ImageIcon iconoBoule = new ImageIcon("images/VitoriaBoulevard.jpg");
 		Image logoBoule = iconoBoule.getImage();
 		labelBoule = new JLabel(new ImageIcon(logoBoule));
 		
-        JTextArea descripcionBoule = new JTextArea("test");
+        JTextArea descripcionBoule = new JTextArea(
+        		"El Boulevard es un maxicentro comercial situado"
+        		+ " en la ciudad de Vitoria en el norte de España.");
         descripcionBoule.setLineWrap(true);
         descripcionBoule.setWrapStyleWord(true);
         descripcionBoule.setEditable(false);
-		
+		descripcionBoule.setFont(font);
+        
 		//Botones y más de panelCuenta
 		//Logo Deusto		
 		ImageIcon icono = new ImageIcon("images/deustocinelogo.png");

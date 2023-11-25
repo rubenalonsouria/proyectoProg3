@@ -17,7 +17,6 @@ public class VentanaConBusqueda extends JFrame {
     	
         setTitle("Ventana con Búsqueda");
         setSize(400, 400);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
 
