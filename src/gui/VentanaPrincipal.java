@@ -91,14 +91,14 @@ public class VentanaPrincipal extends JFrame {
 		});
 		
 		//Boton Busqueda
-				buscar = new JButton("Buscar");
-				buscar.setToolTipText("Buscador de peliculas");
+		buscar = new JButton("Buscar");
+		buscar.setToolTipText("Buscador de peliculas");
 				
-				buscar.addActionListener((e) -> {
-					setVisible(true);
-					new VentanaConBusqueda();
-//hay que hcer que la bulsar el boton buscar se abra la VentanaConBusqueda
-				});
+		buscar.addActionListener((e) -> {
+			setVisible(true);
+			new VentanaConBusqueda();
+
+		});
 		
 		//Boton Admin
 		admin = new JButton("Admin");

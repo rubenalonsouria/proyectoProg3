@@ -19,6 +19,7 @@ public class VentanaConBusqueda extends JFrame {
         setSize(400, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        setVisible(true);
 
         
         campoBusqueda = new JTextField();
