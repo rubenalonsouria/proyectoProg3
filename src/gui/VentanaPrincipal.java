@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -13,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 public class VentanaPrincipal extends JFrame {
@@ -115,8 +117,15 @@ public class VentanaPrincipal extends JFrame {
 
 		});
 		
+		//Creacion de JTable
 		
-		
+		Object[] columnas = {"Pelicula"};
+		Object[][] datos = {
+                {new ImageIcon("images/theMarvels.jpg")},
+                {new ImageIcon("images/UnAmor.jpg")},
+                // Agregar mas Peliculas
+        };	    
+	    
 		//Ventana
 		setLayout(new BorderLayout(0, 0));
 		add(panelCuenta, BorderLayout.NORTH);
