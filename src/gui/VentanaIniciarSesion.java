@@ -19,6 +19,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import main.MainCine;
+
 public class VentanaIniciarSesion extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private  VentanaPrincipal ventanaPrincipal;
@@ -28,10 +30,8 @@ public class VentanaIniciarSesion extends JFrame {
 	private JButton btnNewButton, btnNewButton_1, botonAdminSi, botonAdminNo;
 	private JPanel panelAdmin;
 	private JCheckBox recuerdameButton;
-	private Map<String, String[]> mapaUsuarios = new HashMap<>();
+	MainCine mainCine = new MainCine();
 	
-	
-
 	public VentanaIniciarSesion(JFrame ventanaAnterior, JFrame ventanaPrincipal) {
 
 
@@ -50,41 +50,19 @@ public class VentanaIniciarSesion extends JFrame {
 		});
 		// Para iniciar Sesion
 		btnNewButton.addActionListener((e) -> {
-			try {
-				/*
-				 * SI ERES UN ADMINISTRADOR TIENE QEU APARECER QUE ES ADMIN Y TIENE PODERES
-				 * EXTRA o que aparezca una ventana administrador(diferente a la de cliente que
-				 * es la principal)
-				 */
-				Scanner sc = new Scanner(new FileReader("Ficheros/usuarios"));
-				String usuario = sc.nextLine(); // Primera linea no la queremos
-				String linea;
-				while (sc.hasNext()) {
-					linea = sc.nextLine();
-					String[] partes = linea.split(",");
-					String correo = partes[0];
-					String contrasena = partes[1];
-					String admin = partes[7];
-					String[] values = { contrasena, admin };
-					mapaUsuarios.put(correo, values);
-				}
-				sc.close();
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
-
+			
 			String contrasenaField = password.getText();
 			String correoField = textField.getText();
 
-			if (!mapaUsuarios.containsKey(correoField)) {
+			if (!mainCine.getMapaUsuarios().containsKey(correoField)) {
 				JOptionPane.showMessageDialog(null, "Primero registrate", "ERROR", JOptionPane.WARNING_MESSAGE);
 				
 			} else {
 				
-				if (contrasenaField.equals(mapaUsuarios.get(correoField)[0])) {
+				if (contrasenaField.equals(mainCine.getMapaUsuarios().get(correoField)[0])) {
 					
 					// Comprobacion si es admin
-					if (mapaUsuarios.get(correoField)[1].equals("false")) {
+					if (mainCine.getMapaUsuarios().get(correoField)[1].equals("false")) {
 						JOptionPane.showMessageDialog(null, "Inicio Sesion correcto", "ERROR",JOptionPane.INFORMATION_MESSAGE);
 						setVisible(false);
 						

@@ -34,8 +34,12 @@ public class Administrador extends Usuario {
 
 	@Override
 	public String toString() {
-		return "Administrador [cine=" + cine + ", peliculas=" + peliculas + "]";
+		return "Administrador [cine=" + cine + ", peliculas=" + peliculas + ", correo=" + correo + ", password="
+				+ password + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", fechaNacimineto="
+				+ fechaNacimineto + ", admin=" + admin + "]";
 	}
+
+	
 	
 	
 

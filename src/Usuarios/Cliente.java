@@ -71,10 +71,14 @@ public class Cliente extends Usuario{
 		this.historialDeCompras = historialDeCompras;
 	}
 	//ToString
-	
+
 	@Override
 	public String toString() {
 		return "Cliente [numeroTelefono=" + numeroTelefono + ", metodoDePago=" + metodoDePago + ", numeroTarjeta="
-				+ numeroTarjeta + ", puntos=" + puntos + ", historialDeCompras=" + historialDeCompras + "]";
+				+ numeroTarjeta + ", puntos=" + puntos + ", historialDeCompras=" + historialDeCompras + ", correo="
+				+ correo + ", password=" + password + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni
+				+ ", fechaNacimineto=" + fechaNacimineto + ", admin=" + admin + "]";
 	}
+	
+	
 }
