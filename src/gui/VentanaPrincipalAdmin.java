@@ -3,6 +3,8 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -11,6 +13,8 @@ import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
 
+import main.MainCine;
+
 public class VentanaPrincipalAdmin extends JFrame{
 
 	private static final long serialVersionUID = 1L;
@@ -18,6 +22,7 @@ public class VentanaPrincipalAdmin extends JFrame{
 	protected JPanel panelCuenta, panelCentro;
 	protected JList<?> listaPeliculas;
 	protected ImageIcon iconoIdentificarse; 
+	private static Logger logger = Logger.getLogger(MainCine.class.getName());
 	
 	
 	public VentanaPrincipalAdmin(JFrame ventanaPrincipal) {
@@ -36,6 +41,7 @@ public class VentanaPrincipalAdmin extends JFrame{
 		
 		
 		identificarse.addActionListener((e)->{
+			logger.log(Level.INFO, "SE HA PULSADO EL BOTÓN IDENTIFICARSE");
 			setVisible(false);
 			new VentanaIdentificarse(ventanaPrincipalAdmin);
 			
@@ -45,6 +51,7 @@ public class VentanaPrincipalAdmin extends JFrame{
 		volver.setToolTipText("Volver a la vista Usuario");
 		
 		volver.addActionListener((e)->{
+			logger.log(Level.INFO, "SE HA PULSADO EL BOTÓN VOLVER");
 			setVisible(false);
 			ventanaPrincipal.setVisible(true);	
 			

@@ -6,6 +6,8 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -16,6 +18,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import main.MainCine;
+
 public class VentanaInfoCine extends JFrame{
 
 	private static final long serialVersionUID = 1L;
@@ -24,6 +28,7 @@ public class VentanaInfoCine extends JFrame{
 	protected ImageIcon iconoIdentificarse, iconoZubi, iconoMax, iconoBoulevard, iconoGarbera;
 	public static JButton admin;
 	protected JLabel labelLogo, labelBara, labelZubi, labelGarbe, labelBoule;
+	private static Logger logger = Logger.getLogger(MainCine.class.getName());
 	
 	public VentanaInfoCine() {
 		
@@ -100,6 +105,7 @@ public class VentanaInfoCine extends JFrame{
 		identificarse.setIcon(iconoIdentificarse);
 
 		identificarse.addActionListener((e) -> {
+			logger.log(Level.INFO, "SE HA PULSADO EL BOTÓN IDENTIFICARSE");
 			setVisible(false);
 			new VentanaIdentificarse(VentanaInfoCine);
 
@@ -110,6 +116,7 @@ public class VentanaInfoCine extends JFrame{
 		cine.setToolTipText("Información sobre los cines disponibles");
 				
 		cine.addActionListener((e) -> {
+			logger.log(Level.INFO, "SE HA PULSADO EL BOTÓN CINE");
 			setVisible(false);
 			new VentanaInfoCine();
 
@@ -120,6 +127,7 @@ public class VentanaInfoCine extends JFrame{
 		peliculas.setToolTipText("Todas las películas disponibles");
 				
 		peliculas.addActionListener((e) -> {
+			logger.log(Level.INFO, "SE HA PULSADO EL BOTÓN PELICULAS");
 			setVisible(false);
 			new VentanaPrincipal();
 
@@ -135,6 +143,7 @@ public class VentanaInfoCine extends JFrame{
 		* detecte ha iniciado un admin }
 		*/
 		admin.addActionListener((e) -> {
+			logger.log(Level.INFO, "SE HA PULSADO EL BOTÓN ADMIN");
 			setVisible(false);
 			new VentanaPrincipalAdmin(this);
 

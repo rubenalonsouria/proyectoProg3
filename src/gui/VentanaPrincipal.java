@@ -6,6 +6,8 @@ import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -23,6 +25,7 @@ import Usuarios.Administrador;
 import Usuarios.Cliente;
 import main.MainCine;
 
+
 public class VentanaPrincipal extends JFrame {
 //por que hay que poner serialVersionUID = 1L PREGUNTAR
 
@@ -39,7 +42,9 @@ public class VentanaPrincipal extends JFrame {
 	private boolean esCliente;
 	MainCine mainCine = new MainCine();
 	private JPasswordField datosCuentaPassword;
+	private static Logger logger = Logger.getLogger(MainCine.class.getName());
 
+	
 	/*
 	 * public VentanaPrincipal() {//Ordenar todo segun en el panel qeu sea //si no
 	 * es mucho lio para buscar en la ventana
@@ -236,6 +241,7 @@ public class VentanaPrincipal extends JFrame {
 		cine.setToolTipText("Información sobre los cines disponibles");
 		
 		cine.addActionListener((e) -> {
+			logger.log(Level.INFO, "SE HA PULSADO EL BOTÓN CINE");
 			setVisible(false);
 			new VentanaInfoCine();
 
@@ -246,6 +252,7 @@ public class VentanaPrincipal extends JFrame {
 		peliculas.setToolTipText("Todas las películas disponibles");
 		
 		peliculas.addActionListener((e) -> {
+			logger.log(Level.INFO, "SE HA PULSADO EL BOTÓN PELICULAS");
 			setVisible(false);
 			new VentanaPrincipal();
 
@@ -256,6 +263,7 @@ public class VentanaPrincipal extends JFrame {
 		buscar.setToolTipText("Buscador de peliculas");
 				
 		buscar.addActionListener((e) -> {
+			logger.log(Level.INFO, "SE HA PULSADO EL BOTÓN BUSQUEDA");
 			setVisible(true);
 			new VentanaConBusqueda();
 
@@ -271,6 +279,7 @@ public class VentanaPrincipal extends JFrame {
 		 * detecte ha iniciado un admin }
 		 */
 		admin.addActionListener((e) -> {
+			logger.log(Level.INFO, "SE HA PULSADO EL BOTÓN ADMIN");
 			setVisible(false);
 			new VentanaPrincipalAdmin(this);
 

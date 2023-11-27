@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -31,6 +33,7 @@ public class VentanaIniciarSesion extends JFrame {
 	MainCine mainCine = new MainCine();
 	private static Cliente clienteIniciado = null;
 	private static Administrador administradorIniciado = null;
+	private static Logger logger = Logger.getLogger(MainCine.class.getName());
 
 	public static boolean isSesionIniciada() {
 		return sesionIniciada;
@@ -66,12 +69,13 @@ public class VentanaIniciarSesion extends JFrame {
 
 		// Para cancelar y volver a la ventana principal
 		btnNewButton_1.addActionListener((e) -> {
+			logger.log(Level.INFO, "SE HA PULSADO EL BOTÓN VOLVER");
 			setVisible(false);
 			ventanaAnterior.setVisible(true);
 		});
 		// Para iniciar Sesion
 		btnNewButton.addActionListener((e) -> {
-
+			logger.log(Level.INFO, "SE HA PULSADO EL BOTÓN INICIAR SESIÓN");
 			String contrasenaField = password.getText();
 			String correoField = textField.getText();
 

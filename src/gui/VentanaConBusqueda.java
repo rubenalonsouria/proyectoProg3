@@ -1,9 +1,13 @@
 package gui;
 
 import javax.swing.*;
+
+import main.MainCine;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Logger;
 
 public class VentanaConBusqueda extends JFrame {
     
@@ -11,6 +15,7 @@ public class VentanaConBusqueda extends JFrame {
 	private JTextField campoBusqueda;
     private JButton buscar;
     protected JPanel panelCuenta, panelCuentaIzquierda, panelCuentaDerecha, panelCine, panelCinesInforamcion;
+    private static Logger logger = Logger.getLogger(MainCine.class.getName());
 
     public VentanaConBusqueda() {
 		

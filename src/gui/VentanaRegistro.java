@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.logging.Logger;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,6 +20,7 @@ import javax.swing.JTextField;
 
 import Usuarios.Cliente;
 import Usuarios.Usuario;
+import main.MainCine;
 
 public class VentanaRegistro extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -28,6 +30,7 @@ public class VentanaRegistro extends JFrame {
 			fechaNacimientoLabel;
 	protected JPasswordField contraseñaTextField;
 	protected JButton botonRegistrarse, botonVolver;
+	private static Logger logger = Logger.getLogger(MainCine.class.getName());
 	
 	public VentanaRegistro(JFrame ventanaAnterior, JFrame ventanaPrincipal) {
 

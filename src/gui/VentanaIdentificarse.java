@@ -1,11 +1,16 @@
 package gui;
 import java.awt.BorderLayout;
 import java.awt.Image;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import main.MainCine;
 
 public class VentanaIdentificarse extends JFrame {
 	// por que hay que poner serialVersionUID = 1L PREGUNTAR
@@ -14,12 +19,14 @@ public class VentanaIdentificarse extends JFrame {
 	protected JFrame ventanaIdentificacion, ventanaPricipal;
 	protected JButton iniciarSesion, registrarse, volver;
 	protected JLabel labelLogo;
+	private static Logger logger = Logger.getLogger(MainCine.class.getName());
 
 	public VentanaIdentificarse(JFrame ventanaPricipal) {
 		iniciarSesion = new JButton("Iniciar Sesion");
 		registrarse = new JButton("Registrarse");
 		volver = new JButton("Volver");
 		ventanaIdentificacion = this;
+		
 
 		/*
 		 * Con absolute layout no se anade el segundo bottonn de momento ponemos un flow
@@ -28,14 +35,17 @@ public class VentanaIdentificarse extends JFrame {
 		 */
 
 		iniciarSesion.addActionListener((e) -> {
+			logger.log(Level.INFO, "SE HA PULSADO EL BOTÓN INICIAR SESIÓN");
 			setVisible(false);
 			new VentanaIniciarSesion(ventanaIdentificacion, ventanaPricipal);
 		});
 		registrarse.addActionListener((e) -> {
+			logger.log(Level.INFO, "SE HA PULSADO EL BOTÓN REGISTRARSE");
 			setVisible(false);
 			new VentanaRegistro(ventanaIdentificacion,ventanaPricipal);
 		});
 		volver.addActionListener((e)->{
+			logger.log(Level.INFO, "SE HA PULSADO EL BOTÓN VOLVER");
 			setVisible(false);
 			ventanaPricipal.setVisible(true);
 		});
