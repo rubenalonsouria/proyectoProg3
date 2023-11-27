@@ -147,7 +147,7 @@ public class MainCine {
 		
 		// iniciar ventana
 		VentanaPrincipal ventanaPrincipal = new VentanaPrincipal();
-		VentanaMetodoDePago v = new VentanaMetodoDePago();
+		//VentanaMetodoDePago v = new VentanaMetodoDePago(listaClientes.get(0));
 
 	}
 
