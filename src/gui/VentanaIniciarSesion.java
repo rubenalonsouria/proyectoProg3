@@ -87,6 +87,7 @@ public class VentanaIniciarSesion extends JFrame {
 						JOptionPane.showMessageDialog(null, "Inicio Sesion correcto", null,
 								JOptionPane.INFORMATION_MESSAGE);
 						setVisible(false);
+						ventanaPrincipal.setVisible(true);
 						sesionIniciada = true;
 						administradorIniciado = null; //para qeu no haya errores
 						for (Cliente c : mainCine.getListaClientes()) {
