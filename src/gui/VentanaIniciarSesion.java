@@ -2,14 +2,10 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.Iterator;
+
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -19,21 +15,46 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import Usuarios.Administrador;
+import Usuarios.Cliente;
+import Usuarios.Usuario;
 import main.MainCine;
 
 public class VentanaIniciarSesion extends JFrame {
 	private static final long serialVersionUID = 1L;
-	private  VentanaPrincipal ventanaPrincipal;
+	private static boolean sesionIniciada = false;
 	private JTextField textField; // Poner el nobre de cada componente con el que es
 	private JLabel lblNewLabel, lblNewLabel_1;
 	private JPasswordField password;
-	private JButton btnNewButton, btnNewButton_1, botonAdminSi, botonAdminNo;
-	private JPanel panelAdmin;
+	private JButton btnNewButton, btnNewButton_1;
 	private JCheckBox recuerdameButton;
 	MainCine mainCine = new MainCine();
-	
-	public VentanaIniciarSesion(JFrame ventanaAnterior, JFrame ventanaPrincipal) {
+	private static Cliente clienteIniciado = null;
+	private static Administrador administradorIniciado = null;
 
+	public static boolean isSesionIniciada() {
+		return sesionIniciada;
+	}
+	
+	public static void setSesionIniciada(boolean b) {
+		sesionIniciada = b;
+	}
+
+	public static Cliente clienteIniciado() {
+		return clienteIniciado;
+	}
+	public static void setclienteIniciado(Cliente c) {
+		clienteIniciado = c;
+	}
+
+	public static Administrador administradorIniciado() {
+		return administradorIniciado;
+	}
+	public static void setadministradorIniciado(Administrador a) {
+		administradorIniciado = a;
+	}
+
+	public VentanaIniciarSesion(JFrame ventanaAnterior, JFrame ventanaPrincipal) {
 
 		lblNewLabel = new JLabel("Correo Electrónico:");
 		lblNewLabel_1 = new JLabel("Contraseña:");
@@ -50,39 +71,56 @@ public class VentanaIniciarSesion extends JFrame {
 		});
 		// Para iniciar Sesion
 		btnNewButton.addActionListener((e) -> {
-			
+
 			String contrasenaField = password.getText();
 			String correoField = textField.getText();
 
 			if (!mainCine.getMapaUsuarios().containsKey(correoField)) {
 				JOptionPane.showMessageDialog(null, "Primero registrate", "ERROR", JOptionPane.WARNING_MESSAGE);
-				
+
 			} else {
-				
+
 				if (contrasenaField.equals(mainCine.getMapaUsuarios().get(correoField)[0])) {
-					
+
 					// Comprobacion si es admin
 					if (mainCine.getMapaUsuarios().get(correoField)[1].equals("false")) {
-						JOptionPane.showMessageDialog(null, "Inicio Sesion correcto", "ERROR",JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(null, "Inicio Sesion correcto", null,
+								JOptionPane.INFORMATION_MESSAGE);
 						setVisible(false);
-						
+						sesionIniciada = true;
+						administradorIniciado = null; //para qeu no haya errores
+						for (Cliente c : mainCine.getListaClientes()) {
+							if (c.getCorreo().equals(correoField)) {
+								clienteIniciado = c;
+								break;
+							}
+						}
+
 					} else {
 						/*
 						 * opcion de con un panel panelAdmin = new JPanel(new GridLayout(1,2));
 						 * botonAdminNo = new JButton("No"); botonAdminSi = new JButton("Si");
 						 * panelAdmin.add(botonAdminNo); panelAdmin.add(botonAdminSi);
 						 */
-						
-						Object t = "Se ha detectado que eres administrador" + "\n"// arreglar el barra n para qeu haga												
-								+ "Quieres iniciar Sesion como admin?";			// una nueva fila
+
+						Object t = "Se ha detectado que eres administrador" + "\n"
+								+ "Quieres iniciar Sesion como admin?";
 						int respuesta = JOptionPane.showConfirmDialog(null, t);
 
 						if (respuesta == 0) {
-							
-							//Poner boton adminVisible a true pero no funciona
+
+							// Poner boton adminVisible a true pero no funciona
 							VentanaPrincipal.admin.setVisible(true);
 							setVisible(false);
 							ventanaPrincipal.setVisible(true);
+							sesionIniciada = true;
+							clienteIniciado = null; //para qeu no haya errores
+							for (Administrador a : mainCine.getListaAdministradores()) {
+								if (a.getCorreo().equals(correoField)) {
+									administradorIniciado = a;
+									break;
+								}
+							}
 						} else if (respuesta == 1) {
 							password.setText("");
 							textField.setText("");

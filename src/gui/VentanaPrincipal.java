@@ -13,21 +13,32 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+
+import Usuarios.Administrador;
+import Usuarios.Cliente;
+import main.MainCine;
 
 public class VentanaPrincipal extends JFrame {
 //por que hay que poner serialVersionUID = 1L PREGUNTAR
 
 	private static final long serialVersionUID = 1L;
-	protected JButton identificarse, buscar, cine, peliculas, promociones, cineBilbao, cineBarakaldo, cineVitoria, cineSanSebastian;
-	protected JPanel panelCuenta, panelCuentaIzquierda, panelCuentaDerecha, panelCentro, panelCinesInforamcion;
+	protected JButton identificarse, buscar, cine, peliculas, promociones, cineBilbao, cineBarakaldo, cineVitoria, cineSanSebastian, 
+	editarDatosCuenta, guardarDatosCuenta,salirDatosCuenta,cerrarSesionDatosCuenta;
+	protected JPanel panelCuenta, panelCuentaIzquierda, panelCuentaDerecha, panelCentro, panelCinesInforamcion, panelDatosCuenta;
 	protected JTable tablaPeliculas;
 	protected DefaultTableModel modeloPeliculas;
 	protected ImageIcon iconoIdentificarse, iconoZubi, iconoMax, iconoBoulevard, iconoGarbera;
 	protected JLabel labelLogo;
 	public static JButton admin;
+	private JTextField datosCuentaCorreo,datosCuentaNombre,datosCuentaApellido,datosCuentaDni,datosCuentaFechaNacimiento;
+	private boolean esCliente;
+	MainCine mainCine = new MainCine();
+	private JPasswordField datosCuentaPassword;
 
 	/*
 	 * public VentanaPrincipal() {//Ordenar todo segun en el panel qeu sea //si no
@@ -66,9 +77,157 @@ public class VentanaPrincipal extends JFrame {
 		identificarse.setToolTipText("Iniciar sesión o registrarse");
 		identificarse.setIcon(iconoIdentificarse);
 
+		//paneldatoscuenta
 		identificarse.addActionListener((e) -> {
-			setVisible(false);
+			if (VentanaIniciarSesion.isSesionIniciada() == true) {
+				panelDatosCuenta = new JPanel(new FlowLayout());
+				editarDatosCuenta = new JButton("Editar");
+				salirDatosCuenta = new JButton("salir"); //Poner icono de una x
+				guardarDatosCuenta = new JButton("Guardar Cambios");
+				cerrarSesionDatosCuenta = new JButton("Cerrar Sesion");
+				
+				if (VentanaIniciarSesion.administradorIniciado() == null) {
+					esCliente = true;
+					//Cargamos los datos del cliente
+					datosCuentaCorreo = new JTextField(VentanaIniciarSesion.clienteIniciado().getCorreo());
+					datosCuentaCorreo.setEditable(false);
+					
+					datosCuentaPassword = new JPasswordField(VentanaIniciarSesion.clienteIniciado().getPassword());
+					datosCuentaPassword.setEditable(false);
+					
+					datosCuentaNombre = new JTextField(VentanaIniciarSesion.clienteIniciado().getNombre());
+					datosCuentaNombre.setEditable(false);
+					
+					datosCuentaApellido = new JTextField(VentanaIniciarSesion.clienteIniciado().getApellido());
+					datosCuentaApellido.setEditable(false);
+					
+					datosCuentaDni = new JTextField(VentanaIniciarSesion.clienteIniciado().getDni());
+					datosCuentaDni.setEditable(false);
+					
+					//datosCuentaFechaNacimiento = new JTextField(VentanaIniciarSesion.clienteIniciado().getFechaNacimineto().toString());
+					//datosCuentaFechaNacimiento.setEditable(false);
+					
+					//Anadimos al panel
+					panelDatosCuenta.add(datosCuentaCorreo);
+					panelDatosCuenta.add(datosCuentaPassword);
+					panelDatosCuenta.add(datosCuentaNombre);
+					panelDatosCuenta.add(datosCuentaApellido);
+					panelDatosCuenta.add(datosCuentaDni);
+					//panelDatosCuenta.add(datosCuentaFechaNacimiento);
+					
+				}else if (VentanaIniciarSesion.clienteIniciado() == null) {
+					esCliente = false;
+					//Cargamos los datos del Administrador
+					datosCuentaCorreo = new JTextField(VentanaIniciarSesion.administradorIniciado().getCorreo());
+					datosCuentaCorreo.setEditable(false);
+					
+					datosCuentaPassword = new JPasswordField(VentanaIniciarSesion.administradorIniciado().getPassword());
+					datosCuentaPassword.setEditable(false);
+					
+					datosCuentaNombre = new JTextField(VentanaIniciarSesion.administradorIniciado().getNombre());
+					datosCuentaNombre.setEditable(false);
+					
+					datosCuentaApellido = new JTextField(VentanaIniciarSesion.administradorIniciado().getApellido());
+					datosCuentaApellido.setEditable(false);
+					
+					datosCuentaDni = new JTextField(VentanaIniciarSesion.administradorIniciado().getDni());
+					datosCuentaDni.setEditable(false);
+					
+					//datosCuentaFechaNacimiento = new JTextField(VentanaIniciarSesion.administradorIniciado().getFechaNacimineto().toString());
+					//datosCuentaFechaNacimiento.setEditable(false);
+					
+					//Anadimos al panel
+					panelDatosCuenta.add(datosCuentaCorreo);
+					panelDatosCuenta.add(datosCuentaPassword);
+					panelDatosCuenta.add(datosCuentaNombre);
+					panelDatosCuenta.add(datosCuentaApellido);
+					panelDatosCuenta.add(datosCuentaDni);
+					//panelDatosCuenta.add(datosCuentaFechaNacimiento);
+					
+				}
+				//Boton editar
+				editarDatosCuenta.addActionListener((a) -> {
+					datosCuentaCorreo.setEditable(true);
+					datosCuentaPassword.setEditable(true);
+					datosCuentaNombre.setEditable(true);
+					datosCuentaApellido.setEditable(true);
+					datosCuentaDni.setEditable(true);
+					//datosCuentaFechaNacimiento.setEditable(true);
+				});
+				panelDatosCuenta.add(editarDatosCuenta);
+				
+				//Boton guardar Cambios
+				guardarDatosCuenta.addActionListener((a) ->{
+					if (esCliente == true) {
+						for (Cliente c : mainCine.getListaClientes()) {	//Hay qeu editarlo tmb en el mapa
+							if (c.getCorreo().equals(VentanaIniciarSesion.clienteIniciado().getCorreo())) {
+								//Mapa
+								String[] valorMapa = mainCine.getMapaUsuarios().get(c.getCorreo());
+								valorMapa[0] = datosCuentaPassword.getText();
+								mainCine.getMapaUsuarios().remove(c.getCorreo());
+								mainCine.getMapaUsuarios().put(datosCuentaCorreo.getText(), valorMapa);
+								//Lista
+								c.setCorreo(datosCuentaCorreo.getText());
+								c.setNombre(datosCuentaNombre.getText());
+								c.setApellido(datosCuentaApellido.getText());
+								c.setDni(datosCuentaDni.getText());
+								c.setPassword(datosCuentaPassword.getText());
+								
+							}
+						}
+						
+					}else {
+						for (Administrador ad : mainCine.getListaAdministradores()) {
+							if (ad.getCorreo().equals(VentanaIniciarSesion.administradorIniciado().getCorreo())) {
+								//Mapa
+								String[] valorMapa = mainCine.getMapaUsuarios().get(ad.getCorreo());
+								valorMapa[0] = datosCuentaPassword.getText();
+								mainCine.getMapaUsuarios().remove(ad.getCorreo());
+								mainCine.getMapaUsuarios().put(datosCuentaCorreo.getText(), valorMapa);
+								//Lista
+								ad.setCorreo(datosCuentaCorreo.getText());
+								ad.setNombre(datosCuentaNombre.getText());
+								ad.setApellido(datosCuentaApellido.getText());
+								ad.setDni(datosCuentaDni.getText());
+								ad.setPassword(datosCuentaPassword.getText());
+							}
+						}
+					}
+					//Desactivo la edicion
+					datosCuentaCorreo.setEditable(false);
+					datosCuentaPassword.setEditable(false);
+					datosCuentaNombre.setEditable(false);
+					datosCuentaApellido.setEditable(false);
+					datosCuentaDni.setEditable(false);
+					
+				});
+				panelDatosCuenta.add(guardarDatosCuenta);
+				
+				//Boton salir
+				salirDatosCuenta.addActionListener((a) -> {
+					panelDatosCuenta.setVisible(false);
+					panelCentro.setVisible(true);
+				});
+				panelDatosCuenta.add(salirDatosCuenta);
+				
+				//Boton Cerrar Sesion
+				cerrarSesionDatosCuenta.addActionListener((a) -> {
+					VentanaIniciarSesion.setadministradorIniciado(null);
+					VentanaIniciarSesion.setclienteIniciado(null);
+					VentanaIniciarSesion.setSesionIniciada(false);
+					panelCentro.setVisible(true);
+					panelDatosCuenta.setVisible(false);
+				});
+				panelDatosCuenta.add(cerrarSesionDatosCuenta);
+				
+				panelCentro.setVisible(false);
+				add(panelDatosCuenta, BorderLayout.CENTER); //Cuando sesion iniciada y clicke en el boton de la cuenta se haga visible y cuando no = false.
+				
+			}else {
+				setVisible(false);
 			new VentanaIdentificarse(ventanaPrincipal);
+			}
+			
 
 		});
 
@@ -151,6 +310,7 @@ public class VentanaPrincipal extends JFrame {
 		panelCuentaIzquierda.add(cine, BorderLayout.WEST);
 		panelCuentaIzquierda.add(peliculas, BorderLayout.WEST);
 		panelCuentaIzquierda.add(buscar, BorderLayout.WEST);
+
 
 		
 		
