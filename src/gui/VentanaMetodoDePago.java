@@ -3,6 +3,7 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JButton;
@@ -96,6 +97,7 @@ public class VentanaMetodoDePago extends JFrame{
 	//Listeners
 		//ComboBox
 		comboOpciones.addActionListener((e)-> {
+			logger.log(Level.INFO, "SE HA PULSADO OPCIONES");
 			if (comboOpciones.getSelectedItem().equals("PayPal")) {
 				panelBizum.setVisible(false);
 				panelPagoEnCine.setVisible(false);
@@ -124,16 +126,21 @@ public class VentanaMetodoDePago extends JFrame{
 		
 		//Botones guardar/volver 
 		botonGuardar.addActionListener((e)->{	//Pensar solucion para a ver como almacenamos los datos de pago
+			logger.log(Level.INFO, "SE HA PULSADO EL BOTÓN GUARDAR");
 			MetodoDePago m;
 			if (comboOpciones.getSelectedItem().equals("Tarjeta")) {
+				logger.log(Level.INFO, "SE HA ELEGIDO TARJETA");
 				m = MetodoDePago.tarjeta;
 			}else if (comboOpciones.getSelectedItem().equals("Bizum")) {
+				logger.log(Level.INFO, "SE HA ELEGIDO BIZUM");
 				m = MetodoDePago.bizum;
 
 			}else if (comboOpciones.getSelectedItem().equals("PayPal")) {
+				logger.log(Level.INFO, "SE HA ELEGIDO PAYPAL");
 				m = MetodoDePago.payPal;
 
 			}else {
+				logger.log(Level.INFO, "SE HA ELEGIDO CINE");
 				m = MetodoDePago.cine;
 
 			}
@@ -141,6 +148,7 @@ public class VentanaMetodoDePago extends JFrame{
 		});
 		
 		botonVolver.addActionListener((e)->{
+			logger.log(Level.INFO, "SE HA PULSADO EL BOTÓN VOLVER");
 			setVisible(false);
 			//ventana de la que viene a true
 		});

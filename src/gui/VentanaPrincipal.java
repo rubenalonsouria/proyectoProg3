@@ -32,7 +32,8 @@ public class VentanaPrincipal extends JFrame {
 	private static final long serialVersionUID = 1L;
 	protected JButton identificarse, buscar, cine, peliculas, promociones, cineBilbao, cineBarakaldo, cineVitoria, cineSanSebastian, 
 	editarDatosCuenta, guardarDatosCuenta,salirDatosCuenta,cerrarSesionDatosCuenta;
-	protected JPanel panelCuenta, panelCuentaIzquierda, panelCuentaDerecha, panelCentro, panelCinesInforamcion, panelDatosCuenta;
+	protected JPanel panelCuenta, panelCuentaIzquierda, panelCuentaDerecha, 
+	panelCentro, panelCinesInforamcion, panelDatosCuenta;
 	protected JTable tablaPeliculas;
 	protected DefaultTableModel modeloPeliculas;
 	protected ImageIcon iconoIdentificarse, iconoZubi, iconoMax, iconoBoulevard, iconoGarbera;
@@ -60,7 +61,7 @@ public class VentanaPrincipal extends JFrame {
 	public VentanaPrincipal() {
 		JFrame ventanaPrincipal = this;
 		
-		// Peliculas
+		// Peliculas y Busqueda
 		panelCentro = new JPanel();
 		tablaPeliculas = new JTable();// Aqui anadir un Jlist con botones que contenga la imagen y el titulo de la peli
 								
@@ -303,7 +304,6 @@ public class VentanaPrincipal extends JFrame {
 		
 		panelCuentaIzquierda.setBackground(Color.CYAN);
 		//panelCuentaIzquierda.setBorder(BorderFactory.createLineBorder(Color.GRAY));
-		
 		panelCuentaDerecha.setBackground(Color.CYAN);
 		//panelCuentaDerecha.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 		
@@ -316,14 +316,12 @@ public class VentanaPrincipal extends JFrame {
 		panelCuentaDerecha.add(admin, BorderLayout.CENTER);
 		panelCuentaDerecha.add(identificarse, BorderLayout.EAST);
 		panelCuentaIzquierda.add(labelLogo, BorderLayout.WEST);
-		panelCuentaIzquierda.add(cine, BorderLayout.WEST);
-		panelCuentaIzquierda.add(peliculas, BorderLayout.WEST);
 		panelCuentaIzquierda.add(buscar, BorderLayout.WEST);
-
+		panelCuentaIzquierda.add(peliculas, BorderLayout.WEST);
+		panelCuentaIzquierda.add(cine, BorderLayout.WEST);
 
 		
 		
-
 		setBounds(100, 100, 1200, 800);
 		setLocationRelativeTo(null);
 		setResizable(false);
