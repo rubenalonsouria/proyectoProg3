@@ -302,19 +302,20 @@ public class VentanaPrincipal extends JFrame {
 		panelCuenta.setBackground(Color.CYAN);
 		panelCuenta.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 
-		//panelCentro.setBackground(Color.LIGHT_GRAY);
+		panelCentro.setBackground(Color.LIGHT_GRAY);
 		
 		panelCuentaIzquierda.setBackground(Color.CYAN);
 		//panelCuentaIzquierda.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 		panelCuentaDerecha.setBackground(Color.CYAN);
 		//panelCuentaDerecha.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 		
+		
 		panelCuenta.add(panelCuentaIzquierda, BorderLayout.WEST);
 		panelCuenta.add(panelCuentaDerecha, BorderLayout.EAST);
 		
 		add(panelCentro, BorderLayout.CENTER);
-		//panelCentro.add(tablaPeliculas, BorderLayout.CENTER);
-		panelCentro.add(buscar);
+		panelCentro.add(tablaPeliculas, BorderLayout.CENTER);
+		
 		
 		panelCuentaDerecha.add(admin, BorderLayout.CENTER);
 		panelCuentaDerecha.add(identificarse, BorderLayout.EAST);
