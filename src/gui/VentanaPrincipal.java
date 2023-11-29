@@ -33,7 +33,7 @@ public class VentanaPrincipal extends JFrame {
 	protected JButton identificarse, buscar, cine, peliculas, promociones, cineBilbao, cineBarakaldo, cineVitoria, cineSanSebastian, 
 	editarDatosCuenta, guardarDatosCuenta,salirDatosCuenta,cerrarSesionDatosCuenta;
 	protected JPanel panelCuenta, panelCuentaIzquierda, panelCuentaDerecha, 
-	panelCentro, panelCinesInforamcion, panelDatosCuenta;
+	panelCentro, panelDatosCuenta;
 	protected JTable tablaPeliculas;
 	protected DefaultTableModel modeloPeliculas;
 	protected ImageIcon iconoIdentificarse, iconoZubi, iconoMax, iconoBoulevard, iconoGarbera;
@@ -69,7 +69,7 @@ public class VentanaPrincipal extends JFrame {
 		panelCuenta = new JPanel(new BorderLayout());
 		panelCuentaIzquierda = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		panelCuentaDerecha = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		panelCinesInforamcion = new JPanel();
+		
 		
 		//Botones y más de panelCuenta
 		//Logo Deusto		
@@ -301,6 +301,8 @@ public class VentanaPrincipal extends JFrame {
 		
 		panelCuenta.setBackground(Color.CYAN);
 		panelCuenta.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+
+		//panelCentro.setBackground(Color.LIGHT_GRAY);
 		
 		panelCuentaIzquierda.setBackground(Color.CYAN);
 		//panelCuentaIzquierda.setBorder(BorderFactory.createLineBorder(Color.GRAY));
@@ -311,7 +313,8 @@ public class VentanaPrincipal extends JFrame {
 		panelCuenta.add(panelCuentaDerecha, BorderLayout.EAST);
 		
 		add(panelCentro, BorderLayout.CENTER);
-		panelCentro.add(tablaPeliculas);
+		//panelCentro.add(tablaPeliculas, BorderLayout.CENTER);
+		panelCentro.add(buscar);
 		
 		panelCuentaDerecha.add(admin, BorderLayout.CENTER);
 		panelCuentaDerecha.add(identificarse, BorderLayout.EAST);
