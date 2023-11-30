@@ -36,7 +36,7 @@ public class VentanaPrincipal extends JFrame {
 	panelCentro, panelDatosCuenta;
 	protected JTable tablaPeliculas;
 	protected DefaultTableModel modeloPeliculas;
-	protected ImageIcon iconoIdentificarse, iconoZubi, iconoMax, iconoBoulevard, iconoGarbera;
+	protected ImageIcon iconoIdentificarse, iconoBuscar;
 	protected JLabel labelLogo;
 	public static JButton admin;
 	private JTextField datosCuentaCorreo,datosCuentaNombre,datosCuentaApellido,datosCuentaDni,datosCuentaFechaNacimiento;
@@ -260,8 +260,10 @@ public class VentanaPrincipal extends JFrame {
 		});
 		
 		//Boton Busqueda
-		buscar = new JButton("Buscar");
+		iconoBuscar = new ImageIcon("images/iconoBuscar.png");
+		buscar = new JButton(" Buscar");
 		buscar.setToolTipText("Buscador de peliculas");
+		buscar.setIcon(iconoBuscar);
 				
 		buscar.addActionListener((e) -> {
 			logger.log(Level.INFO, "SE HA PULSADO EL BOTÓN BUSQUEDA");

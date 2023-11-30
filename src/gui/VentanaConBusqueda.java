@@ -16,6 +16,7 @@ public class VentanaConBusqueda extends JFrame {
 	private JTextField campoBusqueda;
 	private JLabel labelBuscar;
     private JButton buscar;
+    protected ImageIcon iconoBuscar;
     protected JPanel panelCuenta, panel, panelCuentaIzquierda, panelCuentaDerecha, panelCine, panelCinesInforamcion;
     private static Logger logger = Logger.getLogger(MainCine.class.getName());
 
@@ -29,7 +30,9 @@ public class VentanaConBusqueda extends JFrame {
         JPanel panel = new JPanel();
         JLabel labelBuscar = new JLabel("Buscar: ");
         JTextField campoBusqueda = new JTextField(20);
-        JButton buscar = new JButton("Buscar");
+        JButton buscar = new JButton();
+        iconoBuscar = new ImageIcon("images/iconoBuscar.png");
+        buscar.setIcon(iconoBuscar);
 
         panel.add(labelBuscar);
         panel.add(campoBusqueda);
@@ -57,7 +60,7 @@ public class VentanaConBusqueda extends JFrame {
             e.printStackTrace();
         }
 
-        JOptionPane.showMessageDialog(this, "Realizando búsqueda con: " + textoBusqueda);
+        JOptionPane.showMessageDialog(this, "Busqueda completada de " + textoBusqueda);
     
     }
     
