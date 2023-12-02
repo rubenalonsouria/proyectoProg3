@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -41,18 +42,25 @@ public class VentanaConBusqueda extends JFrame {
 
         add(panel);
         
-		KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher((KeyEventDispatcher) new KeyEventDispatcher() {
-            public boolean dispatchKeyEvent(KeyEvent e) {
-                // Verifica si se presiona enter
-                if ((e.getKeyCode() == KeyEvent.VK_ENTER)) {
-                	System.out.println("hecho");
-                	realizarBusqueda(campoBusqueda.getText());
-                    return true; // Consumir el evento
-                }
-                return false; // No consumir el evento
+        campoBusqueda.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                // Creo que no es necesario implementar esto
             }
-        }); //ARREGLAR QUE SE PULSE VARIAS VECES	
-        
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                // Creo que no es necesario implementar esto
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    realizarBusqueda(campoBusqueda.getText());
+                }
+            }
+        });	
+		
         buscar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
