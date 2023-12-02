@@ -7,6 +7,7 @@ import main.MainCine;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,7 +22,7 @@ public class VentanaConBusqueda extends JFrame {
     private static Logger logger = Logger.getLogger(MainCine.class.getName());
 
     public VentanaConBusqueda() {
-		
+    	
         setTitle("Ventana con Búsqueda");
         setSize(400, 400);
         setLocationRelativeTo(null);
@@ -39,6 +40,18 @@ public class VentanaConBusqueda extends JFrame {
         panel.add(buscar);
 
         add(panel);
+        
+		KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher((KeyEventDispatcher) new KeyEventDispatcher() {
+            public boolean dispatchKeyEvent(KeyEvent e) {
+                // Verifica si se presiona enter
+                if ((e.getKeyCode() == KeyEvent.VK_ENTER)) {
+                	System.out.println("hecho");
+                	realizarBusqueda(campoBusqueda.getText());
+                    return true; // Consumir el evento
+                }
+                return false; // No consumir el evento
+            }
+        }); //ARREGLAR QUE SE PULSE VARIAS VECES	
         
         buscar.addActionListener(new ActionListener() {
             @Override
@@ -63,5 +76,7 @@ public class VentanaConBusqueda extends JFrame {
         JOptionPane.showMessageDialog(this, "Busqueda completada de " + textoBusqueda);
     
     }
+    
+    
     
 }
