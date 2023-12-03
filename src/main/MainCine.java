@@ -23,36 +23,25 @@ public class MainCine {
 	private static Map<String, String[]> mapaCorreoValoresUsuarios = new HashMap<>();
 	static Logger logger = Logger.getLogger(MainCine.class.getName());
 
-	public ArrayList<Pelicula> getListaPeliculas() {
+	public static ArrayList<Pelicula> getListaPeliculas() {
 		return listaPeliculas;
 	}
 
-	public Map<String, String[]> getMapaUsuarios() {
+	public static Map<String, String[]> getMapaUsuarios() {
 		return mapaCorreoValoresUsuarios;
 	}
 
-	public ArrayList<Cliente> getListaClientes() {
+	public static ArrayList<Cliente> getListaClientes() {
 		return listaClientes;
 	}
 
-	public ArrayList<Administrador> getListaAdministradores() {
+	public static ArrayList<Administrador> getListaAdministradores() {
 		return listaAdministradores;
 	}
 
-	public static void main(String[] args) {
-		// Logger
-		logger.setLevel(Level.ALL);
-		try {
-			logger.log(Level.INFO, "Cargando DeustoCine...");
-		} catch (Exception e) {
+	public static void cargarPeliculas() {
+		listaPeliculas.clear();
 
-			e.printStackTrace();
-		}
-		// Ejemplos de logger
-		// logger.info("Se ha mostrado un mensaje en consola");
-		// logger.warning("Mensaje de warning"); logger.severe("Mensaje de error");
-
-		// Carga de peliculas
 		try {
 			Scanner sc = new Scanner(new FileReader("Ficheros/peliculas"));
 			String primeraLinea = sc.nextLine(); // Primera linea no la queremos
@@ -106,9 +95,14 @@ public class MainCine {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		// Carga de Usuarios
-		try {
+	}
 
+	public static void cargaDeUsuarios() {
+		mapaCorreoValoresUsuarios.clear();
+		listaAdministradores.clear();
+		listaClientes.clear();
+
+		try {
 			Scanner sc = new Scanner(new FileReader("Ficheros/usuarios"));
 			String primeraLinea = sc.nextLine(); // Primera linea no la queremos
 			String usuarioLinea;
@@ -144,10 +138,24 @@ public class MainCine {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		
+
+	}
+
+	public static void main(String[] args) {
+		// Logger
+		logger.setLevel(Level.ALL);
+		logger.log(Level.INFO, "Cargando DeustoCine...");
+
+		// Ejemplos de logger
+		// logger.info("Se ha mostrado un mensaje en consola");
+		// logger.warning("Mensaje de warning"); logger.severe("Mensaje de error");
+
+		cargarPeliculas();
+		cargaDeUsuarios();
+
 		// iniciar ventana
 		VentanaPrincipal ventanaPrincipal = new VentanaPrincipal();
-		//VentanaMetodoDePago v = new VentanaMetodoDePago(listaClientes.get(0));
+		VentanaMetodoDePago v = new VentanaMetodoDePago(getListaClientes().get(0));
 
 	}
 

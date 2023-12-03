@@ -77,12 +77,13 @@ public class VentanaRegistro extends JFrame {
 				//Escritura
 				try (FileWriter fileWriter = new FileWriter("Ficheros/usuarios", true)) {
 					fileWriter.write(correo + "," + contrasena + "," + name + "," + apellidos + "," + dni + ","
-							+ "fechaNULLTemporal" + "," + telefono + "\n");
+							+ "fechaNULLTemporal" + "," + telefono + "," + "false"+ "\n");
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
 				new VentanaIniciarSesion(ventanaAnterior, ventanaPrincipal);
 				setVisible(false);
+				MainCine.cargaDeUsuarios();
 				JOptionPane.showMessageDialog(null, "Te has registrado correctamente",
 						null, JOptionPane.INFORMATION_MESSAGE);
 				

@@ -30,7 +30,6 @@ public class VentanaIniciarSesion extends JFrame {
 	private JPasswordField password;
 	private JButton btnNewButton, btnNewButton_1;
 	private JCheckBox recuerdameButton;
-	MainCine mainCine = new MainCine();
 	private static Cliente clienteIniciado = null;
 	private static Administrador administradorIniciado = null;
 	private static Logger logger = Logger.getLogger(MainCine.class.getName());
@@ -79,22 +78,22 @@ public class VentanaIniciarSesion extends JFrame {
 			String contrasenaField = password.getText();
 			String correoField = textField.getText();
 
-			if (!mainCine.getMapaUsuarios().containsKey(correoField)) {
+			if (!MainCine.getMapaUsuarios().containsKey(correoField)) {
 				JOptionPane.showMessageDialog(null, "Primero registrate", "ERROR", JOptionPane.WARNING_MESSAGE);
 
 			} else {
 
-				if (contrasenaField.equals(mainCine.getMapaUsuarios().get(correoField)[0])) {
+				if (contrasenaField.equals(MainCine.getMapaUsuarios().get(correoField)[0])) {
 
 					// Comprobacion si es admin
-					if (mainCine.getMapaUsuarios().get(correoField)[1].equals("false")) {
+					if (MainCine.getMapaUsuarios().get(correoField)[1].equals("false")) {
 						JOptionPane.showMessageDialog(null, "Inicio Sesion correcto", null,
 								JOptionPane.INFORMATION_MESSAGE);
 						setVisible(false);
 						ventanaPrincipal.setVisible(true);
 						sesionIniciada = true;
 						administradorIniciado = null; //para qeu no haya errores
-						for (Cliente c : mainCine.getListaClientes()) {
+						for (Cliente c : MainCine.getListaClientes()) {
 							if (c.getCorreo().equals(correoField)) {
 								clienteIniciado = c;
 								break;
@@ -120,7 +119,7 @@ public class VentanaIniciarSesion extends JFrame {
 							ventanaPrincipal.setVisible(true);
 							sesionIniciada = true;
 							clienteIniciado = null; //para qeu no haya errores
-							for (Administrador a : mainCine.getListaAdministradores()) {
+							for (Administrador a : MainCine.getListaAdministradores()) {
 								if (a.getCorreo().equals(correoField)) {
 									administradorIniciado = a;
 									break;

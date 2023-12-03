@@ -6,24 +6,33 @@ import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Panel;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import Usuarios.Administrador;
 import Usuarios.Cliente;
+import Usuarios.MetodoDePago;
+import Usuarios.Usuario;
 import main.MainCine;
+import main.Utilidades;
 
 
 public class VentanaPrincipal extends JFrame {
@@ -31,7 +40,7 @@ public class VentanaPrincipal extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	protected JButton identificarse, buscar, cine, peliculas, promociones, cineBilbao, cineBarakaldo, cineVitoria, cineSanSebastian, 
-	editarDatosCuenta, guardarDatosCuenta,salirDatosCuenta,cerrarSesionDatosCuenta;
+	editarDatosCuenta, guardarDatosCuenta,salirDatosCuenta,cerrarSesionDatosCuenta,metodoDePago;
 	protected JPanel panelCuenta, panelCuentaIzquierda, panelCuentaDerecha, 
 	panelCentro, panelDatosCuenta;
 	protected JTable tablaPeliculas;
@@ -41,9 +50,18 @@ public class VentanaPrincipal extends JFrame {
 	public static JButton admin;
 	private JTextField datosCuentaCorreo,datosCuentaNombre,datosCuentaApellido,datosCuentaDni,datosCuentaFechaNacimiento;
 	private boolean esCliente;
-	MainCine mainCine = new MainCine();
 	private JPasswordField datosCuentaPassword;
 	private static Logger logger = Logger.getLogger(MainCine.class.getName());
+	
+	//metodo de pago
+	private JComboBox<String> comboOpciones;
+	private JPanel panelPaypal, panelBizum, panelPagoEnCine, panelTarjeta, panelMetodoDePago;
+	private JLabel labelCorreo, labelPassword,labelNumeroTlf,labelTarjeta,labelFecha,labelCVV;
+	private JTextField textCorreo, textoNumeroTlf, textoTarjeta,TextoFecha;
+	JTextArea textoPagoEnCine;
+	private JCheckBox pagoEnCine;
+	private JPasswordField textPassword, textCVV;
+	private JButton botonVolver, botonGuardar;
 
 	
 	/*
@@ -61,40 +79,44 @@ public class VentanaPrincipal extends JFrame {
 	public VentanaPrincipal() {
 		JFrame ventanaPrincipal = this;
 		
-		// Peliculas y Busqueda
+// Peliculas y Busqueda
 		panelCentro = new JPanel();
 		tablaPeliculas = new JTable();// Aqui anadir un Jlist con botones que contenga la imagen y el titulo de la peli
 								
-		// Utilidad Ventana
+// Utilidad Ventana
 		panelCuenta = new JPanel(new BorderLayout());
 		panelCuentaIzquierda = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		panelCuentaDerecha = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		
-		
-		//Botones y más de panelCuenta
-		//Logo Deusto		
+				
+//Botones y más de panelCuenta
+//Logo Deusto		
 		ImageIcon icono = new ImageIcon("images/deustocinelogo.png");
 		Image logo = icono.getImage();
 		labelLogo = new JLabel(new ImageIcon(logo));
 		
-		//Boton Identificarse
+//Boton Identificarse
 		iconoIdentificarse = new ImageIcon("images/iconoCuenta.png");
 		identificarse = new JButton();
 		identificarse.setToolTipText("Iniciar sesión o registrarse");
 		identificarse.setIcon(iconoIdentificarse);
 
-		//paneldatoscuenta
+//paneldatoscuenta
 		identificarse.addActionListener((e) -> {
 			if (VentanaIniciarSesion.isSesionIniciada() == true) {
 				panelDatosCuenta = new JPanel(new FlowLayout());
+				panelMetodoDePago = new JPanel(new FlowLayout());
+				
 				editarDatosCuenta = new JButton("Editar");
 				salirDatosCuenta = new JButton("salir"); //Poner icono de una x
 				guardarDatosCuenta = new JButton("Guardar Cambios");
 				cerrarSesionDatosCuenta = new JButton("Cerrar Sesion");
+				metodoDePago = new JButton("Metodo De Pago");
+				
 				
 				if (VentanaIniciarSesion.administradorIniciado() == null) {
 					esCliente = true;
 					//Cargamos los datos del cliente
+					
 					datosCuentaCorreo = new JTextField(VentanaIniciarSesion.clienteIniciado().getCorreo());
 					datosCuentaCorreo.setEditable(false);
 					
@@ -151,7 +173,7 @@ public class VentanaPrincipal extends JFrame {
 					//panelDatosCuenta.add(datosCuentaFechaNacimiento);
 					
 				}
-				//Boton editar
+//Boton editar
 				editarDatosCuenta.addActionListener((a) -> {
 					datosCuentaCorreo.setEditable(true);
 					datosCuentaPassword.setEditable(true);
@@ -162,16 +184,16 @@ public class VentanaPrincipal extends JFrame {
 				});
 				panelDatosCuenta.add(editarDatosCuenta);
 				
-				//Boton guardar Cambios
+//Boton guardar Cambios
 				guardarDatosCuenta.addActionListener((a) ->{
 					if (esCliente == true) {
-						for (Cliente c : mainCine.getListaClientes()) {	//Hay qeu editarlo tmb en el mapa
+						for (Cliente c : MainCine.getListaClientes()) {	//Hay qeu editarlo tmb en el mapa
 							if (c.getCorreo().equals(VentanaIniciarSesion.clienteIniciado().getCorreo())) {
 								//Mapa
-								String[] valorMapa = mainCine.getMapaUsuarios().get(c.getCorreo());
+								String[] valorMapa = MainCine.getMapaUsuarios().get(c.getCorreo());
 								valorMapa[0] = datosCuentaPassword.getText();
-								mainCine.getMapaUsuarios().remove(c.getCorreo());
-								mainCine.getMapaUsuarios().put(datosCuentaCorreo.getText(), valorMapa);
+								MainCine.getMapaUsuarios().remove(c.getCorreo());
+								MainCine.getMapaUsuarios().put(datosCuentaCorreo.getText(), valorMapa);
 								//Lista
 								c.setCorreo(datosCuentaCorreo.getText());
 								c.setNombre(datosCuentaNombre.getText());
@@ -183,13 +205,13 @@ public class VentanaPrincipal extends JFrame {
 						}
 						
 					}else {
-						for (Administrador ad : mainCine.getListaAdministradores()) {
+						for (Administrador ad : MainCine.getListaAdministradores()) {
 							if (ad.getCorreo().equals(VentanaIniciarSesion.administradorIniciado().getCorreo())) {
 								//Mapa
-								String[] valorMapa = mainCine.getMapaUsuarios().get(ad.getCorreo());
+								String[] valorMapa = MainCine.getMapaUsuarios().get(ad.getCorreo());
 								valorMapa[0] = datosCuentaPassword.getText();
-								mainCine.getMapaUsuarios().remove(ad.getCorreo());
-								mainCine.getMapaUsuarios().put(datosCuentaCorreo.getText(), valorMapa);
+								MainCine.getMapaUsuarios().remove(ad.getCorreo());
+								MainCine.getMapaUsuarios().put(datosCuentaCorreo.getText(), valorMapa);
 								//Lista
 								ad.setCorreo(datosCuentaCorreo.getText());
 								ad.setNombre(datosCuentaNombre.getText());
@@ -212,6 +234,7 @@ public class VentanaPrincipal extends JFrame {
 				//Boton salir
 				salirDatosCuenta.addActionListener((a) -> {
 					panelDatosCuenta.setVisible(false);
+					panelMetodoDePago.setVisible(false);
 					panelCentro.setVisible(true);
 				});
 				panelDatosCuenta.add(salirDatosCuenta);
@@ -223,19 +246,186 @@ public class VentanaPrincipal extends JFrame {
 					VentanaIniciarSesion.setSesionIniciada(false);
 					panelCentro.setVisible(true);
 					panelDatosCuenta.setVisible(false);
+					panelMetodoDePago.setVisible(false);
 				});
 				panelDatosCuenta.add(cerrarSesionDatosCuenta);
+	//Panel metodo de pago
+				
+				//Combobox
+				String[] metodosAceptados = {"Tarjeta", "Bizum","PayPal", "Pago en cine"};
+				comboOpciones = new JComboBox<String>(metodosAceptados);
+				comboOpciones.setSelectedIndex(-1);
+				panelMetodoDePago.add(comboOpciones);
+				
+				botonGuardar = new JButton("Guardar");
+				botonVolver = new JButton("Volver");
+				
+		//Paneles metodo de Pago (PONER ICONOS LOGO DEL METODO DE PAGO DE FONDO DE PANTALLA O UNA MARCA DE AGUA )
+				//PayPal
+				panelPaypal = new JPanel();
+				labelCorreo = new JLabel("Correo: ");
+				labelPassword = new JLabel("Contraseña: ");
+				textCorreo = new JTextField(15);
+				textPassword = new JPasswordField(12);
+				
+				panelPaypal.add(labelCorreo);
+				panelPaypal.add(textCorreo);
+				panelPaypal.add(labelPassword);
+				panelPaypal.add(textPassword);
+				
+				//Bizum
+				panelBizum = new JPanel();
+				labelNumeroTlf = new JLabel("Numero de Tlf:");
+				textoNumeroTlf = new JTextField(15);
+				
+				panelBizum.add(labelNumeroTlf);
+				panelBizum.add(textoNumeroTlf);
+
+				//Pago en Cine
+				panelPagoEnCine = new JPanel(new BorderLayout());
+				pagoEnCine = new JCheckBox("Pagar en cine");
+				textoPagoEnCine = new JTextArea("Marca la Casilla si desea pagar en cine," + "\n" + "tendra que llegar 5 minutos antes y proporcionar"+ "\n" +"el correo con el que esta haceiendo la compra.");
+				textoPagoEnCine.setEditable(false);
+				
+				panelPagoEnCine.add(pagoEnCine,BorderLayout.NORTH);
+				panelPagoEnCine.add(textoPagoEnCine, BorderLayout.CENTER);
+				
+				//Tarjeta
+				panelTarjeta = new JPanel(new GridLayout(3,2));
+				labelTarjeta = new JLabel("Numero de Tarjeta: ");
+				labelCVV = new JLabel("CVV: ");
+				labelFecha = new JLabel("Fecha Caducidad: ");
+				textoTarjeta = new JTextField(19);
+				textCVV = new JPasswordField(3);
+				TextoFecha = new JTextField();//Poner cuando este implementado las Date
+				
+				panelTarjeta.add(labelTarjeta);
+				panelTarjeta.add(textoTarjeta);
+				panelTarjeta.add(labelCVV);
+				panelTarjeta.add(textCVV);
+				panelTarjeta.add(labelFecha);
+				panelTarjeta.add(TextoFecha);
+								
+		//Listeners
+				//ComboBox
+				comboOpciones.addActionListener((d)-> {
+					logger.log(Level.INFO, "SE HA PULSADO OPCIONES");
+					if (comboOpciones.getSelectedItem().equals("PayPal")) {
+						panelBizum.setVisible(false);
+						panelPagoEnCine.setVisible(false);
+						panelPaypal.setVisible(true);
+						panelTarjeta.setVisible(false);
+						
+					}else if (comboOpciones.getSelectedItem().equals("Bizum")) {
+						panelBizum.setVisible(true);
+						panelPagoEnCine.setVisible(false);
+						panelPaypal.setVisible(false);
+						panelTarjeta.setVisible(false);
+						
+					}else if (comboOpciones.getSelectedItem().equals("Pago en cine")) {
+						panelBizum.setVisible(false);
+						panelPagoEnCine.setVisible(true);
+						panelPaypal.setVisible(false);
+						panelTarjeta.setVisible(false);
+						
+					}else {
+						panelBizum.setVisible(false);
+						panelPagoEnCine.setVisible(false);
+						panelPaypal.setVisible(false);
+						panelTarjeta.setVisible(true);
+					}
+				});
+				
+			//Botones guardar/volver 
+				botonGuardar.addActionListener((a)->{	//Pensar solucion para a ver como almacenamos los datos de pago
+					logger.log(Level.INFO, "SE HA PULSADO EL BOTÓN GUARDAR");
+					MetodoDePago m = null;
+					ArrayList<String> datos = new ArrayList<String>();
+					if (comboOpciones.getSelectedItem().equals("Tarjeta")) {
+						logger.log(Level.INFO, "SE HA ELEGIDO TARJETA");
+						m = MetodoDePago.tarjeta;
+						datos.add(textoTarjeta.getText());
+						datos.add(textCVV.getText());
+						datos.add(TextoFecha.getText());
+						
+					}else if (comboOpciones.getSelectedItem().equals("Bizum")) {
+						logger.log(Level.INFO, "SE HA ELEGIDO BIZUM");
+						m = MetodoDePago.bizum;
+						datos.add(textoNumeroTlf.getText());
+						
+					}else if (comboOpciones.getSelectedItem().equals("PayPal")) {
+						logger.log(Level.INFO, "SE HA ELEGIDO PAYPAL");
+						m = MetodoDePago.payPal;
+						datos.add(textCorreo.getText());
+						datos.add(textPassword.getText());
+
+					}else if (comboOpciones.getSelectedItem().equals("Pago en cine") && pagoEnCine.isSelected()) {
+						logger.log(Level.INFO, "SE HA ELEGIDO CINE");
+						m = MetodoDePago.cine;
+						datos.add("pago en cine");
+					} 
+					else {
+						JOptionPane.showMessageDialog(null, "No se ha guardado" + "\n" + "Comprueba los campos.");
+					}
+					Cliente c = VentanaIniciarSesion.clienteIniciado();
+					c.setMetodoDePago(m);
+					Utilidades.actualizarMetodosDePago(m, datos); //Este Metodo no esta HECHO
+					datos = new ArrayList<String>();
+				});
+				
+				botonVolver.addActionListener((f)->{
+					logger.log(Level.INFO, "SE HA PULSADO EL BOTÓN VOLVER");
+					panelMetodoDePago.setVisible(false);
+					panelDatosCuenta.setVisible(true);
+				});
+				
+				
+				panelBizum.setVisible(false);
+				panelPagoEnCine.setVisible(false);
+				panelPaypal.setVisible(false);
+				panelTarjeta.setVisible(false);
+
+				panelMetodoDePago.add(panelBizum);
+				panelMetodoDePago.add(panelPagoEnCine);
+				panelMetodoDePago.add(panelPaypal);
+				panelMetodoDePago.add(panelTarjeta);
+				panelMetodoDePago.add(botonGuardar);
+				panelMetodoDePago.add(botonVolver);
+				
+//Boton Metodo de Pago
+				metodoDePago.addActionListener((a)-> {
+					panelMetodoDePago.setVisible(true);
+					panelDatosCuenta.setVisible(false);
+					panelCentro.setVisible(false);
+					
+				});
+				panelDatosCuenta.add(metodoDePago);
 				
 				panelCentro.setVisible(false);
+				panelMetodoDePago.setVisible(false);
+				panelDatosCuenta.setVisible(true);
+				
+				add(panelMetodoDePago, BorderLayout.CENTER);
 				add(panelDatosCuenta, BorderLayout.CENTER); //Cuando sesion iniciada y clicke en el boton de la cuenta se haga visible y cuando no = false.
 				
+				add(panelMetodoDePago, BorderLayout.SOUTH);
 			}else {
 				setVisible(false);
 			new VentanaIdentificarse(ventanaPrincipal);
+			
 			}
 			
-
+			
 		});
+		
+		
+		
+		
+		
+		
+		
+		
+		
 
 		//Boton Cine
 		cine = new JButton("Cines");
