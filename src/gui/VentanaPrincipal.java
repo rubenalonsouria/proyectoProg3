@@ -2,12 +2,12 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.Panel;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,16 +21,16 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
+import Pelicula.Pelicula;
 import Usuarios.Administrador;
 import Usuarios.Cliente;
 import Usuarios.MetodoDePago;
-import Usuarios.Usuario;
 import main.MainCine;
 import main.Utilidades;
 
@@ -39,12 +39,11 @@ public class VentanaPrincipal extends JFrame {
 //por que hay que poner serialVersionUID = 1L PREGUNTAR
 
 	private static final long serialVersionUID = 1L;
-	protected JButton identificarse, buscar, cine, peliculas, promociones, cineBilbao, cineBarakaldo, cineVitoria, cineSanSebastian, 
+	protected JButton identificarse, buscar, cine, botonPeliculas, promociones, cineBilbao, cineBarakaldo, cineVitoria, cineSanSebastian, 
 	editarDatosCuenta, guardarDatosCuenta,salirDatosCuenta,cerrarSesionDatosCuenta,metodoDePago;
-	protected JPanel panelCuenta, panelCuentaIzquierda, panelCuentaDerecha, 
-	panelCentro, panelDatosCuenta;
+	protected JPanel panelCuenta, panelCuentaIzquierda, panelCuentaDerecha,panelCentro, panelDatosCuenta;
 	protected JTable tablaPeliculas;
-	protected DefaultTableModel modeloPeliculas;
+	protected JScrollPane srollTablaPeliculas;
 	protected ImageIcon iconoIdentificarse, iconoBuscar;
 	protected JLabel labelLogo;
 	public static JButton admin;
@@ -79,9 +78,22 @@ public class VentanaPrincipal extends JFrame {
 	public VentanaPrincipal() {
 		JFrame ventanaPrincipal = this;
 		
-// Peliculas y Busqueda
-		panelCentro = new JPanel();
-		tablaPeliculas = new JTable();// Aqui anadir un Jlist con botones que contenga la imagen y el titulo de la peli
+// Peliculas
+		panelCentro = new JPanel();	//La idea es que la imagen tenga el mimo nombre que la peli y asi sea mas facil agregarlo a la Jtable
+		List<String> listaPeliculas = new ArrayList<>();
+		for (Pelicula p : MainCine.getListaPeliculas()) {
+			listaPeliculas.add(p.getTitulo());
+		}
+		
+		tablaPeliculas = new JTable(new ModeloTablaPelicula(listaPeliculas));// Aqui anadir un Jlist con botones que contenga la imagen y el titulo de la peli
+		srollTablaPeliculas = new JScrollPane(tablaPeliculas);
+		panelCentro.add(srollTablaPeliculas);
+		
+		
+		
+		
+		
+		
 								
 // Utilidad Ventana
 		panelCuenta = new JPanel(new BorderLayout());
@@ -95,10 +107,9 @@ public class VentanaPrincipal extends JFrame {
 		labelLogo = new JLabel(new ImageIcon(logo));
 		
 //Boton Identificarse
-		iconoIdentificarse = new ImageIcon("images/iconoCuenta.png");
 		identificarse = new JButton();
 		identificarse.setToolTipText("Iniciar sesión o registrarse");
-		identificarse.setIcon(iconoIdentificarse);
+		identificarse.setIcon(new ImageIcon("images/iconoCuenta.png"));
 
 //paneldatoscuenta
 		identificarse.addActionListener((e) -> {
@@ -439,14 +450,12 @@ public class VentanaPrincipal extends JFrame {
 		});
 		
 		//Boton Peliculas (Ventana Principal)
-		peliculas = new JButton("Películas");
-		peliculas.setToolTipText("Todas las películas disponibles");
+		botonPeliculas = new JButton("Películas");
+		botonPeliculas.setToolTipText("Todas las películas disponibles");
 		
-		peliculas.addActionListener((e) -> {
+		botonPeliculas.addActionListener((e) -> {
 			logger.log(Level.INFO, "SE HA PULSADO EL BOTÓN PELICULAS");
-			setVisible(false);
-			new VentanaPrincipal();
-
+			panelCentro.setVisible(true);
 		});
 		
 		//Boton Busqueda
@@ -477,15 +486,6 @@ public class VentanaPrincipal extends JFrame {
 			new VentanaPrincipalAdmin(this);
 
 		});
-		
-		//Creacion de JTable
-		
-		Object[] columnas = {"Pelicula"};
-		Object[][] datos = {
-                {new ImageIcon("images/theMarvels.jpg")},
-                {new ImageIcon("images/UnAmor.jpg")},
-                // Agregar mas Peliculas
-        };	    
 	    
 		//Ventana
 		setLayout(new BorderLayout(0, 0));
@@ -513,7 +513,7 @@ public class VentanaPrincipal extends JFrame {
 		panelCuentaDerecha.add(identificarse, BorderLayout.EAST);
 		panelCuentaIzquierda.add(labelLogo, BorderLayout.WEST);
 		panelCuentaIzquierda.add(buscar, BorderLayout.WEST);
-		panelCuentaIzquierda.add(peliculas, BorderLayout.WEST);
+		panelCuentaIzquierda.add(botonPeliculas, BorderLayout.WEST);
 		panelCuentaIzquierda.add(cine, BorderLayout.WEST);
 
 		
