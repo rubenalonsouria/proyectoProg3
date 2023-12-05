@@ -46,7 +46,7 @@ public class VentanaInfoCine extends JFrame{
 		Image logoBarakaldo = iconoBarakaldo.getImage();
 		labelBara = new JLabel(new ImageIcon(logoBarakaldo));
 		
-		Font font = new Font("Arial", Font.BOLD, 20);
+		Font font = new Font("Times New Roman", Font.BOLD, 20);
 		
         JTextArea descripcionBara = new JTextArea(
         		"Max Center es un centro comercial de Baracaldo, en la provincia vasca de Vizcaya. "
@@ -55,6 +55,7 @@ public class VentanaInfoCine extends JFrame{
         descripcionBara.setWrapStyleWord(true);
         descripcionBara.setEditable(false);
         descripcionBara.setFont(font);
+        descripcionBara.setOpaque(false);
 		
 		ImageIcon iconoZubi = new ImageIcon("images/BilbaoZubi.jpg");
 		Image logoZubi = iconoZubi.getImage();
@@ -67,6 +68,7 @@ public class VentanaInfoCine extends JFrame{
         descripcionZubi.setWrapStyleWord(true);
         descripcionZubi.setEditable(false);
 		descripcionZubi.setFont(font);
+		descripcionZubi.setOpaque(false);
         
 		ImageIcon iconoGarbera = new ImageIcon("images/SanSebastianGarbera.jpg");
 		Image logoGarbera = iconoGarbera.getImage();
@@ -79,6 +81,7 @@ public class VentanaInfoCine extends JFrame{
         descripcionGarbe.setWrapStyleWord(true);
         descripcionGarbe.setEditable(false);
 		descripcionGarbe.setFont(font);
+		descripcionGarbe.setOpaque(false);
         
 		ImageIcon iconoBoule = new ImageIcon("images/VitoriaBoulevard.jpg");
 		Image logoBoule = iconoBoule.getImage();
@@ -91,6 +94,7 @@ public class VentanaInfoCine extends JFrame{
         descripcionBoule.setWrapStyleWord(true);
         descripcionBoule.setEditable(false);
 		descripcionBoule.setFont(font);
+		descripcionBoule.setOpaque(false);
         
 		//Botones y más de panelCuenta
 		//Logo Deusto		
@@ -154,6 +158,8 @@ public class VentanaInfoCine extends JFrame{
 
 		JScrollPane scrollPane = new JScrollPane(panelCine);
 		getContentPane().add(scrollPane, BorderLayout.CENTER);
+		scrollPane.getViewport().setOpaque(false);
+		scrollPane.setOpaque(false);
 		
 		panelCuenta.setBackground(Color.CYAN);
 		panelCuenta.setBorder(BorderFactory.createLineBorder(Color.GRAY));
