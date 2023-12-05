@@ -26,6 +26,7 @@ public class VentanaPrincipalAdmin extends JFrame{
 	
 	
 	public VentanaPrincipalAdmin(JFrame ventanaPrincipal) {
+		
 		JFrame ventanaPrincipalAdmin = this;
 		
 		panelCuenta = new JPanel(new FlowLayout(FlowLayout.RIGHT));

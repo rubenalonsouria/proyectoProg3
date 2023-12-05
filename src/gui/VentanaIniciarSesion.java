@@ -113,7 +113,6 @@ public class VentanaIniciarSesion extends JFrame {
 
 						if (respuesta == 0) {
 
-							// Poner boton adminVisible a true pero no funciona
 							VentanaPrincipal.admin.setVisible(true);
 							setVisible(false);
 							ventanaPrincipal.setVisible(true);
