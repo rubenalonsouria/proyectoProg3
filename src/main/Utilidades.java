@@ -27,5 +27,14 @@ public class Utilidades {
 		 * @TODO
 		 * */
 	}
+	
+	public static void privilegiosAdministrador(Boolean b) {
+		if (b) {
+			/*AQUI IRAN LOS PRIVILEGIOS DE LOS ADMINISTRADORES*/
+		}else {
+			/*AQUI IRAN LOS PRIVILEGIOS DE LOS ADMINISTRADORES PERO DESACTIVADOS*/
+
+		}
+	}
 
 }

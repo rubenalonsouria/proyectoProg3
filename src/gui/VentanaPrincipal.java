@@ -40,7 +40,7 @@ public class VentanaPrincipal extends JFrame {
 	private static final long serialVersionUID = 1L;
 	protected JButton identificarse, buscar, cine, botonPeliculas, promociones, cineBilbao, cineBarakaldo, cineVitoria,
 			cineSanSebastian, editarDatosCuenta, guardarDatosCuenta, salirDatosCuenta, cerrarSesionDatosCuenta,
-			metodoDePago;
+			metodoDePago,botonVolverAdmin;
 	protected JPanel panelCuenta, panelCuentaIzquierda, panelCuentaDerecha, panelCentro, panelDatosCuenta;
 	protected JTable tablaPeliculas;
 	protected JScrollPane srollTablaPeliculas;
@@ -76,41 +76,16 @@ public class VentanaPrincipal extends JFrame {
 	 */
 
 	public VentanaPrincipal() {
-		JFrame ventanaPrincipal = this;
 		/* VISTA CLIENTE */
-		
-
-				
-
-				// Boton Admin
-				admin = new JButton("Admin");
-				admin.setToolTipText("Ventana Administrador");
-				admin.setVisible(false);
-				// admin.setVisible(false);
-				/*
-				 * while (adminVisible) { admin.setVisible(false); //Se activa cuando el sistema
-				 * detecte ha iniciado un admin }
-				 */
-				admin.addActionListener((e) -> {
-					logger.log(Level.INFO, "SE HA PULSADO EL BOTÓN ADMIN");
-					setVisible(false);
-					new VentanaPrincipalAdmin(this);
-
-				});
-		
-		
-	
-		
-		
-		
-		
 //PANELES
+		JFrame ventanaPrincipal = this;
 		panelCuenta = new JPanel(new BorderLayout());
 		panelCuentaIzquierda = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		panelCuentaDerecha = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
 //PANEL CENTRAL CON PELICULAS
-		panelCentro = new JPanel(); // La idea es que la imagen tenga el mismo nombre que la peli y asi sea mas facil
+		panelCentro = new JPanel(); // La idea es que la imagen tenga el mismo nombre que la peli y asi sea mas
+									// facil
 									// agregarlo a la Jtable
 		List<String> listaPeliculas = new ArrayList<>();
 		for (Pelicula p : MainCine.getListaPeliculas()) {
@@ -133,41 +108,37 @@ public class VentanaPrincipal extends JFrame {
 		identificarse = new JButton(new ImageIcon("images/iconoCuenta.png"));
 		identificarse.setToolTipText("Iniciar sesión o registrarse");
 
-
 		cine = new JButton("Cines");
 		cine.setToolTipText("Información sobre los cines disponibles");
-		
-		
+
 		botonPeliculas = new JButton("Películas");
 		botonPeliculas.setToolTipText("Todas las películas disponibles");
 
-		
 		buscar = new JButton(" Buscar", new ImageIcon("images/iconoBuscar.png"));
 		buscar.setToolTipText("Buscador de peliculas");
-	
-		
-	//ACTION LISTENERS
+
+		// ACTION LISTENERS
 		cine.addActionListener((e) -> {
 			logger.log(Level.INFO, "SE HA PULSADO EL BOTÓN CINE");
 			setVisible(false);
 			new VentanaInfoCine();
-		});	
-		
+		});
+
 		botonPeliculas.addActionListener((e) -> {
 			logger.log(Level.INFO, "SE HA PULSADO EL BOTÓN PELICULAS");
 			panelCentro.setVisible(true);
 		});
-		
+
 		buscar.addActionListener((e) -> {
 			logger.log(Level.INFO, "SE HA PULSADO EL BOTÓN BUSQUEDA");
 			setVisible(true);
 			new VentanaConBusqueda();
 		});
-		
+
 //LOGICA SI LA SESION ESTA INICIADA Y DEL PANEL DATOS CUENTA
 		panelDatosCuenta = new JPanel(new FlowLayout());
 		panelMetodoDePago = new JPanel(new FlowLayout());
-		
+
 		editarDatosCuenta = new JButton("Editar");
 		salirDatosCuenta = new JButton("salir"); // Poner icono de una x
 		guardarDatosCuenta = new JButton("Guardar Cambios");
@@ -178,7 +149,7 @@ public class VentanaPrincipal extends JFrame {
 		datosCuentaNombre = new JTextField();
 		datosCuentaApellido = new JTextField();
 		datosCuentaDni = new JTextField();
-		
+
 		identificarse.addActionListener((e) -> {
 			if (VentanaIniciarSesion.isSesionIniciada() == true) {
 				if (VentanaIniciarSesion.administradorIniciado() == null) {
@@ -240,7 +211,7 @@ public class VentanaPrincipal extends JFrame {
 					panelDatosCuenta.add(datosCuentaDni);
 					// panelDatosCuenta.add(datosCuentaFechaNacimiento);
 				}
-				
+
 //ACTION LISTENERS DE PANEL DATOS CUENTA
 				editarDatosCuenta.addActionListener((a) -> {
 					datosCuentaCorreo.setEditable(true);
@@ -249,15 +220,15 @@ public class VentanaPrincipal extends JFrame {
 					datosCuentaApellido.setEditable(true);
 					datosCuentaDni.setEditable(true);
 					// datosCuentaFechaNacimiento.setEditable(true);
-				});panelDatosCuenta.add(editarDatosCuenta);
-				
-				
+				});
+				panelDatosCuenta.add(editarDatosCuenta);
+
 				salirDatosCuenta.addActionListener((a) -> {
 					panelDatosCuenta.setVisible(false);
 					panelMetodoDePago.setVisible(false);
 					panelCentro.setVisible(true);
-				});panelDatosCuenta.add(salirDatosCuenta);
-
+				});
+				panelDatosCuenta.add(salirDatosCuenta);
 
 				cerrarSesionDatosCuenta.addActionListener((a) -> {
 					VentanaIniciarSesion.setadministradorIniciado(null);
@@ -266,9 +237,9 @@ public class VentanaPrincipal extends JFrame {
 					panelCentro.setVisible(true);
 					panelDatosCuenta.setVisible(false);
 					panelMetodoDePago.setVisible(false);
-				});panelDatosCuenta.add(cerrarSesionDatosCuenta);
+				});
+				panelDatosCuenta.add(cerrarSesionDatosCuenta);
 
-				
 				guardarDatosCuenta.addActionListener((a) -> {
 					if (esCliente == true) {
 						for (Cliente c : MainCine.getListaClientes()) { // Hay qeu editarlo tmb en el mapa
@@ -304,27 +275,26 @@ public class VentanaPrincipal extends JFrame {
 						}
 					}
 					datosCuentaCorreo.setEditable(false);
-					datosCuentaPassword.setEditable(false);	//Una vez editado, se ponen en false
+					datosCuentaPassword.setEditable(false); // Una vez editado, se ponen en false
 					datosCuentaNombre.setEditable(false);
 					datosCuentaApellido.setEditable(false);
 					datosCuentaDni.setEditable(false);
-				});panelDatosCuenta.add(guardarDatosCuenta);
-				
-				
+				});
+				panelDatosCuenta.add(guardarDatosCuenta);
+
 				metodoDePago.addActionListener((a) -> {
 					panelMetodoDePago.setVisible(true);
 					panelDatosCuenta.setVisible(false);
 					panelCentro.setVisible(false);
 
-				});panelDatosCuenta.add(metodoDePago);
-				
- 				
+				});
+				panelDatosCuenta.add(metodoDePago);
+
 				panelCentro.setVisible(false);
 				panelMetodoDePago.setVisible(false);
 				panelDatosCuenta.setVisible(true);
 
-				//add(panelMetodoDePago, BorderLayout.SOUTH);
-				
+				// add(panelMetodoDePago, BorderLayout.SOUTH);
 
 //PANEL METODO DE PAGO
 				String[] metodosAceptados = { "Tarjeta", "Bizum", "PayPal", "Pago en cine" };
@@ -333,9 +303,12 @@ public class VentanaPrincipal extends JFrame {
 				botonGuardar = new JButton("Guardar");
 				botonVolver = new JButton("Volver");
 
-				/* Paneles metodo de Pago (PONER ICONOS LOGO DEL METODO DE PAGO DE FONDO DE PANTALLA O UNA MARCA DE AGUA )*/
-				
-				//PayPal
+				/*
+				 * Paneles metodo de Pago (PONER ICONOS LOGO DEL METODO DE PAGO DE FONDO DE
+				 * PANTALLA O UNA MARCA DE AGUA )
+				 */
+
+				// PayPal
 				panelPaypal = new JPanel();
 				labelCorreo = new JLabel("Correo: ");
 				labelPassword = new JLabel("Contraseña: ");
@@ -346,20 +319,20 @@ public class VentanaPrincipal extends JFrame {
 				panelPaypal.add(textCorreo);
 				panelPaypal.add(labelPassword);
 				panelPaypal.add(textPassword);
-				
+
 				panelPaypal.setVisible(false);
 
-				//Bizum
+				// Bizum
 				panelBizum = new JPanel();
 				labelNumeroTlf = new JLabel("Numero de Tlf:");
 				textoNumeroTlf = new JTextField(15);
 
 				panelBizum.add(labelNumeroTlf);
 				panelBizum.add(textoNumeroTlf);
-				
+
 				panelBizum.setVisible(false);
 
-				//Pago en Cine
+				// Pago en Cine
 				panelPagoEnCine = new JPanel(new BorderLayout());
 				pagoEnCine = new JCheckBox("Pagar en cine");
 				textoPagoEnCine = new JTextArea("Marca la Casilla si desea pagar en cine," + "\n"
@@ -369,17 +342,17 @@ public class VentanaPrincipal extends JFrame {
 
 				panelPagoEnCine.add(pagoEnCine, BorderLayout.NORTH);
 				panelPagoEnCine.add(textoPagoEnCine, BorderLayout.CENTER);
-				
+
 				panelPagoEnCine.setVisible(false);
 
-				//Tarjeta
+				// Tarjeta
 				panelTarjeta = new JPanel(new GridLayout(3, 2));
 				labelTarjeta = new JLabel("Numero de Tarjeta: ");
 				labelCVV = new JLabel("CVV: ");
 				labelFecha = new JLabel("Fecha Caducidad: ");
 				textoTarjeta = new JTextField(19);
 				textCVV = new JPasswordField(3);
-				TextoFecha = new JTextField(); //Poner cuando este implementado las Date
+				TextoFecha = new JTextField(); // Poner cuando este implementado las Date
 
 				panelTarjeta.add(labelTarjeta);
 				panelTarjeta.add(textoTarjeta);
@@ -387,10 +360,10 @@ public class VentanaPrincipal extends JFrame {
 				panelTarjeta.add(textCVV);
 				panelTarjeta.add(labelFecha);
 				panelTarjeta.add(TextoFecha);
-		
+
 				panelTarjeta.setVisible(false);
 
-			//Listeners
+				// Listeners
 				botonVolver.addActionListener((f) -> {
 					logger.log(Level.INFO, "SE HA PULSADO EL BOTÓN VOLVER");
 					panelMetodoDePago.setVisible(false);
@@ -398,7 +371,7 @@ public class VentanaPrincipal extends JFrame {
 					panelCentro.setVisible(false);
 
 				});
-				
+
 				comboOpciones.addActionListener((d) -> {
 					logger.log(Level.INFO, "SE HA PULSADO OPCIONES");
 					if (comboOpciones.getSelectedItem().equals("PayPal")) {
@@ -426,7 +399,7 @@ public class VentanaPrincipal extends JFrame {
 						panelTarjeta.setVisible(true);
 					}
 				});
-				
+
 				botonGuardar.addActionListener((a) -> { // Pensar solucion para a ver como almacenamos los datos de pago
 					logger.log(Level.INFO, "SE HA PULSADO EL BOTÓN GUARDAR");
 					MetodoDePago m = null;
@@ -460,11 +433,11 @@ public class VentanaPrincipal extends JFrame {
 					c.setMetodoDePago(m);
 					Utilidades.actualizarMetodosDePago(m, datos); // Este Metodo no esta HECHO
 					datos = new ArrayList<String>();
-					
-					//poner messagedialog se ha guardado correctamente 
-					
+
+					// poner messagedialog se ha guardado correctamente
+
 				});
-	
+
 				panelMetodoDePago.add(panelBizum);
 				panelMetodoDePago.add(panelPagoEnCine);
 				panelMetodoDePago.add(panelPaypal);
@@ -472,7 +445,7 @@ public class VentanaPrincipal extends JFrame {
 				panelMetodoDePago.add(botonGuardar);
 				panelMetodoDePago.add(botonVolver);
 				panelMetodoDePago.add(comboOpciones);
-				
+
 			} else {
 				setVisible(false);
 				new VentanaIdentificarse(ventanaPrincipal);
@@ -481,34 +454,58 @@ public class VentanaPrincipal extends JFrame {
 
 		});
 
+		/* VISTA ADMINISTRADOR */
+		botonVolverAdmin = new JButton("Vista Usuario");
+		botonVolverAdmin.setToolTipText("Volver a la vista Usuario");
+		botonVolverAdmin.setVisible(false);
+
+		admin = new JButton("Admin");
+		admin.setToolTipText("Ventana Administrador");
+		admin.setVisible(false);
+		
+//ACTION LISTENERS
+		if (!esCliente) {
+		admin.addActionListener((e) -> {
+			logger.log(Level.INFO, "SE HA PULSADO EL BOTÓN ADMIN");
+			admin.setVisible(false);
+			botonVolverAdmin.setVisible(true);
+			Utilidades.privilegiosAdministrador(true);
+		});
+		botonVolverAdmin.addActionListener((e)->{
+			admin.setVisible(true);
+			botonVolverAdmin.setVisible(false);
+			Utilidades.privilegiosAdministrador(false);
+		});
+}
 		// Ventana
 		setLayout(new BorderLayout(0, 0));
 		panelCuenta.setBackground(Color.CYAN);
 		panelCentro.setBackground(Color.LIGHT_GRAY);
 		panelCuentaIzquierda.setBackground(Color.CYAN);
 		panelCuentaDerecha.setBackground(Color.CYAN);
-		
+
 		panelCuenta.setBorder(BorderFactory.createLineBorder(Color.GRAY));
-		
+
 		panelCuenta.add(panelCuentaIzquierda, BorderLayout.WEST);
 		panelCuenta.add(panelCuentaDerecha, BorderLayout.EAST);
-		
+
 		panelCuentaDerecha.add(admin, BorderLayout.CENTER);
+		panelCuentaDerecha.add(botonVolverAdmin, BorderLayout.CENTER);
 		panelCuentaDerecha.add(identificarse, BorderLayout.EAST);
 		panelCuentaIzquierda.add(labelLogo, BorderLayout.WEST);
 		panelCuentaIzquierda.add(buscar, BorderLayout.WEST);
 		panelCuentaIzquierda.add(botonPeliculas, BorderLayout.WEST);
 		panelCuentaIzquierda.add(cine, BorderLayout.WEST);
-		
+
 		panelCentro.add(tablaPeliculas, BorderLayout.CENTER);
 		// panelCuentaIzquierda.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 		// panelCuentaDerecha.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 
 		add(panelCentro, BorderLayout.CENTER);
 		add(panelCuenta, BorderLayout.NORTH);
-		
+
 		add(panelMetodoDePago, BorderLayout.CENTER);
-		add(panelDatosCuenta,BorderLayout.CENTER);
+		add(panelDatosCuenta, BorderLayout.CENTER);
 
 		setBounds(100, 100, 1200, 800);
 		setLocationRelativeTo(null);
