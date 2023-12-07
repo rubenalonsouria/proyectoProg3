@@ -13,7 +13,8 @@ import Pelicula.Genero;
 import Pelicula.Pelicula;
 import Usuarios.Administrador;
 import Usuarios.Cliente;
-import gui.VentanaMetodoDePago;
+import gui.PanelMetodoDePago;
+import gui.VentanaPricipalNueva;
 import gui.VentanaPrincipal;
 
 public class MainCine {
@@ -154,8 +155,9 @@ public class MainCine {
 		cargaDeUsuarios();
 
 		// iniciar ventana
-		VentanaPrincipal ventanaPrincipal = new VentanaPrincipal();
+		//VentanaPrincipal ventanaPrincipal = new VentanaPrincipal();
 		//VentanaMetodoDePago v = new VentanaMetodoDePago(getListaClientes().get(0));
+		VentanaPricipalNueva v = new VentanaPricipalNueva();
 
 	}
 

@@ -9,10 +9,12 @@ package main;
 
 	    public static void main(String[] args) {
 	        // URL de conexión con la base de datos SQLite
-	        String url = "jdbc:sqlite:/sgb/mi_basededatos.db";
-
+	        String url = "jdbc:sqlite:/Users/ikerClase/Desktop/prueba.db";
+	      
 	        // Intenta establecer la conexión con la base de datos
-	        try (Connection conn = DriverManager.getConnection(url)) {
+	        try {  
+	        	Class.forName("org.sqlite.JDBC");
+	        	Connection conn = DriverManager.getConnection(url); 
 	            if (conn != null) {
 	                System.out.println("Conexión exitosa a la base de datos SQLite");
 	                
@@ -29,7 +31,10 @@ package main;
 	            }
 	        } catch (SQLException e) {
 	            System.out.println(e.getMessage());
-	        }
+	        } catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	    }
 	}
 

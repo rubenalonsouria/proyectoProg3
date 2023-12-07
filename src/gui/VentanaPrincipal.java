@@ -41,6 +41,7 @@ public class VentanaPrincipal extends JFrame {
 	protected JButton identificarse, buscar, cine, botonPeliculas, promociones, cineBilbao, cineBarakaldo, cineVitoria,
 			cineSanSebastian, editarDatosCuenta, guardarDatosCuenta, salirDatosCuenta, cerrarSesionDatosCuenta,
 			metodoDePago,botonVolverAdmin;
+	
 	protected JPanel panelCuenta, panelCuentaIzquierda, panelCuentaDerecha, panelCentro, panelDatosCuenta;
 	protected JTable tablaPeliculas;
 	protected JScrollPane srollTablaPeliculas;
@@ -62,6 +63,8 @@ public class VentanaPrincipal extends JFrame {
 	private JCheckBox pagoEnCine;
 	private JPasswordField textPassword, textCVV;
 	private JButton botonVolver, botonGuardar;
+	
+	private PanelPagos panel;
 
 	/*
 	 * public VentanaPrincipal() {//Ordenar todo segun en el panel qeu sea //si no
@@ -87,9 +90,9 @@ public class VentanaPrincipal extends JFrame {
 		panelCentro = new JPanel(); // La idea es que la imagen tenga el mismo nombre que la peli y asi sea mas
 									// facil
 									// agregarlo a la Jtable
-		List<String> listaPeliculas = new ArrayList<>();
+		List<Pelicula> listaPeliculas = new ArrayList<>();
 		for (Pelicula p : MainCine.getListaPeliculas()) {
-			listaPeliculas.add(p.getTitulo());
+			listaPeliculas.add(p);
 		}
 
 		tablaPeliculas = new JTable(new ModeloTablaPelicula(listaPeliculas));// Aqui anadir un Jlist con botones que
@@ -152,6 +155,8 @@ public class VentanaPrincipal extends JFrame {
 
 		identificarse.addActionListener((e) -> {
 			if (VentanaIniciarSesion.isSesionIniciada() == true) {
+				//panel datos cuenta tenria que hacer un remove????
+				
 				if (VentanaIniciarSesion.administradorIniciado() == null) {
 					esCliente = true;
 					// Cargamos los datos del cliente
@@ -223,6 +228,8 @@ public class VentanaPrincipal extends JFrame {
 				});
 				panelDatosCuenta.add(editarDatosCuenta);
 
+				
+				
 				salirDatosCuenta.addActionListener((a) -> {
 					panelDatosCuenta.setVisible(false);
 					panelMetodoDePago.setVisible(false);
@@ -285,8 +292,10 @@ public class VentanaPrincipal extends JFrame {
 				metodoDePago.addActionListener((a) -> {
 					panelMetodoDePago.setVisible(true);
 					panelDatosCuenta.setVisible(false);
-					panelCentro.setVisible(false);
-
+					add(panelMetodoDePago, BorderLayout.CENTER);
+					repaint();
+					//panelCentro.setVisible(false);
+		
 				});
 				panelDatosCuenta.add(metodoDePago);
 
@@ -303,10 +312,10 @@ public class VentanaPrincipal extends JFrame {
 				botonGuardar = new JButton("Guardar");
 				botonVolver = new JButton("Volver");
 
-				/*
-				 * Paneles metodo de Pago (PONER ICONOS LOGO DEL METODO DE PAGO DE FONDO DE
-				 * PANTALLA O UNA MARCA DE AGUA )
-				 */
+				
+				 // Paneles metodo de Pago (PONER ICONOS LOGO DEL METODO DE PAGO DE FONDO DE
+				 // PANTALLA O UNA MARCA DE AGUA )
+				
 
 				// PayPal
 				panelPaypal = new JPanel();
@@ -501,10 +510,11 @@ public class VentanaPrincipal extends JFrame {
 		// panelCuentaIzquierda.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 		// panelCuentaDerecha.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 
-		add(panelCentro, BorderLayout.CENTER);
+		//add(panelCentro, BorderLayout.CENTER);
 		add(panelCuenta, BorderLayout.NORTH);
 
 		add(panelMetodoDePago, BorderLayout.CENTER);
+		//add(panel, BorderLayout.CENTER);
 		add(panelDatosCuenta, BorderLayout.CENTER);
 
 		setBounds(100, 100, 1200, 800);

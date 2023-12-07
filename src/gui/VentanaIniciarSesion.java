@@ -33,6 +33,7 @@ public class VentanaIniciarSesion extends JFrame {
 	private static Cliente clienteIniciado = null;
 	private static Administrador administradorIniciado = null;
 	private static Logger logger = Logger.getLogger(MainCine.class.getName());
+	private static boolean esAdmin;
 
 	public static boolean isSesionIniciada() {
 		return sesionIniciada;
@@ -54,6 +55,13 @@ public class VentanaIniciarSesion extends JFrame {
 	}
 	public static void setadministradorIniciado(Administrador a) {
 		administradorIniciado = a;
+	}
+	public static boolean isEsAdmin() {
+		return esAdmin;
+	}
+
+	public static void setEsAdmin(boolean esAdmin) {
+		VentanaIniciarSesion.esAdmin = esAdmin;
 	}
 
 	public VentanaIniciarSesion(JFrame ventanaAnterior, JFrame ventanaPrincipal) {
@@ -90,6 +98,7 @@ public class VentanaIniciarSesion extends JFrame {
 						JOptionPane.showMessageDialog(null, "Inicio Sesion correcto", null,
 								JOptionPane.INFORMATION_MESSAGE);
 						setVisible(false);
+						setEsAdmin(false);
 						ventanaPrincipal.setVisible(true);
 						sesionIniciada = true;
 						administradorIniciado = null; //para qeu no haya errores
@@ -112,10 +121,10 @@ public class VentanaIniciarSesion extends JFrame {
 						int respuesta = JOptionPane.showConfirmDialog(null, t);
 
 						if (respuesta == 0) {
-
-							VentanaPrincipal.admin.setVisible(true);
+							VentanaPricipalNueva.botonAdminSuperior.setVisible(true);
 							setVisible(false);
 							ventanaPrincipal.setVisible(true);
+							setEsAdmin(true);
 							sesionIniciada = true;
 							clienteIniciado = null; //para qeu no haya errores
 							for (Administrador a : MainCine.getListaAdministradores()) {

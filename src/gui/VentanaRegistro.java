@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.logging.Logger;
 
 import javax.swing.JButton;
@@ -21,6 +22,7 @@ import javax.swing.JTextField;
 import Usuarios.Cliente;
 import Usuarios.Usuario;
 import main.MainCine;
+import main.Utilidades;
 
 public class VentanaRegistro extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -53,7 +55,7 @@ public class VentanaRegistro extends JFrame {
 		telTextField = new JTextField(20);
 
 		fechaNacimientoLabel = new JLabel("Fecha Nacimiento: ");
-		fechaNacimiento = new JTextField("dd--MM-yyyy");// formas para darle el formato correcto al localDate
+		fechaNacimiento = new JTextField("yyyy-MM-dd");// formas para darle el formato correcto al localDate
 		fechaNacimiento.setEditable(true); // De momento el usuario se crea con su cumpleaños en NULL.
 
 		dniLabel = new JLabel("Dni:");
@@ -64,7 +66,6 @@ public class VentanaRegistro extends JFrame {
 			//Cogemos de los TextFields
 			String name = nameTextField.getText();
 			String apellidos = surnameTextField.getText();
-			// String edad = ageTextField.getText();
 			String correo = correoTextField.getText();
 			String contrasena = contraseñaTextField.getText();
 			String dni = dniTextField.getText();
@@ -72,12 +73,13 @@ public class VentanaRegistro extends JFrame {
 			//Comprobamos la informacion y si es correcta escribimos en fichero y creamos cliente
 			if (name.matches("[a-zA-Z]+") && apellidos.matches("[a-zA-Z]+") && telTextField.getText().matches("\\d+")) {
 				int telefono = Integer.parseInt(telTextField.getText());
-				Cliente cliente = new Cliente(correo, contrasena, name, apellidos, dni, null, telefono, false);
+				LocalDate ld = LocalDate.parse(fechaNacimiento.getText());
+				Cliente cliente = new Cliente(correo, contrasena, name, apellidos, dni, ld , telefono, false);
 				
 				//Escritura
 				try (FileWriter fileWriter = new FileWriter("Ficheros/usuarios", true)) {
 					fileWriter.write(correo + "," + contrasena + "," + name + "," + apellidos + "," + dni + ","
-							+ "fechaNULLTemporal" + "," + telefono + "," + "false"+ "\n");
+							+ cliente.getFechaNacimineto().toString() + "," + telefono + "," + "false"+ "\n");
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
