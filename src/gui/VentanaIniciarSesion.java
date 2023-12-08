@@ -38,7 +38,7 @@ public class VentanaIniciarSesion extends JFrame {
 	public static boolean isSesionIniciada() {
 		return sesionIniciada;
 	}
-	
+
 	public static void setSesionIniciada(boolean b) {
 		sesionIniciada = b;
 	}
@@ -46,6 +46,7 @@ public class VentanaIniciarSesion extends JFrame {
 	public static Cliente clienteIniciado() {
 		return clienteIniciado;
 	}
+
 	public static void setclienteIniciado(Cliente c) {
 		clienteIniciado = c;
 	}
@@ -53,9 +54,11 @@ public class VentanaIniciarSesion extends JFrame {
 	public static Administrador administradorIniciado() {
 		return administradorIniciado;
 	}
+
 	public static void setadministradorIniciado(Administrador a) {
 		administradorIniciado = a;
 	}
+
 	public static boolean isEsAdmin() {
 		return esAdmin;
 	}
@@ -101,7 +104,7 @@ public class VentanaIniciarSesion extends JFrame {
 						setEsAdmin(false);
 						ventanaPrincipal.setVisible(true);
 						sesionIniciada = true;
-						administradorIniciado = null; //para qeu no haya errores
+						administradorIniciado = null; // para qeu no haya errores
 						for (Cliente c : MainCine.getListaClientes()) {
 							if (c.getCorreo().equals(correoField)) {
 								clienteIniciado = c;
@@ -126,7 +129,7 @@ public class VentanaIniciarSesion extends JFrame {
 							ventanaPrincipal.setVisible(true);
 							setEsAdmin(true);
 							sesionIniciada = true;
-							clienteIniciado = null; //para qeu no haya errores
+							clienteIniciado = null; // para qeu no haya errores
 							for (Administrador a : MainCine.getListaAdministradores()) {
 								if (a.getCorreo().equals(correoField)) {
 									administradorIniciado = a;

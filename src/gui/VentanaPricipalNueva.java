@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import Usuarios.Cliente;
 import main.MainCine;
 import main.Utilidades;
 
@@ -24,20 +25,26 @@ public class VentanaPricipalNueva extends JFrame {
 	private JButton botonIdentificarseSuperior, botonCineSuperior, botonPeliculasSuperior, botonBuscarSuperior,
 			botonUsuarioSuperior;
 	public static JButton botonAdminSuperior;
-	private JPanel panelCentral;
+	private static JPanel panelCentral;
 	private JPanel panelCuentaSuperior, panelCuentaIzquierdaSuperior, panelCuentaDerechaSuperior;
 	private PanelDatosCuenta panelDatosCuenta;
+	private PanelInformacionCines panelInformacionCines;
+
+	public static JPanel getPanelCentral() {
+		return panelCentral;
+	}
+
+	public static void setPanelCentral(JPanel panelCentral) {
+		VentanaPricipalNueva.panelCentral = panelCentral;
+	}
 
 	public VentanaPricipalNueva() {
 		JFrame ventanaPrincipal = this;
-		
-		
+
 		/* VISTA USUARIO */
-		panelDatosCuenta = new PanelDatosCuenta();
-		
 		panelCentral = new JPanel(new FlowLayout());
 		panelCentral.setVisible(true);
-				
+
 		panelCuentaSuperior = new JPanel(new BorderLayout());
 		panelCuentaIzquierdaSuperior = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		panelCuentaDerechaSuperior = new JPanel(new FlowLayout(FlowLayout.RIGHT));
@@ -58,9 +65,17 @@ public class VentanaPricipalNueva extends JFrame {
 
 // ACTION LISTENERS
 		botonCineSuperior.addActionListener((e) -> {
-			logger.log(Level.INFO, "SE HA PULSADO EL BOTÓN CINE");
-			setVisible(false);
-			new VentanaInfoCine();
+			logger.log(Level.INFO, "SE HA PULSADO EL BOTÓN CINE"); //No funciona
+			panelInformacionCines = new PanelInformacionCines();
+			if (panelCentral.getComponent(0) != null) { //Solucion para
+				panelCentral.remove(0);
+				panelCentral.revalidate();
+				panelCentral.repaint();
+			}
+			VentanaPricipalNueva.getPanelCentral().add(panelInformacionCines);
+			VentanaPricipalNueva.getPanelCentral().revalidate();
+			VentanaPricipalNueva.getPanelCentral().repaint();	
+			
 		});
 
 		botonPeliculasSuperior.addActionListener((e) -> {
@@ -75,24 +90,22 @@ public class VentanaPricipalNueva extends JFrame {
 		});
 		botonIdentificarseSuperior.addActionListener((e) -> {
 			if (VentanaIniciarSesion.isSesionIniciada() == true) {
-				panelDatosCuenta.setVisible(true);
+				if (!(panelCentral == null)) {
+					panelCentral.remove(0);
+					panelCentral.revalidate();
+					panelCentral.repaint();
+				}
+				panelDatosCuenta = new PanelDatosCuenta();
 				panelCentral.add(panelDatosCuenta);
-				
-				panelDatosCuenta.setBorder(BorderFactory.createLineBorder(Color.RED)); // Agregar un borde rojo al panel
-
-				
-				
 				panelCentral.revalidate();
-		        panelCentral.repaint();
-		        this.revalidate();
-		        this.repaint();
-				
+				panelCentral.repaint();
+
 			} else {
 				setVisible(false);
 				new VentanaIdentificarse(ventanaPrincipal);
 			}
 		});
-		
+
 		/* VISTA ADMINISTRADOR */
 		botonUsuarioSuperior = new JButton("Vista Usuario");
 		botonUsuarioSuperior.setToolTipText("Volver a la vista Usuario");
@@ -101,11 +114,11 @@ public class VentanaPricipalNueva extends JFrame {
 		botonAdminSuperior = new JButton("Admin");
 		botonAdminSuperior.setToolTipText("Ventana Administrador");
 		botonAdminSuperior.setVisible(false);
-		
-		//Ad esAdministrador =  ;
+
+		// Ad esAdministrador = ;
 
 //ACTION LISTENERS
-	
+
 		if (VentanaIniciarSesion.isEsAdmin()) { // No entra a este bucle
 			botonAdminSuperior.addActionListener((e) -> {
 				logger.log(Level.INFO, "SE HA PULSADO EL BOTÓN ADMIN");
@@ -123,7 +136,6 @@ public class VentanaPricipalNueva extends JFrame {
 			botonAdminSuperior.setVisible(false);
 			botonUsuarioSuperior.setVisible(false);
 		}
-		
 
 		/* VENTANA */
 		setLayout(new BorderLayout(0, 0));
@@ -144,9 +156,9 @@ public class VentanaPricipalNueva extends JFrame {
 		panelCuentaSuperior.add(panelCuentaIzquierdaSuperior, BorderLayout.WEST);
 		panelCuentaSuperior.add(panelCuentaDerechaSuperior, BorderLayout.EAST);
 		add(panelCuentaSuperior, BorderLayout.NORTH);
-		
+
 		add(panelCentral, BorderLayout.CENTER);
-		//add(panelCentral, BorderLayout.CENTER);
+		// add(panelCentral, BorderLayout.CENTER);
 
 		setBounds(100, 100, 1200, 800);
 		setLocationRelativeTo(null);

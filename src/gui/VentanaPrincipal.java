@@ -446,7 +446,7 @@ public class VentanaPrincipal extends JFrame {
 					// poner messagedialog se ha guardado correctamente
 
 				});
-
+				
 				panelMetodoDePago.add(panelBizum);
 				panelMetodoDePago.add(panelPagoEnCine);
 				panelMetodoDePago.add(panelPaypal);
