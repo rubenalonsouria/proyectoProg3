@@ -1,12 +1,16 @@
 package gui;
 
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import main.MainCine;
@@ -20,9 +24,9 @@ public class PanelInformacionCines extends JPanel{
 	
 	
 	public PanelInformacionCines() {
-	
 		
 		//Imagenes Cine fuente y descripciones
+		
 		ImageIcon iconoBarakaldo = new ImageIcon("images/BarakaldoMaxCenter.jpg");
 		Image logoBarakaldo = iconoBarakaldo.getImage();
 		labelBara = new JLabel(new ImageIcon(logoBarakaldo));
@@ -77,6 +81,7 @@ public class PanelInformacionCines extends JPanel{
 		descripcionBoule.setFont(font);
 		descripcionBoule.setOpaque(false);
 		
+		setLayout(new GridLayout(0, 4, 5, 5));
 		
 		add(labelBara);
         add(descripcionBara);
