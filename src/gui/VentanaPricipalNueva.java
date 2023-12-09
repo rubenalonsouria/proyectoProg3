@@ -67,7 +67,7 @@ public class VentanaPricipalNueva extends JFrame {
 		botonCineSuperior.addActionListener((e) -> {
 			logger.log(Level.INFO, "SE HA PULSADO EL BOTÓN CINE"); //No funciona
 			panelInformacionCines = new PanelInformacionCines();
-			if (panelCentral.getComponent(0) != null) { //Solucion para
+			if (panelCentral.getComponentCount() > 0) { //Solucion para
 				panelCentral.remove(0);
 				panelCentral.revalidate();
 				panelCentral.repaint();
