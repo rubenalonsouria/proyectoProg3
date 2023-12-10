@@ -1,4 +1,4 @@
-package gui;
+package clasesEnDesuso;
 
 import java.awt.BorderLayout;
 

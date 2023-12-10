@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import clasesEnDesuso.VentanaPrincipal;
 import main.MainCine;
 
 public class VentanaIdentificarse extends JFrame {

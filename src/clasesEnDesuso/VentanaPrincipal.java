@@ -1,4 +1,4 @@
-package gui;
+package clasesEnDesuso;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -31,6 +31,10 @@ import Pelicula.Pelicula;
 import Usuarios.Administrador;
 import Usuarios.Cliente;
 import Usuarios.MetodoDePago;
+import gui.ModeloTablaPelicula;
+import gui.VentanaConBusqueda;
+import gui.VentanaIdentificarse;
+import gui.VentanaIniciarSesion;
 import main.MainCine;
 import main.Utilidades;
 

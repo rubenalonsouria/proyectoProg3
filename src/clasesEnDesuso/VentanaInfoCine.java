@@ -1,4 +1,4 @@
-package gui;
+package clasesEnDesuso;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -18,6 +18,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import gui.VentanaIdentificarse;
+import gui.VentanaPrincipalAdmin;
 import main.MainCine;
 
 public class VentanaInfoCine extends JFrame{

@@ -29,14 +29,17 @@ public class VentanaPricipalNueva extends JFrame {
 	private JPanel panelCuentaSuperior, panelCuentaIzquierdaSuperior, panelCuentaDerechaSuperior;
 	private PanelDatosCuenta panelDatosCuenta;
 	private PanelInformacionCines panelInformacionCines;
-
+	private PanelPeliculas panelPeliculas;
+	
+/* METODOS */
 	public static JPanel getPanelCentral() {
 		return panelCentral;
 	}
-
 	public static void setPanelCentral(JPanel panelCentral) {
 		VentanaPricipalNueva.panelCentral = panelCentral;
 	}
+	
+/* VENTANA */
 
 	public VentanaPricipalNueva() {
 		JFrame ventanaPrincipal = this;
@@ -81,7 +84,16 @@ public class VentanaPricipalNueva extends JFrame {
 
 		botonPeliculasSuperior.addActionListener((e) -> {
 			logger.log(Level.INFO, "SE HA PULSADO EL BOTÓN PELICULAS");
-			panelCentral.setVisible(true);
+			if (getPanelCentral().getComponentCount() > 0) {
+				getPanelCentral().remove(0);
+				getPanelCentral().revalidate();
+				getPanelCentral().repaint();
+			}
+			panelPeliculas = new PanelPeliculas();
+			getPanelCentral().add(panelPeliculas);
+			getPanelCentral().revalidate();
+			getPanelCentral().repaint();	
+			
 		});
 
 		botonBuscarSuperior.addActionListener((e) -> {

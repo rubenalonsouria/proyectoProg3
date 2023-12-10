@@ -13,9 +13,9 @@ import Pelicula.Genero;
 import Pelicula.Pelicula;
 import Usuarios.Administrador;
 import Usuarios.Cliente;
+import clasesEnDesuso.VentanaPrincipal;
 import gui.PanelMetodoDePago;
 import gui.VentanaPricipalNueva;
-import gui.VentanaPrincipal;
 
 public class MainCine {
 	private static ArrayList<Pelicula> listaPeliculas = new ArrayList<>();
@@ -158,6 +158,8 @@ public class MainCine {
 		//VentanaPrincipal ventanaPrincipal = new VentanaPrincipal();
 		//VentanaMetodoDePago v = new VentanaMetodoDePago(getListaClientes().get(0));
 		VentanaPricipalNueva v = new VentanaPricipalNueva();
+		System.out.println(listaPeliculas);
+		System.out.println(getListaPeliculas());
 
 	}
 
