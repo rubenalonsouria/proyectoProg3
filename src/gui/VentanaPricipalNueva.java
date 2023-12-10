@@ -23,15 +23,18 @@ public class VentanaPricipalNueva extends JFrame {
 
 	private JLabel labelLogo;
 	private JButton botonIdentificarseSuperior, botonCineSuperior, botonPeliculasSuperior, botonBuscarSuperior,
-			botonUsuarioSuperior;
+			botonUsuarioSuperior, botonPrecioSuperior;
 	public static JButton botonAdminSuperior;
 	private static JPanel panelCentral;
 	private JPanel panelCuentaSuperior, panelCuentaIzquierdaSuperior, panelCuentaDerechaSuperior;
 	private PanelDatosCuenta panelDatosCuenta;
 	private PanelInformacionCines panelInformacionCines;
+
 	private PanelPeliculas panelPeliculas;
 	
 /* METODOS */
+	private PanelPrecios panelPrecios;
+
 	public static JPanel getPanelCentral() {
 		return panelCentral;
 	}
@@ -66,6 +69,9 @@ public class VentanaPricipalNueva extends JFrame {
 
 		botonBuscarSuperior = new JButton(" Buscar", new ImageIcon("images/iconoBuscar.png"));
 		botonBuscarSuperior.setToolTipText("Buscador de peliculas");
+		
+		botonPrecioSuperior = new JButton("Precios");
+		botonPrecioSuperior.setToolTipText("Consulta los precios disponibles");
 
 // ACTION LISTENERS
 		botonCineSuperior.addActionListener((e) -> {
@@ -118,7 +124,21 @@ public class VentanaPricipalNueva extends JFrame {
 				new VentanaIdentificarse(ventanaPrincipal);
 			}
 		});
-
+		
+		botonPrecioSuperior.addActionListener((e) -> {
+			logger.log(Level.INFO, "SE HA PULSADO EL BOTÓN PRECIOS"); 
+			if (getPanelCentral().getComponentCount() > 0) {
+				//getPanelCentral().getComponent(0).setVisible(false);
+				getPanelCentral().remove(0);
+				getPanelCentral().revalidate();
+				getPanelCentral().repaint();
+			}
+			getPanelCentral().add(panelInformacionCines); //CAMBIAR (SOLO PARA TEST)
+			getPanelCentral().revalidate();
+			getPanelCentral().repaint();	
+			
+		});
+		
 		/* VISTA ADMINISTRADOR */
 		botonUsuarioSuperior = new JButton("Vista Usuario");
 		botonUsuarioSuperior.setToolTipText("Volver a la vista Usuario");
@@ -165,6 +185,7 @@ public class VentanaPricipalNueva extends JFrame {
 		panelCuentaIzquierdaSuperior.add(botonBuscarSuperior, BorderLayout.WEST);
 		panelCuentaIzquierdaSuperior.add(botonPeliculasSuperior, BorderLayout.WEST);
 		panelCuentaIzquierdaSuperior.add(botonCineSuperior, BorderLayout.WEST);
+		panelCuentaIzquierdaSuperior.add(botonPrecioSuperior, BorderLayout.WEST);
 
 		panelCuentaSuperior.add(panelCuentaIzquierdaSuperior, BorderLayout.WEST);
 		panelCuentaSuperior.add(panelCuentaDerechaSuperior, BorderLayout.EAST);
