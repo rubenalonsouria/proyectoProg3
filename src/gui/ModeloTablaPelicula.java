@@ -48,7 +48,7 @@ public class ModeloTablaPelicula extends DefaultTableModel{
 		default: return null;
 		}
 	}
-
+ 
 	@Override
 	public int getColumnCount() {
 		return super.getColumnCount();
