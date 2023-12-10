@@ -44,6 +44,7 @@ public class VentanaPricipalNueva extends JFrame {
 		/* VISTA USUARIO */
 		panelCentral = new JPanel(new FlowLayout());
 		panelCentral.setVisible(true);
+		panelInformacionCines = new PanelInformacionCines();
 
 		panelCuentaSuperior = new JPanel(new BorderLayout());
 		panelCuentaIzquierdaSuperior = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -65,16 +66,16 @@ public class VentanaPricipalNueva extends JFrame {
 
 // ACTION LISTENERS
 		botonCineSuperior.addActionListener((e) -> {
-			logger.log(Level.INFO, "SE HA PULSADO EL BOTÓN CINE"); //No funciona
-			panelInformacionCines = new PanelInformacionCines();
-			if (panelCentral.getComponentCount() > 0) { //Solucion para
-				panelCentral.remove(0);
-				panelCentral.revalidate();
-				panelCentral.repaint();
+			logger.log(Level.INFO, "SE HA PULSADO EL BOTÓN CINE"); 
+			if (getPanelCentral().getComponentCount() > 0) {
+				//getPanelCentral().getComponent(0).setVisible(false);
+				getPanelCentral().remove(0);
+				getPanelCentral().revalidate();
+				getPanelCentral().repaint();
 			}
-			VentanaPricipalNueva.getPanelCentral().add(panelInformacionCines);
-			VentanaPricipalNueva.getPanelCentral().revalidate();
-			VentanaPricipalNueva.getPanelCentral().repaint();	
+			getPanelCentral().add(panelInformacionCines);
+			getPanelCentral().revalidate();
+			getPanelCentral().repaint();	
 			
 		});
 
@@ -90,15 +91,15 @@ public class VentanaPricipalNueva extends JFrame {
 		});
 		botonIdentificarseSuperior.addActionListener((e) -> {
 			if (VentanaIniciarSesion.isSesionIniciada() == true) {
-				if (!(panelCentral == null)) {
-					panelCentral.remove(0);
-					panelCentral.revalidate();
-					panelCentral.repaint();
+				if (getPanelCentral().getComponentCount() > 0) { //Solucion para
+					getPanelCentral().remove(0);
+					getPanelCentral().revalidate();
+					getPanelCentral().repaint();
 				}
 				panelDatosCuenta = new PanelDatosCuenta();
-				panelCentral.add(panelDatosCuenta);
-				panelCentral.revalidate();
-				panelCentral.repaint();
+				getPanelCentral().add(panelDatosCuenta);
+				getPanelCentral().revalidate();
+				getPanelCentral().repaint();
 
 			} else {
 				setVisible(false);

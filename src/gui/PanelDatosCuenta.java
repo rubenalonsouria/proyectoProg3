@@ -115,8 +115,7 @@ public class PanelDatosCuenta extends JPanel {
 				VentanaIniciarSesion.setclienteIniciado(null);
 				VentanaIniciarSesion.setSesionIniciada(false);
 				setVisible(false);
-			});
-			add(cerrarSesionDatosCuenta);
+			});add(cerrarSesionDatosCuenta);
 
 			guardarDatosCuenta.addActionListener((a) -> {
 				if (VentanaIniciarSesion.clienteIniciado() != null) {
@@ -157,20 +156,21 @@ public class PanelDatosCuenta extends JPanel {
 				datosCuentaNombre.setEditable(false);
 				datosCuentaApellido.setEditable(false);
 				datosCuentaDni.setEditable(false);
-			});
-			add(guardarDatosCuenta);
+			});add(guardarDatosCuenta);
 
 			metodoDePago.addActionListener((a) -> {
-				setVisible(false);
-				panelMetodoDePago = new PanelMetodoDePago(VentanaIniciarSesion.clienteIniciado(), this);
-				VentanaPricipalNueva.getPanelCentral().add(panelMetodoDePago);
-				repaint();
+				if (VentanaPricipalNueva.getPanelCentral().getComponentCount() > 0) { //Solucion para
+					VentanaPricipalNueva.getPanelCentral().remove(0);
+					VentanaPricipalNueva.getPanelCentral().revalidate();
+					VentanaPricipalNueva.getPanelCentral().repaint();
+				}
+				VentanaPricipalNueva.getPanelCentral().add(panelMetodoDePago = new PanelMetodoDePago(VentanaIniciarSesion.clienteIniciado(), this));
+				
 
 			});
 			if (!VentanaIniciarSesion.isEsAdmin()) {
 				add(metodoDePago);
-			}
-			;
+			};
 
 		}
 		// setPreferredSize(new Dimension(200, 200));

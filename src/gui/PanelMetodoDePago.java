@@ -162,8 +162,13 @@ public class PanelMetodoDePago extends JPanel {
 
 		botonVolver.addActionListener((e) -> {
 			logger.log(Level.INFO, "SE HA PULSADO EL BOTÓN VOLVER");
-			setVisible(false);
-			panelDatosCuenta.setVisible(true);
+			if (VentanaPricipalNueva.getPanelCentral().getComponentCount() > 0) {
+				VentanaPricipalNueva.getPanelCentral().remove(0);
+				VentanaPricipalNueva.getPanelCentral().revalidate();
+				VentanaPricipalNueva.getPanelCentral().repaint();
+			}
+			//setVisible(false);
+			VentanaPricipalNueva.getPanelCentral().add(panelDatosCuenta);
 			VentanaPricipalNueva.getPanelCentral().repaint();
 			VentanaPricipalNueva.getPanelCentral().revalidate();
 
