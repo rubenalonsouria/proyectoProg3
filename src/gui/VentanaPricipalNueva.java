@@ -19,11 +19,12 @@ import main.Utilidades;
 
 public class VentanaPricipalNueva extends JFrame {
 	private static final long serialVersionUID = 1L;
+	
 	private static Logger logger = Logger.getLogger(MainCine.class.getName());
 
 	private JLabel labelLogo;
 	private JButton botonIdentificarseSuperior, botonCineSuperior, botonPeliculasSuperior, botonBuscarSuperior,
-			botonUsuarioSuperior, botonPrecioSuperior;
+			botonUsuarioSuperior, botonPrecioSuperior, botonCarritoSuperior;
 	public static JButton botonAdminSuperior;
 	private static JPanel panelCentral;
 	private JPanel panelCuentaSuperior, panelCuentaIzquierdaSuperior, panelCuentaDerechaSuperior;
@@ -33,6 +34,8 @@ public class VentanaPricipalNueva extends JFrame {
 	private PanelPeliculas panelPeliculas;
 	
 	private PanelPrecios panelPrecios;
+	
+	private PanelCesta panelCesta;
 	
 /* METODOS */
 	
@@ -74,8 +77,26 @@ public class VentanaPricipalNueva extends JFrame {
 		
 		botonPrecioSuperior = new JButton("Precios");
 		botonPrecioSuperior.setToolTipText("Consulta los precios disponibles");
+		
+		botonCarritoSuperior = new JButton("Cesta");
+		
 
 // ACTION LISTENERS
+		botonCarritoSuperior.addActionListener((e) -> { 
+			if (getPanelCentral().getComponentCount() > 0) {
+				//getPanelCentral().getComponent(0).setVisible(false);
+				getPanelCentral().remove(0);
+				getPanelCentral().revalidate();
+				getPanelCentral().repaint();
+			}
+			panelCesta = new PanelCesta();
+			getPanelCentral().add(panelCesta); //de la base de datos que lea y cree una jtable
+			getPanelCentral().revalidate();
+			getPanelCentral().repaint();	
+			
+		});
+
+		
 		botonCineSuperior.addActionListener((e) -> {
 			logger.log(Level.INFO, "SE HA PULSADO EL BOTÓN CINE"); 
 			if (getPanelCentral().getComponentCount() > 0) {
@@ -111,7 +132,7 @@ public class VentanaPricipalNueva extends JFrame {
 		});
 		botonIdentificarseSuperior.addActionListener((e) -> {
 			if (VentanaIniciarSesion.isSesionIniciada() == true) {
-				if (getPanelCentral().getComponentCount() > 0) { //Solucion para
+				if (getPanelCentral().getComponentCount() > 0) {
 					getPanelCentral().remove(0);
 					getPanelCentral().revalidate();
 					getPanelCentral().repaint();
@@ -182,7 +203,10 @@ public class VentanaPricipalNueva extends JFrame {
 
 		panelCuentaDerechaSuperior.add(botonAdminSuperior, BorderLayout.CENTER);
 		panelCuentaDerechaSuperior.add(botonUsuarioSuperior, BorderLayout.CENTER);
+		panelCuentaDerechaSuperior.add(botonCarritoSuperior);
 		panelCuentaDerechaSuperior.add(botonIdentificarseSuperior, BorderLayout.EAST);
+		
+
 
 		panelCuentaIzquierdaSuperior.add(labelLogo, BorderLayout.WEST);
 		panelCuentaIzquierdaSuperior.add(botonBuscarSuperior, BorderLayout.WEST);

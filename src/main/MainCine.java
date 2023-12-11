@@ -1,6 +1,7 @@
 package main;
 
 import java.io.FileReader;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -160,7 +161,11 @@ public class MainCine {
 		VentanaPricipalNueva v = new VentanaPricipalNueva();
 		System.out.println(listaPeliculas);
 		System.out.println(getListaPeliculas());
-
+		
+		/*BASE DE DATOS*/
+		Connection con = BaseDeDatos.initBD("newton.db");
+		BaseDeDatos.crearTablas(con);
+		BaseDeDatos.closeBD(con);
 	}
 
 }

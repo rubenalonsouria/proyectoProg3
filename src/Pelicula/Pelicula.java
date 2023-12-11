@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
-public abstract class Pelicula{
+public abstract class Pelicula{//Abstracta por qeu ????
 	
 	protected String titulo;
 	protected ImageIcon poster;
