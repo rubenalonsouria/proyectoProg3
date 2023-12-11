@@ -32,8 +32,10 @@ public class VentanaPricipalNueva extends JFrame {
 
 	private PanelPeliculas panelPeliculas;
 	
-/* METODOS */
 	private PanelPrecios panelPrecios;
+	
+/* METODOS */
+	
 
 	public static JPanel getPanelCentral() {
 		return panelCentral;
@@ -133,7 +135,8 @@ public class VentanaPricipalNueva extends JFrame {
 				getPanelCentral().revalidate();
 				getPanelCentral().repaint();
 			}
-			getPanelCentral().add(panelInformacionCines); //CAMBIAR (SOLO PARA TEST)
+			panelPrecios = new PanelPrecios();
+			getPanelCentral().add(panelPrecios); //CAMBIAR (SOLO PARA TEST)
 			getPanelCentral().revalidate();
 			getPanelCentral().repaint();	
 			
