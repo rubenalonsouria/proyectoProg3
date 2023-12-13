@@ -2,31 +2,34 @@ package main;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import Pelicula.Genero;
+import Pelicula.Valoracion;
 import Usuarios.Cliente;
 
 public class BaseDeDatos {
 	
-	public static Connection initBD(String nombreBD) {
+	public static Connection initBD(String nomBD) {
 		Connection con = null;
 		try {
-			con = DriverManager.getConnection("jdbc:sqlite:"+nombreBD);
-			//String url = "proyectoProg3/sqlite-jdbc-3.44.1.0.jar"; //PARA Windows
+			Class.forName("org.sqlite.JDBC");
+			con = DriverManager.getConnection("jdbc:sqlite:ficheros/" + nomBD);
+			
+		//con = DriverManager.getConnection("jdbc:sqlite:"+nombreBD);
+		//String url = "proyectoProg3/sqlite-jdbc-3.44.1.0.jar"; //PARA Windows
 		//	String url = "proyectoProg3/slf4j-api-2.0.9.jar"; //PARA Mac"jdbc:sqlite:/slf4j-api-2.0.9.jar/"
-            
-		
-			System.out.println("si");
-		} catch (Exception e) {
+			
+		}catch (ClassNotFoundException e) {
 			e.printStackTrace();
-		} catch (ExceptionInInitializerError e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		
+		} 
 		return con;
 	}
 	
@@ -67,6 +70,43 @@ public class BaseDeDatos {
 			st.executeUpdate(sql3);
 			st.close();
 		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void anadirPelicula(String titulo, Genero genero, Valoracion estrellas ) {
+		String sql = String.format("INSERT INTO Pelicula VALUES('%s','%s','%s')",titulo,genero.toString(),estrellas.toString());
+		//String sql = "INSERT INTO Pelicula (titulo, genero, estrellas) VALUES (?, ?, ?)";
+		
+			try {
+			Connection con = BaseDeDatos.initBD("deustoCine.db");
+			Statement st = con.createStatement();
+			st.executeUpdate(sql);
+			st.close();
+			BaseDeDatos.closeBD(con);
+
+			
+			
+			/*
+			 * PreparedStatement pst = con.prepareStatement(sql); pst.setString(1, titulo);
+			 * pst.setString(2, genero.toString()); pst.setString(3, estrellas.toString());
+			 * 
+			 * pst.executeUpdate(); pst.close();
+			 */
+		} catch (SQLException e) {
+		
+			e.printStackTrace();
+		}
+	}
+	public static void borrarTodasLasPeliculas(Connection con) {
+		String sql = "delete from Pelicula";
+		
+		try {
+			Statement st = con.createStatement();
+			st.execute(sql);
+			st.close();
+		} catch (SQLException e) {
+			
 			e.printStackTrace();
 		}
 	}

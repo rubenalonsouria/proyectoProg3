@@ -12,6 +12,7 @@ import java.util.logging.Level;
 
 import Pelicula.Genero;
 import Pelicula.Pelicula;
+import Pelicula.Valoracion;
 import Usuarios.Administrador;
 import Usuarios.Cliente;
 import clasesEnDesuso.VentanaPrincipal;
@@ -43,10 +44,13 @@ public class MainCine {
 
 	public static void cargarPeliculas() {
 		listaPeliculas.clear();
-
+		
+		Connection con = BaseDeDatos.initBD("deustoCine.db");
+		BaseDeDatos.borrarTodasLasPeliculas(con);
 		try {
 			Scanner sc = new Scanner(new FileReader("Ficheros/peliculas"));
 			String primeraLinea = sc.nextLine(); // Primera linea no la queremos
+			
 			String linea;
 			while (sc.hasNext()) {
 				linea = sc.nextLine();
@@ -91,6 +95,8 @@ public class MainCine {
 				// Creo la pelicula y la añado a la lista
 				Pelicula peli = new Pelicula(titulo, duracion, sipnosis, actoresArray, directoresArray, genero, null) {
 				};
+				BaseDeDatos.anadirPelicula( titulo, genero, Valoracion.aceptable); //TODO hay qeu cambiar esto
+				BaseDeDatos.closeBD(con);
 				listaPeliculas.add(peli);
 			}
 			sc.close();
@@ -151,21 +157,22 @@ public class MainCine {
 		// Ejemplos de logger
 		// logger.info("Se ha mostrado un mensaje en consola");
 		// logger.warning("Mensaje de warning"); logger.severe("Mensaje de error");
+		
+		
+		/*BASE DE DATOS*/
+		Connection con = BaseDeDatos.initBD("deustoCine.db");
+		BaseDeDatos.crearTablas(con);
+		BaseDeDatos.closeBD(con);
+		
+		/*METODOS*/
 
 		cargarPeliculas();
 		cargaDeUsuarios();
-
-		// iniciar ventana
-		//VentanaPrincipal ventanaPrincipal = new VentanaPrincipal();
-		//VentanaMetodoDePago v = new VentanaMetodoDePago(getListaClientes().get(0));
+		
+		/*VENTANA*/
 		VentanaPricipalNueva v = new VentanaPricipalNueva();
 		System.out.println(listaPeliculas);
 		System.out.println(getListaPeliculas());
-		
-		/*BASE DE DATOS*/
-		Connection con = BaseDeDatos.initBD("newton.db");
-		BaseDeDatos.crearTablas(con);
-		BaseDeDatos.closeBD(con);
 	}
 
 }
