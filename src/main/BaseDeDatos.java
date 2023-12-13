@@ -14,27 +14,44 @@ import Pelicula.Valoracion;
 import Usuarios.Cliente;
 
 public class BaseDeDatos {
-	
+	/*
+	 * Al ejecutar una sentencia sql tenemos 2 opciones: - Modificar la base de
+	 * datos: CREATE TABLE, UPDATE, DELETE, INSERT, DROP, MODIFY
+	 * st.executeUpdate(sql);
+	 * 
+	 * - No modifica la base de datos, sólo accede al contenido: SELECT ResultSet rs
+	 * = st.executeQuery(sql);
+	 */
+
+	/*
+	 * Cuando se captura una excepción podemos hacer 2 cosas:
+	 * 
+	 * - Darle tratamiento a esa excepción en el catch - Propagar la excepción -> Si
+	 * un método propaga una excepción,lo tiene que indicar en la cabecer
+	 * 
+	 */
+
 	public static Connection initBD(String nomBD) {
 		Connection con = null;
 		try {
 			Class.forName("org.sqlite.JDBC");
 			con = DriverManager.getConnection("jdbc:sqlite:ficheros/" + nomBD);
-			
-		//con = DriverManager.getConnection("jdbc:sqlite:"+nombreBD);
-		//String url = "proyectoProg3/sqlite-jdbc-3.44.1.0.jar"; //PARA Windows
-		//	String url = "proyectoProg3/slf4j-api-2.0.9.jar"; //PARA Mac"jdbc:sqlite:/slf4j-api-2.0.9.jar/"
-			
-		}catch (ClassNotFoundException e) {
+
+			// con = DriverManager.getConnection("jdbc:sqlite:"+nombreBD);
+			// String url = "proyectoProg3/sqlite-jdbc-3.44.1.0.jar"; //PARA Windows
+			// String url = "proyectoProg3/slf4j-api-2.0.9.jar"; //PARA
+			// Mac"jdbc:sqlite:/slf4j-api-2.0.9.jar/"
+
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} 
+		}
 		return con;
 	}
-	
+
 	public static void closeBD(Connection con) {
-		if(con!=null) {
+		if (con != null) {
 			try {
 				con.close();
 			} catch (SQLException e) {
@@ -42,27 +59,14 @@ public class BaseDeDatos {
 			}
 		}
 	}
-	
-	/*Al ejecutar una sentencia sql tenemos 2 opciones:
-	  - Modificar la base de datos: CREATE TABLE, UPDATE, DELETE, INSERT, DROP, MODIFY
-	  				st.executeUpdate(sql);
-	  				
-	  - No modifica la base de datos, sólo accede al contenido: SELECT
-	                ResultSet rs = st.executeQuery(sql);
-	  */
-	
-	/*Cuando se captura una excepción podemos hacer 2 cosas:
-	 * 
-	 * - Darle tratamiento a esa excepción en el catch
-	 * - Propagar la excepción -> Si un método propaga una excepción,lo tiene que indicar en la cabecer
-	 * 
-	 * */
+
 	public static void crearTablas(Connection con) {
-		String sql = "CREATE TABLE IF NOT EXISTS Cliente (dni String, nombre String)";
+		String sql = "CREATE TABLE IF NOT EXISTS Cliente (correo String, nombre String, metodoDePago String, historialDeCompras String)";
 		String sql2 = "CREATE TABLE IF NOT EXISTS Pelicula (titulo String, genero Genero, estrellas Valoracion)";
 		String sql3 = "CREATE TABLE IF NOT EXISTS Carrito(dni String, titulo String)";
-		//Añadir sesiones y y qeu la de carrito salga el precio de la sesion y mas cosas
-		
+		// Añadir sesiones y y qeu la de carrito salga el precio de la sesion y mas
+		// cosas
+
 		try {
 			Statement st = con.createStatement();
 			st.executeUpdate(sql);
@@ -73,123 +77,136 @@ public class BaseDeDatos {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void anadirPelicula(String titulo, Genero genero, Valoracion estrellas ) {
-		String sql = String.format("INSERT INTO Pelicula VALUES('%s','%s','%s')",titulo,genero.toString(),estrellas.toString());
-		//String sql = "INSERT INTO Pelicula (titulo, genero, estrellas) VALUES (?, ?, ?)";
-		
-			try {
+
+	public static void anadirPelicula(String titulo, Genero genero, Valoracion estrellas) {
+		String sql = String.format("INSERT INTO Pelicula VALUES('%s','%s','%s')", titulo, genero.toString(),
+				estrellas.toString());
+		// String sql = "INSERT INTO Pelicula (titulo, genero, estrellas) VALUES (?, ?,
+		// ?)";
+
+		try {
 			Connection con = BaseDeDatos.initBD("deustoCine.db");
 			Statement st = con.createStatement();
 			st.executeUpdate(sql);
 			st.close();
 			BaseDeDatos.closeBD(con);
 
-			
-			
-			/*
-			 * PreparedStatement pst = con.prepareStatement(sql); pst.setString(1, titulo);
-			 * pst.setString(2, genero.toString()); pst.setString(3, estrellas.toString());
-			 * 
-			 * pst.executeUpdate(); pst.close();
-			 */
 		} catch (SQLException e) {
-		
+
 			e.printStackTrace();
 		}
 	}
+
+	public static void anadirCarritoDeCliente(String dni, String nombrePelicula) { // TODO probar si funciona
+		String sql = String.format("insert into Carrito values('%s','%s')", dni, nombrePelicula);
+		try {
+			Connection con = BaseDeDatos.initBD("deustoCine.db");
+			Statement st = con.createStatement();
+			st.executeUpdate(sql);
+			st.close();
+			BaseDeDatos.closeBD(con);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void quitarCarritoDeCliente(String dni, String nombrePelicula) { // TODO probar si funciona
+		String sql = String.format("delete from Carrito where dni = '%s' and titulo = '%s'", dni, nombrePelicula);
+		try {
+			Connection con = BaseDeDatos.initBD("deustoCine.db");
+			Statement st = con.createStatement();
+			st.executeUpdate(sql);
+			st.close();
+			BaseDeDatos.closeBD(con);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void anadirCliente(Cliente c) {
+		String metodoPago = "";
+
+		if (c.getMetodoDePago() == null) {
+			metodoPago = null;
+		} else {
+			metodoPago = c.getMetodoDePago().toString();
+		}
+
+		String sql = String.format("insert into Cliente values('%s','%s','%s','%s')", c.getCorreo(), c.getNombre(),
+				metodoPago, c.getHistorialDeCompras().toString());
+
+		try {
+			Connection con = BaseDeDatos.initBD("deustoCine.db");
+			Statement st = con.createStatement();
+			st.executeUpdate(sql);
+			st.close();
+			BaseDeDatos.closeBD(con);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
 	public static void borrarTodasLasPeliculas(Connection con) {
 		String sql = "delete from Pelicula";
-		
+
 		try {
 			Statement st = con.createStatement();
 			st.execute(sql);
 			st.close();
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
 		}
 	}
-	
-	/*Devuelve una lista con las personas de la tabla Persona*/
-	public static List<Cliente> obtenerListaPersonas(Connection con){
+
+	/* Devuelve una lista con las personas de la tabla Persona */
+	public static List<Cliente> obtenerListaClientes(Connection con) {// TODO probar si funciona
 		String sql = "SELECT * FROM Cliente";
 		List<Cliente> l = new ArrayList<>();
 		try {
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(sql);
-			while(rs.next()) {
-				String dni = rs.getString("dni");
-				String nom = rs.getString("nombre");
-				Cliente c = new Cliente(dni, null, nom, null, null, null, 0, false);
-				l.add(c);
-			}
-			rs.close();
-			st.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return l;
-	}
-	
-	public static List<String> obtenerListaCarrito(Connection con, String dni){
-		String sql = String.format("SELECT * FROM Carrito WHERE dni='%s'", dni);
-		List<String> l = new ArrayList<>();
-		
-		try {
-			Statement st = con.createStatement();
-			ResultSet rs = st.executeQuery(sql);
-			while(rs.next()) {
-				String titulo = rs.getString("nombre");
-				l.add(titulo);
-			}
-			rs.close();
-			st.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return l;
-	}
-	
-	/*public static List<Compra> obtenerComprasPersona(Connection con, String dni){
-		//String sql = String.format("SELECT * FROM Compra WHERE dni='%s'", dni);
-		String sql = String.format("SELECT C.idC,C.id,C.unidades,C.fecha,A.precio FROM Compra C, Articulo a "
-				+ "WHERE C.id = A.id AND C.dni='%s'", dni);
-		List<Compra> l = new ArrayList<>();
-		try {
-			Statement st = con.createStatement();
-			ResultSet rs = st.executeQuery(sql);
-			while(rs.next()) {
-				int idC = rs.getInt("idC");
-				int id = rs.getInt("id");
-				int unidades = rs.getInt("unidades");
-				String fecha = rs.getString("fecha");
-				double precio = rs.getDouble("precio");
-				Compra c = new Compra(idC, dni, id, unidades, fecha, (float)(unidades*precio));
-				l.add(c);
-			}
-			rs.close();
-			st.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return l;
-	}
-	
-	public static void borrarCompra(Connection con, int idC) {
-		String sql = String.format("DELETE FROM Compra WHERE idC=%d", idC);
-		try {
-			Statement st = con.createStatement();
-			st.executeUpdate(sql);
-			st.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}*/
-			
-}
 
+			while (rs.next()) {
+				String correo = rs.getString("correo");
+				for (Cliente cliente : MainCine.getListaClientes()) {
+					if (cliente.getCorreo().equals(correo)) {
+						l.add(cliente);
+						break;
+					}
+				}
+				rs.close();
+				st.close();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return l;
+	}
+
+	public static List<String> obtenerListaCarrito(Connection con, String Correo) {// TODO probar si funciona
+		String sql = String.format("SELECT * FROM Carrito WHERE correo ='%s'", Correo);
+		List<String> l = new ArrayList<>();
+
+		try {
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			while (rs.next()) {
+				String titulo = rs.getString("titulo");
+				l.add(titulo);
+
+				rs.close();
+				st.close();
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return l;
+	}
+
+
+}

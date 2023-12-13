@@ -11,7 +11,7 @@ public class Cliente extends Usuario{
 	
 	protected int numeroTelefono;
 	protected MetodoDePago metodoDePago;//Esto no en el momento de creacion del cliente sera null
-	protected int numeroTarjeta;		//Una vez que reserve se pediran datos depago y se actualizaran.
+	//protected int numeroTarjeta;		//Una vez que reserve se pediran datos depago y se actualizaran.
 	protected int puntos;	//Por cada compra almacena puntos que 100 = 1$ de descuento
 	protected Map<Pelicula, ArrayList<Compra>> historialDeCompras; //Almacenaremos la Pelicula como clave y en la ArrayList
 																   //guardaremos las compras para esa pelicula.
@@ -23,7 +23,7 @@ public class Cliente extends Usuario{
 		
 		this.numeroTelefono = numeroTelefono;
 		this.metodoDePago = null;
-		this.numeroTarjeta = 0;
+		//this.numeroTarjeta = 0;
 		this.puntos = 0;
 		this.historialDeCompras = new HashMap<>();
 		this.admin = false;
@@ -47,13 +47,12 @@ public class Cliente extends Usuario{
 		this.metodoDePago = metodoDePago;
 	}
 
-	public int getNumeroTarjeta() {
-		return numeroTarjeta;
-	}
-
-	public void setNumeroTarjeta(int numeroTarjeta) {
-		this.numeroTarjeta = numeroTarjeta;
-	}
+	/*
+	 * public int getNumeroTarjeta() { return numeroTarjeta; }
+	 * 
+	 * public void setNumeroTarjeta(int numeroTarjeta) { this.numeroTarjeta =
+	 * numeroTarjeta; }
+	 */
 
 	public int getPuntos() {
 		return puntos;
@@ -74,8 +73,8 @@ public class Cliente extends Usuario{
 
 	@Override
 	public String toString() {
-		return "Cliente [numeroTelefono=" + numeroTelefono + ", metodoDePago=" + metodoDePago + ", numeroTarjeta="
-				+ numeroTarjeta + ", puntos=" + puntos + ", historialDeCompras=" + historialDeCompras + ", correo="
+		return "Cliente [numeroTelefono=" + numeroTelefono + ", metodoDePago=" + metodoDePago //+ ", numeroTarjeta="+ numeroTarjeta 
+				+ ", puntos=" + puntos + ", historialDeCompras=" + historialDeCompras + ", correo="
 				+ correo + ", password=" + password + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni
 				+ ", fechaNacimineto=" + fechaNacimineto + ", admin=" + admin + "]";
 	}

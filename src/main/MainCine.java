@@ -132,13 +132,16 @@ public class MainCine {
 				int tlf = Integer.parseInt(partes[6]);
 
 				if (admin.equals("true")) {
-					Administrador usuario = new Administrador(correo, contrasena, nombre, apellidos, dni, null, true) {
+					Administrador adminU = new Administrador(correo, contrasena, nombre, apellidos, dni, null, true) {
 					};
-					listaAdministradores.add(usuario);
+					listaAdministradores.add(adminU);
 				} else {
-					Cliente usuario = new Cliente(correo, contrasena, nombre, apellidos, dni, null, tlf, false) {
+					Cliente cliente = new Cliente(correo, contrasena, nombre, apellidos, dni, null, tlf, false) {
 					};
-					listaClientes.add(usuario);
+					listaClientes.add(cliente);
+					BaseDeDatos.anadirCliente(cliente);
+					
+					
 				}
 
 			}
@@ -171,8 +174,7 @@ public class MainCine {
 		
 		/*VENTANA*/
 		VentanaPricipalNueva v = new VentanaPricipalNueva();
-		System.out.println(listaPeliculas);
-		System.out.println(getListaPeliculas());
+		
 	}
 
 }
