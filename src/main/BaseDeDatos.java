@@ -15,11 +15,11 @@ public class BaseDeDatos {
 	public static Connection initBD(String nombreBD) {
 		Connection con = null;
 		try {
+			con = DriverManager.getConnection("jdbc:sqlite:"+nombreBD);
 			//String url = "proyectoProg3/sqlite-jdbc-3.44.1.0.jar"; //PARA Windows
-			String url = "proyectoProg3/slf4j-api-2.0.9.jar"; //PARA Mac
+		//	String url = "proyectoProg3/slf4j-api-2.0.9.jar"; //PARA Mac"jdbc:sqlite:/slf4j-api-2.0.9.jar/"
             
-			// create a connection to the database
-            con = DriverManager.getConnection(url);
+		
 			System.out.println("si");
 		} catch (Exception e) {
 			e.printStackTrace();
