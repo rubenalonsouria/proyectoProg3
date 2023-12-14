@@ -27,6 +27,7 @@ public class PanelCesta extends JPanel{
 	
 public PanelCesta() {
 		
+	
 		setLayout(new FlowLayout());
 		botonVolver = new JButton("Volver");
 		botonComprar = new JButton("Comprar");
