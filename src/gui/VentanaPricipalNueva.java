@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.ScrollPaneLayout;
 
 import Usuarios.Cliente;
 import main.MainCine;
@@ -82,13 +83,13 @@ public class VentanaPricipalNueva extends JFrame {
 		
 
 // ACTION LISTENERS
-		botonCarritoSuperior.addActionListener((e) -> { 
+		botonCarritoSuperior.addActionListener((e) -> {  
 			if (getPanelCentral().getComponentCount() > 0) {
-				//getPanelCentral().getComponent(0).setVisible(false);
 				getPanelCentral().remove(0);
 				getPanelCentral().revalidate();
 				getPanelCentral().repaint();
 			}
+			
 			panelCesta = new PanelCesta();
 			getPanelCentral().add(panelCesta); //de la base de datos que lea y cree una jtable
 			getPanelCentral().revalidate();

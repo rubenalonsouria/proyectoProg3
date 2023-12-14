@@ -25,7 +25,7 @@ public class PanelCesta extends JPanel{
 	private JScrollPane scrollpanelList;
 	private JButton botonVolver, botonComprar;
 	
-public PanelCesta() {
+public PanelCesta(/*JPanel panelAnterior8*/) {
 		
 	
 		setLayout(new FlowLayout());
@@ -58,7 +58,16 @@ public PanelCesta() {
 		
 //ActionListeners
 		botonVolver.addActionListener((e)-> {
-			
+			if (VentanaPricipalNueva.getPanelCentral().getComponentCount() > 0) {
+				VentanaPricipalNueva.getPanelCentral().remove(0);
+				VentanaPricipalNueva.getPanelCentral().revalidate();
+				VentanaPricipalNueva.getPanelCentral().repaint();
+			}
+			/*
+			 * VentanaPricipalNueva.getPanelCentral().add();
+			 * VentanaPricipalNueva.getPanelCentral().repaint();
+			 * VentanaPricipalNueva.getPanelCentral().revalidate();
+			 */
 		});
 		
 		botonComprar.addChangeListener((e)-> {
