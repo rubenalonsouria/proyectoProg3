@@ -1,4 +1,6 @@
 Titulo,duracion,sinopsis,actores(Array),directores(Array),genero,Valoracion
 Barbie;125;Una pelicula rosa;[Barbi,ken];[Manuel,Laura];FANTASIA;null
 Piratas;180;Piratas y explosiones fuertes;[jack,juan];[Director,director2];FANTASIA;null
-Señor de Los anilos;200;Mucha magia en poder;[Anuel,Quevedo];[Director3,director4];SUSPENSE;null
+Señor de los anilos;200;Mucha magia en poder;[Anuel,Quevedo];[Director3,director4];SUSPENSE;null
+Los marvells;220;Super que? superrr;[Bad bunny,Eladio];[Director5,director6];ACCION;null
+Un amor;190;Muchos mimos y luego te pongo los cuernos;[Rosalia,Rauw Alejandro];[Director7,director8];ROMANCE;null

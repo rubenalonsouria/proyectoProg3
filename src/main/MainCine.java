@@ -109,12 +109,12 @@ public class MainCine {
 		mapaCorreoValoresUsuarios.clear();
 		listaAdministradores.clear();
 		listaClientes.clear();
-
+		
+		BaseDeDatos.borrarTodosLosClientes();
 		try {
 			Scanner sc = new Scanner(new FileReader("Ficheros/usuarios"));
 			String primeraLinea = sc.nextLine(); // Primera linea no la queremos
 			String usuarioLinea;
-
 			while (sc.hasNext()) {
 				usuarioLinea = sc.nextLine();
 				String[] partes = usuarioLinea.split(",");

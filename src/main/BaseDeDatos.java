@@ -63,7 +63,7 @@ public class BaseDeDatos {
 	public static void crearTablas(Connection con) {
 		String sql = "CREATE TABLE IF NOT EXISTS Cliente (correo String, nombre String, metodoDePago String, historialDeCompras String)";
 		String sql2 = "CREATE TABLE IF NOT EXISTS Pelicula (titulo String, genero Genero, estrellas Valoracion)";
-		String sql3 = "CREATE TABLE IF NOT EXISTS Carrito(dni String, titulo String)";
+		String sql3 = "CREATE TABLE IF NOT EXISTS Carrito(correo String, titulo String)";
 		// Añadir sesiones y y qeu la de carrito salga el precio de la sesion y mas
 		// cosas
 
@@ -97,8 +97,8 @@ public class BaseDeDatos {
 		}
 	}
 
-	public static void anadirCarritoDeCliente(String dni, String nombrePelicula) { // TODO probar si funciona
-		String sql = String.format("insert into Carrito values('%s','%s')", dni, nombrePelicula);
+	public static void anadirCarritoDeCliente(String correo, String nombrePelicula) { // TODO probar si funciona
+		String sql = String.format("insert into Carrito values('%s','%s')", correo, nombrePelicula);
 		try {
 			Connection con = BaseDeDatos.initBD("deustoCine.db");
 			Statement st = con.createStatement();
@@ -111,7 +111,7 @@ public class BaseDeDatos {
 	}
 
 	public static void quitarCarritoDeCliente(String dni, String nombrePelicula) { // TODO probar si funciona
-		String sql = String.format("delete from Carrito where dni = '%s' and titulo = '%s'", dni, nombrePelicula);
+		String sql = String.format("delete from Carrito where correo = '%s' and titulo = '%s'", dni, nombrePelicula);
 		try {
 			Connection con = BaseDeDatos.initBD("deustoCine.db");
 			Statement st = con.createStatement();
@@ -146,6 +146,20 @@ public class BaseDeDatos {
 			e.printStackTrace();
 		}
 
+	}
+
+	public static void borrarTodosLosClientes() {
+		String sql = "delete from Cliente";
+
+		try {
+			Connection coon = BaseDeDatos.initBD("deustoCine.db");
+			Statement st = coon.createStatement();
+			st.execute(sql);
+			st.close();
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
 	}
 
 	public static void borrarTodasLasPeliculas(Connection con) {
@@ -187,26 +201,27 @@ public class BaseDeDatos {
 		return l;
 	}
 
-	public static List<String> obtenerListaCarrito(Connection con, String Correo) {// TODO probar si funciona
-		String sql = String.format("SELECT * FROM Carrito WHERE correo ='%s'", Correo);
+	public static List<String> obtenerListaCarrito(String Correo) {// TODO probar si funciona
+		String sql = String.format("SELECT titulo FROM Carrito where correo ='%s'", Correo);
 		List<String> l = new ArrayList<>();
 
 		try {
+			Connection con = BaseDeDatos.initBD("deustoCine.db");
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(sql);
 			while (rs.next()) {
 				String titulo = rs.getString("titulo");
 				l.add(titulo);
 
-				rs.close();
-				st.close();
-
+				
 			}
+			rs.close();
+			st.close();
+			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return l;
 	}
-
 
 }

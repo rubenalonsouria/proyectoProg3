@@ -25,6 +25,7 @@ public abstract class Pelicula{//Abstracta por qeu ????
 		this.directores = directores;
 		this.genero = genero;
 		this.estrellas = estrellas;
+		this.poster = null;
 	}
 
 	public String getTitulo() {
