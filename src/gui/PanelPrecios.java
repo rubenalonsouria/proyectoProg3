@@ -2,7 +2,9 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.logging.Level;
@@ -18,6 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.border.Border;
 
 import main.MainCine;
 
@@ -28,7 +31,7 @@ public class PanelPrecios extends JPanel {
     
     private JCheckBox chkPrecios, chkOfertas;
     private ButtonGroup grupoCheckBoxes;
-    private JPanel panelFiltros, panelPrecios;
+    private JPanel panelFiltros, panelMostrarPrecios;
 
     public PanelPrecios() {
         // VISTA USUARIO
@@ -36,8 +39,8 @@ public class PanelPrecios extends JPanel {
         Font font = new Font("Times New Roman", Font.BOLD, 20);
 
         panelFiltros = new JPanel();
-        panelPrecios = new JPanel();
-        panelPrecios.setLayout(new BoxLayout(panelPrecios, BoxLayout.Y_AXIS));
+        panelMostrarPrecios = new JPanel();
+        panelMostrarPrecios.setLayout(new BoxLayout(panelMostrarPrecios, BoxLayout.Y_AXIS));
 
         chkPrecios = new JCheckBox("Precios");
         chkPrecios.setSelected(true);
@@ -48,14 +51,26 @@ public class PanelPrecios extends JPanel {
         grupoCheckBoxes.add(chkOfertas);
 
         // SCROLLPANE
-        JScrollPane scrollPane = new JScrollPane(panelPrecios);
+        JScrollPane scrollPane = new JScrollPane(panelMostrarPrecios);
 
-        // Crea elementos (imagen + texto) y agregarlos al panelPrecios [CAMBIAR IMAGENES Y TEXTO Y AGREGAR MAS]
-        agregarElementoConImagenYTexto(panelPrecios, "images/deustocinelogo.png", "Texto para precios", font);
-        agregarElementoConImagenYTexto(panelPrecios, "images/deustocinelogo.png", "Texto para oferta1", font);
-        agregarElementoConImagenYTexto(panelPrecios, "images/deustocinelogo.png", "Texto para oferta2", font);
-        agregarElementoConImagenYTexto(panelPrecios, "images/deustocinelogo.png", "Texto para otra oferta", font);
-
+        // Crea elementos (imagen + texto) y agregarlos al panelMostrarPrecios [CAMBIAR IMAGENES Y TEXTO Y AGREGAR MAS]
+        // PRECIOS
+        agregarElementoConImagenYTexto(panelMostrarPrecios, "images/adultosCine.jpg", "PRECIOS PARA ADULTOS\r\n"
+        		+ "El precio para los adultos es 11,4€", font);
+        agregarElementoConImagenYTexto(panelMostrarPrecios, "images/niñosCine.jpg", "PRECIOS PARA NIÑOS MAYORES DE 13 AÑOS\r\n"
+        		+ "El precio para los niños mayores de 13 años es 8,4€", font);
+        agregarElementoConImagenYTexto(panelMostrarPrecios, "images/seniorCine.jpg", "PRECIOS PARA SENIOR\r\n"
+        		+ "El precio para los mayores de 60 años es 8,4€", font);
+        
+        //OFERTAS
+        agregarElementoConImagenYTexto(panelMostrarPrecios, "images/seniorCine.jpg", "MARTES DE CINE A 2€\r\n"
+        		+ "¡Los mayores de 65 años ya podéis disfrutar de esta oferta por solo 2€ la entrada!", font);
+        agregarElementoConImagenYTexto(panelMostrarPrecios, "images/parejaCine.jpg", "¡CINE EN PAREJA AL MEJOR PRECIO!\r\n"
+        		+ "Oferta valida cuando compras 2 entradas a la vez", font);
+        agregarElementoConImagenYTexto(panelMostrarPrecios, "images/genteCine.jpg", "¡PARA AUTÉNTICOS FANS DEL CINE!\r\n"
+        		+ "Utiliza los puntos para conseguir una oferta increible", font);
+        agregarElementoConImagenYTexto(panelMostrarPrecios, "images/adultosCine.jpg", "ENTRADAS POR 9,90€ LOS MIERCOLES\r\n"
+        		+ "¡Aprovecha esta oferta solo disponible los miercoles!", font);
         // ACTION LISTENERS
 
         chkPrecios.addActionListener(new ActionListener() {
@@ -77,20 +92,19 @@ public class PanelPrecios extends JPanel {
         
 
         // VENTANA
-        setLayout(new BorderLayout(0, 0));
+        setLayout(new BorderLayout());
 
         panelFiltros.add(chkPrecios);
         panelFiltros.add(chkOfertas);
-
-        panelFiltros.setBorder(BorderFactory.createLineBorder(Color.GRAY));
-        panelFiltros.setBackground(Color.BLUE);
+        
+        panelFiltros.setPreferredSize(new Dimension(1190, 50));
         add(panelFiltros, BorderLayout.NORTH);
-
+        scrollPane.setPreferredSize(new Dimension(1190, 750));
         add(scrollPane, BorderLayout.CENTER);
-
+        
         setVisible(true);
         setName("Precios");
-
+        
         // Asegurarse de que al menos una checkbox esté seleccionada por defecto
         actualizarFiltro();
     }
@@ -104,8 +118,8 @@ public class PanelPrecios extends JPanel {
 
         JPanel elementoPanel = new JPanel();
         elementoPanel.setLayout(new BoxLayout(elementoPanel, BoxLayout.X_AXIS));
-        elementoPanel.add(lblImagen);
-        elementoPanel.add(txtArea);
+        elementoPanel.add(lblImagen, BorderLayout.WEST);
+        elementoPanel.add(txtArea, BorderLayout.CENTER);
 
         panel.add(elementoPanel);
     }
@@ -122,8 +136,8 @@ public class PanelPrecios extends JPanel {
         boolean mostrarPrecios = chkPrecios.isSelected();
         boolean mostrarOfertas = chkOfertas.isSelected();
 
-        for (int i = 0; i < panelPrecios.getComponentCount(); i++) {
-            JPanel elementoPanel = (JPanel) panelPrecios.getComponent(i);
+        for (int i = 0; i < panelMostrarPrecios.getComponentCount(); i++) {
+            JPanel elementoPanel = (JPanel) panelMostrarPrecios.getComponent(i);
             JTextArea txtArea = (JTextArea) elementoPanel.getComponent(1);
 
             boolean esOferta = txtArea.getText().toLowerCase().contains("oferta");
@@ -133,7 +147,7 @@ public class PanelPrecios extends JPanel {
             elementoPanel.setVisible(mostrarElemento);
         }
 
-        panelPrecios.revalidate();
-        panelPrecios.repaint();
+        panelMostrarPrecios.revalidate();
+        panelMostrarPrecios.repaint();
     }
 }
