@@ -4,14 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -20,7 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.border.Border;
+import javax.swing.ScrollPaneConstants;
 
 import main.MainCine;
 
@@ -34,8 +31,8 @@ public class PanelPrecios extends JPanel {
     private JPanel panelFiltros, panelMostrarPrecios;
 
     public PanelPrecios() {
-        // VISTA USUARIO
-
+        
+    	// VISTA USUARIO
         Font font = new Font("Times New Roman", Font.BOLD, 20);
 
         panelFiltros = new JPanel();
@@ -52,17 +49,20 @@ public class PanelPrecios extends JPanel {
 
         // SCROLLPANE
         JScrollPane scrollPane = new JScrollPane(panelMostrarPrecios);
+        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
+        
+        
         // Crea elementos (imagen + texto) y agregarlos al panelMostrarPrecios [CAMBIAR IMAGENES Y TEXTO Y AGREGAR MAS]
         // PRECIOS
         agregarElementoConImagenYTexto(panelMostrarPrecios, "images/adultosCine.jpg", "PRECIOS PARA ADULTOS\r\n"
         		+ "El precio para los adultos es 11,4€", font);
         agregarElementoConImagenYTexto(panelMostrarPrecios, "images/niñosCine.jpg", "PRECIOS PARA NIÑOS MAYORES DE 13 AÑOS\r\n"
-        		+ "El precio para los niños mayores de 13 años es 8,4€", font);
+        		+ "El precio para los niños mayo	res de 13 años es 8,4€", font);
         agregarElementoConImagenYTexto(panelMostrarPrecios, "images/seniorCine.jpg", "PRECIOS PARA SENIOR\r\n"
         		+ "El precio para los mayores de 60 años es 8,4€", font);
         
-        //OFERTAS
+        // OFERTAS
         agregarElementoConImagenYTexto(panelMostrarPrecios, "images/seniorCine.jpg", "MARTES DE CINE A 2€\r\n"
         		+ "¡Los mayores de 65 años ya podéis disfrutar de esta oferta por solo 2€ la entrada!", font);
         agregarElementoConImagenYTexto(panelMostrarPrecios, "images/parejaCine.jpg", "¡CINE EN PAREJA AL MEJOR PRECIO!\r\n"
@@ -71,8 +71,10 @@ public class PanelPrecios extends JPanel {
         		+ "Utiliza los puntos para conseguir una oferta increible", font);
         agregarElementoConImagenYTexto(panelMostrarPrecios, "images/adultosCine.jpg", "ENTRADAS POR 9,90€ LOS MIERCOLES\r\n"
         		+ "¡Aprovecha esta oferta solo disponible los miercoles!", font);
+        
+        
+        
         // ACTION LISTENERS
-
         chkPrecios.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -99,8 +101,9 @@ public class PanelPrecios extends JPanel {
         
         panelFiltros.setPreferredSize(new Dimension(1190, 50));
         add(panelFiltros, BorderLayout.NORTH);
-        scrollPane.setPreferredSize(new Dimension(1190, 750));
+        
         add(scrollPane, BorderLayout.CENTER);
+        
         
         setVisible(true);
         setName("Precios");
