@@ -22,10 +22,10 @@ public class PanelInformacionPelicula extends JPanel {
 	private JTextField textDuracion, textSinopsis, textActores, textDirectores, textGenero;
 	//private static boolean cambioBool;
 	
-	/*
-	 * public static boolean tickDeCarrito() { return cambioBool; }
-	 * 
-	 */	public PanelInformacionPelicula(Pelicula p, JPanel estePanel) {
+	
+	// public static boolean tickDeCarrito() { return cambioBool; }
+	 
+	 	public PanelInformacionPelicula(Pelicula p, JPanel estePanel) {
 		setLayout(new FlowLayout());//Esta ventana estaria bien hacerla con absoloutlayout con ayuda de windowBuielder
 									//Solo para coger las posiciones x e y
 		botonVolver = new JButton("Volver");
@@ -68,7 +68,7 @@ public class PanelInformacionPelicula extends JPanel {
 				String titulo = p.getTitulo();
 				BaseDeDatos.anadirCarritoDeCliente(correo, titulo);	//TODO poner un Jspin y habra qeu poner un render de seleccion de asiento y el hilo de a;adiendo...
 				JOptionPane.showMessageDialog(null, "Añadida con exito", null, JOptionPane.INFORMATION_MESSAGE);
-			//	cambioBool = true;
+				//cambioBool = true;
 			}else {
 				JOptionPane.showMessageDialog(null, "Primero inicia Sesion o Registrate", null, JOptionPane.INFORMATION_MESSAGE);
 				

@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.ScrollPaneLayout;
 
@@ -84,7 +85,8 @@ public class VentanaPricipalNueva extends JFrame {
 
 // ACTION LISTENERS
 		botonCarritoSuperior.addActionListener((e) -> {  
-			if (getPanelCentral().getComponentCount() > 0) {
+			if (VentanaIniciarSesion.isSesionIniciada()) {
+				if (getPanelCentral().getComponentCount() > 0) {
 				getPanelCentral().remove(0);
 				getPanelCentral().revalidate();
 				getPanelCentral().repaint();
@@ -93,7 +95,11 @@ public class VentanaPricipalNueva extends JFrame {
 			panelCesta = new PanelCesta();
 			getPanelCentral().add(panelCesta); //de la base de datos que lea y cree una jtable
 			getPanelCentral().revalidate();
-			getPanelCentral().repaint();	
+			getPanelCentral().repaint();
+			}else {
+				JOptionPane.showMessageDialog(null, "Primero inicia sesion" );
+			}
+				
 			
 		});
 

@@ -30,7 +30,7 @@ public class PanelCesta extends JPanel {
 
 		// modeloLista = new DefaultListModel<>();
 
-		if (VentanaIniciarSesion.isSesionIniciada() /* && PanelInformacionPelicula.tickDeCarrito() */) {
+		if (VentanaIniciarSesion.isSesionIniciada()  /*&& PanelInformacionPelicula.tickDeCarrito()*/ ) {
 			
 			Cliente c = VentanaIniciarSesion.clienteIniciado();
 			String correo = c.getCorreo();
@@ -58,6 +58,7 @@ public class PanelCesta extends JPanel {
 			modeloTabla = new ModeloTablaCesta(listaPeliculas);
 			String[] titulo = { "TITULO", "NUMERO ENTRADAS" };
 			modeloTabla.setColumnIdentifiers(titulo);
+			//TODO Poner qeu solo se pueda seleccionar una fila a la vez 
 		}
 
 		// jlist = new JList<>(modeloLista);
