@@ -112,6 +112,7 @@ public class BaseDeDatos {
 
 	public static void quitarCarritoDeCliente(String correo, String nombrePelicula) { // TODO probar si funciona
 		String sql = String.format("DELETE FROM Carrito WHERE correo = '%s' AND titulo = '%s' LIMIT 1", correo, nombrePelicula);
+
 		try {
 			Connection con = BaseDeDatos.initBD("deustoCine.db");
 			Statement st = con.createStatement();

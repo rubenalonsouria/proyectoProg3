@@ -40,6 +40,11 @@ public class ModeloTablaCesta extends DefaultTableModel{
 		default: return null;
 		}
 	}
+
+	public void actualizarDatos() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 	

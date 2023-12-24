@@ -116,41 +116,69 @@ public class PanelCesta extends JPanel {
 				spiner.setValue(getnEstradas(fila));
 			}
 		});
-
+		
 		spiner.addChangeListener((e) -> {
-			if (tabla.getSelectedRow() >= 0) {
-				int fila = tabla.getSelectedRow();
-				String pelicula = (String) tabla.getValueAt(fila, 0);
+		    if (tabla.getSelectedRow() >= 0) {
+		        int fila = tabla.getSelectedRow();
+		        String pelicula = (String) tabla.getValueAt(fila, 0);
 
-				int valorNuevo = (int) spiner.getValue();
-				int valorActual = getnEstradas(fila);
-				int resultadoResta = valorNuevo - valorActual;
+		        int valorNuevo = (int) spiner.getValue();
+		        int valorActual = getnEstradas(fila);
+		        int resultadoResta = valorNuevo - valorActual;
+		        System.out.println(resultadoResta);
+		        if (resultadoResta > 0) {
+		            for (int i = 0; i < resultadoResta; i++) {
+		                BaseDeDatos.anadirCarritoDeCliente(VentanaIniciarSesion.clienteIniciado().getCorreo(), pelicula);
+		            }
+		        } else if (resultadoResta < 0) {
+		            for (int i = 0; i < Math.abs(resultadoResta); i++) {
+		                BaseDeDatos.quitarCarritoDeCliente(VentanaIniciarSesion.clienteIniciado().getCorreo(), pelicula);
+		            }
+		        }
 
-				System.out.println(resultadoResta);
-
-				if (resultadoResta > 0) {
-					System.out.println("entro");
-					BaseDeDatos.anadirCarritoDeCliente(VentanaIniciarSesion.clienteIniciado().getCorreo(), pelicula);
-					//antes de borrar qeu seleccione cual esta seleccionada en el modelo para qeu la nueva jtabel este con esa y 
-					//opcional visible jspinner
-					scrollpaneltabla.remove(0);
-					add(scrollpaneltabla = new JScrollPane(cargarModelo()));
-					VentanaPricipalNueva.getPanelCentral().revalidate();
-					VentanaPricipalNueva.getPanelCentral().repaint();
-
-				} else if (resultadoResta < 0) {
-					System.out.println("Entro 2");
-					BaseDeDatos.quitarCarritoDeCliente(VentanaIniciarSesion.clienteIniciado().getCorreo(), pelicula);
-					
-					scrollpaneltabla.remove(0);
-					add(scrollpaneltabla = new JScrollPane(cargarModelo()));
-					VentanaPricipalNueva.getPanelCentral().revalidate();
-					VentanaPricipalNueva.getPanelCentral().repaint();
-				}
-
-			}
-
+		        // Actualizar la tabla sin recrearla
+		        modeloTabla.actualizarDatos(); // Método que deberías implementar en tu ModeloTablaCesta para actualizar los datos desde la base de datos
+		        
+		        // Luego, actualiza el valor en la tabla
+		        tabla.setValueAt(String.valueOf(valorNuevo), fila, 1); // Actualiza el número de entradas en la tabla
+		    }
 		});
+
+		/*
+		 * spiner.addChangeListener((e) -> { if (tabla.getSelectedRow() >= 0) { int fila
+		 * = tabla.getSelectedRow(); String pelicula = (String) tabla.getValueAt(fila,
+		 * 0);
+		 * 
+		 * int valorNuevo = (int) spiner.getValue(); int valorActual =
+		 * getnEstradas(fila); int resultadoResta = valorNuevo - valorActual;
+		 * 
+		 * System.out.println(resultadoResta);
+		 * 
+		 * if (resultadoResta > 0) { System.out.println("entro");
+		 * BaseDeDatos.anadirCarritoDeCliente(VentanaIniciarSesion.clienteIniciado().
+		 * getCorreo(), pelicula); int selecion = tabla.getSelectedRow(); //antes de
+		 * borrar qeu seleccione cual esta seleccionada en el modelo para qeu la nueva
+		 * jtabel este con esa y //opcional visible jspinner
+		 * 
+		 * scrollpaneltabla.remove(0); add(scrollpaneltabla = new
+		 * JScrollPane(cargarModelo()));
+		 * 
+		 * VentanaPricipalNueva.getPanelCentral().revalidate();
+		 * VentanaPricipalNueva.getPanelCentral().repaint();
+		 * 
+		 * } else if (resultadoResta < 0) { System.out.println("Entro 2");
+		 * BaseDeDatos.quitarCarritoDeCliente(VentanaIniciarSesion.clienteIniciado().
+		 * getCorreo(), pelicula);
+		 * 
+		 * scrollpaneltabla.remove(0); add(scrollpaneltabla = new
+		 * JScrollPane(cargarModelo()));
+		 * VentanaPricipalNueva.getPanelCentral().revalidate();
+		 * VentanaPricipalNueva.getPanelCentral().repaint(); }
+		 * 
+		 * }
+		 * 
+		 * });
+		 */
 
 		add(spiner);
 		add(botonComprar);
