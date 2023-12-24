@@ -6,9 +6,10 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import Usuarios.Cliente;
 import main.BaseDeDatos;
 
@@ -21,45 +22,57 @@ public class PanelCesta extends JPanel {
 	private JTable tabla;
 	private JScrollPane scrollpaneltabla;
 	private JButton botonVolver, botonComprar;
+	private JSpinner spiner;
+	private static int nEntradas;
+
+	private int getnEstradas(int fila) {
+		return Integer.parseInt((String) tabla.getValueAt(fila, 1));
+	}
+
+	private JTable cargarModelo() {
+
+		Cliente c = VentanaIniciarSesion.clienteIniciado();
+		String correo = c.getCorreo();
+		List<String> l = BaseDeDatos.obtenerListaCarrito(correo);
+		ArrayList<String[]> listaPeliculas = new ArrayList<>();
+
+		for (String s : l) {
+			boolean found = false;
+
+			for (String[] a : listaPeliculas) {
+				if (a[0].equals(s)) {
+					a[1] = String.valueOf(Integer.parseInt(a[1]) + 1);
+					found = true;
+					break;
+				}
+			}
+
+			if (!found) {
+				String[] newMovie = { s, "1" };
+				listaPeliculas.add(newMovie);
+			}
+		}
+
+		modeloTabla = new ModeloTablaCesta(listaPeliculas);
+		String[] titulo = { "TITULO", "NUMERO ENTRADAS" };
+		modeloTabla.setColumnIdentifiers(titulo);
+		// TODO Poner qeu solo se pueda seleccionar una fila a la vez
+
+		tabla = new JTable(modeloTabla);
+
+		return tabla;
+	}
 
 	public PanelCesta(/* JPanel panelAnterior8 */) {
 
 		setLayout(new FlowLayout());
 		botonVolver = new JButton("Volver");
 		botonComprar = new JButton("Comprar");
+		spiner = new JSpinner();
 
 		// modeloLista = new DefaultListModel<>();
 
-		if (VentanaIniciarSesion.isSesionIniciada()  /*&& PanelInformacionPelicula.tickDeCarrito()*/ ) {
-			
-			Cliente c = VentanaIniciarSesion.clienteIniciado();
-			String correo = c.getCorreo();
-			List<String> l = BaseDeDatos.obtenerListaCarrito(correo);
-			ArrayList<String[]> listaPeliculas = new ArrayList<>();
-
-			for (String s : l) {
-				boolean found = false;
-
-				for (String[] a : listaPeliculas) {
-					if (a[0].equals(s)) {
-						a[1] = String.valueOf(Integer.parseInt(a[1]) + 1);
-						found = true;
-						break; 
-					}
-				}
-
-				if (!found) {
-					String[] newMovie = { s, "1" };
-					listaPeliculas.add(newMovie);
-				}
-			}
-
-			
-			modeloTabla = new ModeloTablaCesta(listaPeliculas);
-			String[] titulo = { "TITULO", "NUMERO ENTRADAS" };
-			modeloTabla.setColumnIdentifiers(titulo);
-			//TODO Poner qeu solo se pueda seleccionar una fila a la vez 
-		}
+		scrollpaneltabla = new JScrollPane(cargarModelo());
 
 		// jlist = new JList<>(modeloLista);
 		// scrollpanelList = new JScrollPane(jlist);
@@ -67,8 +80,6 @@ public class PanelCesta extends JPanel {
 
 		// jlist.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED,
 		// Color.DARK_GRAY, Color.LIGHT_GRAY));
-		tabla = new JTable(modeloTabla);
-		scrollpaneltabla = new JScrollPane(tabla);
 
 		/*
 		 * Lectura de la base de datos diseñar la interfaz mejor: hay una lista con
@@ -97,6 +108,51 @@ public class PanelCesta extends JPanel {
 
 		});
 
+		tabla.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				int fila = tabla.getSelectedRow();
+				spiner.setValue(getnEstradas(fila));
+			}
+		});
+
+		spiner.addChangeListener((e) -> {
+			if (tabla.getSelectedRow() >= 0) {
+				int fila = tabla.getSelectedRow();
+				String pelicula = (String) tabla.getValueAt(fila, 0);
+
+				int valorNuevo = (int) spiner.getValue();
+				int valorActual = getnEstradas(fila);
+				int resultadoResta = valorNuevo - valorActual;
+
+				System.out.println(resultadoResta);
+
+				if (resultadoResta > 0) {
+					System.out.println("entro");
+					BaseDeDatos.anadirCarritoDeCliente(VentanaIniciarSesion.clienteIniciado().getCorreo(), pelicula);
+					//antes de borrar qeu seleccione cual esta seleccionada en el modelo para qeu la nueva jtabel este con esa y 
+					//opcional visible jspinner
+					scrollpaneltabla.remove(0);
+					add(scrollpaneltabla = new JScrollPane(cargarModelo()));
+					VentanaPricipalNueva.getPanelCentral().revalidate();
+					VentanaPricipalNueva.getPanelCentral().repaint();
+
+				} else if (resultadoResta < 0) {
+					System.out.println("Entro 2");
+					BaseDeDatos.quitarCarritoDeCliente(VentanaIniciarSesion.clienteIniciado().getCorreo(), pelicula);
+					
+					scrollpaneltabla.remove(0);
+					add(scrollpaneltabla = new JScrollPane(cargarModelo()));
+					VentanaPricipalNueva.getPanelCentral().revalidate();
+					VentanaPricipalNueva.getPanelCentral().repaint();
+				}
+
+			}
+
+		});
+
+		add(spiner);
 		add(botonComprar);
 		add(botonVolver);
 		add(scrollpaneltabla);
