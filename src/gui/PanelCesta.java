@@ -99,7 +99,7 @@ public class PanelCesta extends JPanel {
 				VentanaPricipalNueva.getPanelCentral().repaint();
 			}
 			
-			//nuevo panel
+			//nuevo panel el metodo de pago que lo coja de lo del inicio de sesion 
 		});
 
 		tabla.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
