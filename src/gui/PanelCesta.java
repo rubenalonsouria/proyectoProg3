@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.FlowLayout;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -83,8 +84,22 @@ public class PanelCesta extends JPanel {
 			}
 		});
 
-		botonComprar.addChangeListener((e) -> {
-
+		botonComprar.addActionListener((e) -> {
+			int row = tabla.getSelectedRow();
+			int veces = Integer.parseInt((String) tabla.getValueAt(row, 1));
+			String pelicula = (String) tabla.getValueAt(row, 0);
+			
+			for (int i = 0; i < veces ; i++) {
+				BaseDeDatos.quitarCarritoDeCliente(VentanaIniciarSesion.clienteIniciado().getCorreo(), pelicula);
+			}
+			
+			if (VentanaPricipalNueva.getPanelCentral().getComponentCount() > 0) {
+				VentanaPricipalNueva.getPanelCentral().remove(0);
+				VentanaPricipalNueva.getPanelCentral().revalidate();
+				VentanaPricipalNueva.getPanelCentral().repaint();
+			}
+			
+			//nuevo panel
 		});
 
 		tabla.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
