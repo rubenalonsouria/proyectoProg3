@@ -33,13 +33,23 @@ public class ModeloTablaCesta extends DefaultTableModel{
 
 	@Override
 	public Object getValueAt(int row, int column) {
+		//System.out.println(l.size());
+		//System.out.println(row);
 		String[] o = l.get(row);
+		
 		switch(column) {
 		case 0: return o[0];
 		case 1: return o[1]; 
 		default: return null;
 		}
 	}
+
+	public void actualizarDatos(ArrayList<String[]> nuevosDatos) {
+        this.l = nuevosDatos; // Actualizar los datos con los nuevos obtenidos de la base de datos
+        fireTableDataChanged(); // Notificar a la tabla que los datos han cambiado
+    }
+	
+	
 	
 	
 	

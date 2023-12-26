@@ -23,13 +23,17 @@ public class PanelCesta extends JPanel {
 	private JScrollPane scrollpaneltabla;
 	private JButton botonVolver, botonComprar;
 	private JSpinner spiner;
-	private static int nEntradas;
 
 	private int getnEstradas(int fila) {
-		return Integer.parseInt((String) tabla.getValueAt(fila, 1));
+		return Integer.parseInt((String) modeloTabla.getValueAt(fila, 1));
 	}
 
-	private JTable cargarModelo() {
+	private void actualizarTabla() {
+		ArrayList<String[]> listaPeliculas = cargarPeliculas();
+		modeloTabla.actualizarDatos(listaPeliculas);
+	}
+
+	private ArrayList<String[]> cargarPeliculas() {
 
 		Cliente c = VentanaIniciarSesion.clienteIniciado();
 		String correo = c.getCorreo();
@@ -53,42 +57,22 @@ public class PanelCesta extends JPanel {
 			}
 		}
 
-		modeloTabla = new ModeloTablaCesta(listaPeliculas);
-		String[] titulo = { "TITULO", "NUMERO ENTRADAS" };
-		modeloTabla.setColumnIdentifiers(titulo);
-		// TODO Poner qeu solo se pueda seleccionar una fila a la vez
-
-		tabla = new JTable(modeloTabla);
-
-		return tabla;
+		return listaPeliculas;
 	}
 
-	public PanelCesta(/* JPanel panelAnterior8 */) {
+	public PanelCesta() {
 
 		setLayout(new FlowLayout());
 		botonVolver = new JButton("Volver");
 		botonComprar = new JButton("Comprar");
 		spiner = new JSpinner();
+		spiner.setVisible(false);
 
-		// modeloLista = new DefaultListModel<>();
+		modeloTabla = new ModeloTablaCesta(cargarPeliculas());
+		String[] titulo = { "TITULO", "NUMERO ENTRADAS" };
+		modeloTabla.setColumnIdentifiers(titulo);
 
-		scrollpaneltabla = new JScrollPane(cargarModelo());
-
-		// jlist = new JList<>(modeloLista);
-		// scrollpanelList = new JScrollPane(jlist);
-		// jlist.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-
-		// jlist.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED,
-		// Color.DARK_GRAY, Color.LIGHT_GRAY));
-
-		/*
-		 * Lectura de la base de datos diseñar la interfaz mejor: hay una lista con
-		 * peliculas agregadas al carrito que contendran cada una un checkbox, esas
-		 * entradas son unicas ya que iran con el numero de asiento.
-		 * 
-		 * El checbox funcionara para seleccionar cuales quieres comprar y el boton
-		 * compra te llevara a la pasarela de pago
-		 */
+		tabla = new JTable(modeloTabla);
 
 //ActionListeners
 		botonVolver.addActionListener((e) -> {
@@ -97,11 +81,6 @@ public class PanelCesta extends JPanel {
 				VentanaPricipalNueva.getPanelCentral().revalidate();
 				VentanaPricipalNueva.getPanelCentral().repaint();
 			}
-			/*
-			 * VentanaPricipalNueva.getPanelCentral().add();
-			 * VentanaPricipalNueva.getPanelCentral().repaint();
-			 * VentanaPricipalNueva.getPanelCentral().revalidate();
-			 */
 		});
 
 		botonComprar.addChangeListener((e) -> {
@@ -113,45 +92,45 @@ public class PanelCesta extends JPanel {
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				int fila = tabla.getSelectedRow();
-				spiner.setValue(getnEstradas(fila));
+				if (fila != -1) {
+					spiner.setValue(getnEstradas(fila));
+					spiner.setVisible(true);
+
+				} else {
+					spiner.setVisible(false);
+				}
 			}
 		});
 
 		spiner.addChangeListener((e) -> {
-			if (tabla.getSelectedRow() >= 0) {
-				int fila = tabla.getSelectedRow();
+			int fila = tabla.getSelectedRow();
+
+			if (fila >= 0) {
+
 				String pelicula = (String) tabla.getValueAt(fila, 0);
 
 				int valorNuevo = (int) spiner.getValue();
 				int valorActual = getnEstradas(fila);
 				int resultadoResta = valorNuevo - valorActual;
 
-				System.out.println(resultadoResta);
-
-				if (resultadoResta > 0) {
-					System.out.println("entro");
-					BaseDeDatos.anadirCarritoDeCliente(VentanaIniciarSesion.clienteIniciado().getCorreo(), pelicula);
-					//antes de borrar qeu seleccione cual esta seleccionada en el modelo para qeu la nueva jtabel este con esa y 
-					//opcional visible jspinner
-					scrollpaneltabla.remove(0);
-					add(scrollpaneltabla = new JScrollPane(cargarModelo()));
-					VentanaPricipalNueva.getPanelCentral().revalidate();
-					VentanaPricipalNueva.getPanelCentral().repaint();
-
-				} else if (resultadoResta < 0) {
-					System.out.println("Entro 2");
-					BaseDeDatos.quitarCarritoDeCliente(VentanaIniciarSesion.clienteIniciado().getCorreo(), pelicula);
-					
-					scrollpaneltabla.remove(0);
-					add(scrollpaneltabla = new JScrollPane(cargarModelo()));
-					VentanaPricipalNueva.getPanelCentral().revalidate();
-					VentanaPricipalNueva.getPanelCentral().repaint();
+				if (resultadoResta == 1) {
+					for (int i = 0; i < resultadoResta; i++) {
+						BaseDeDatos.anadirCarritoDeCliente(VentanaIniciarSesion.clienteIniciado().getCorreo(),
+								pelicula);
+					}
+				} else if (resultadoResta == -1) {
+					for (int i = 0; i < Math.abs(resultadoResta); i++) {
+						BaseDeDatos.quitarCarritoDeCliente(VentanaIniciarSesion.clienteIniciado().getCorreo(),
+								pelicula);
+					}
 				}
+				actualizarTabla();
 
 			}
-
+			tabla.setRowSelectionInterval(fila, fila);
 		});
 
+		scrollpaneltabla = new JScrollPane(tabla);
 		add(spiner);
 		add(botonComprar);
 		add(botonVolver);

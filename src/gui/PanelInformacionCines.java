@@ -1,97 +1,78 @@
 package gui;
 
+import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.util.logging.Logger;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-import main.MainCine;
+public class PanelInformacionCines extends JPanel {
+    private static final long serialVersionUID = 1L;
 
-public class PanelInformacionCines extends JPanel{
-	private static final long serialVersionUID = 1L;
-	
-	private ImageIcon iconoIdentificarse, iconoZubi, iconoMax, iconoBoulevard, iconoGarbera;
-	private JLabel labelLogo, labelBara, labelZubi, labelGarbe, labelBoule;
-	private static Logger logger = Logger.getLogger(MainCine.class.getName());
-	
-	
-	public PanelInformacionCines() {
-		
-		//Imagenes Cine fuente y descripciones
-		
-		ImageIcon iconoBarakaldo = new ImageIcon("images/BarakaldoMaxCenter.jpg");
-		Image logoBarakaldo = iconoBarakaldo.getImage();
-		labelBara = new JLabel(new ImageIcon(logoBarakaldo));
-		
-		Font font = new Font("Times New Roman", Font.BOLD, 20);
-		
-        JTextArea descripcionBara = new JTextArea(
-        		"Max Center es un centro comercial de Baracaldo, en la provincia vasca de Vizcaya. "
-        		+ "Es la mayor zona de ocio y restauración de la provincia.");
-        descripcionBara.setLineWrap(true);
-        descripcionBara.setWrapStyleWord(true);
-        descripcionBara.setEditable(false);
-        descripcionBara.setFont(font);
-        descripcionBara.setOpaque(false);
-		
-		ImageIcon iconoZubi = new ImageIcon("images/BilbaoZubi.jpg");
-		Image logoZubi = iconoZubi.getImage();
-		labelZubi = new JLabel(new ImageIcon(logoZubi));
-		
-        JTextArea descripcionZubi = new JTextArea(
-        		"Tiendas variadas, restaurantes y cine en un centro comercial cubierto"
-        		+ " y elegante con un diseño que aporta sensación de amplitud.");
-        descripcionZubi.setLineWrap(true);
-        descripcionZubi.setWrapStyleWord(true);
-        descripcionZubi.setEditable(false);
-		descripcionZubi.setFont(font);
-		descripcionZubi.setOpaque(false);
-        
-		ImageIcon iconoGarbera = new ImageIcon("images/SanSebastianGarbera.jpg");
-		Image logoGarbera = iconoGarbera.getImage();
-		labelGarbe = new JLabel(new ImageIcon(logoGarbera));
-		
-        JTextArea descripcionGarbe = new JTextArea(
-        		"Centro comercial moderno con boutiques chic, "
-        		+ "artículos para el hogar y varios restaurantes.");
-        descripcionGarbe.setLineWrap(true);
-        descripcionGarbe.setWrapStyleWord(true);
-        descripcionGarbe.setEditable(false);
-		descripcionGarbe.setFont(font);
-		descripcionGarbe.setOpaque(false);
-        
-		ImageIcon iconoBoule = new ImageIcon("images/VitoriaBoulevard.jpg");
-		Image logoBoule = iconoBoule.getImage();
-		labelBoule = new JLabel(new ImageIcon(logoBoule));
-		
-        JTextArea descripcionBoule = new JTextArea(
-        		"El Boulevard es un maxicentro comercial situado"
-        		+ " en la ciudad de Vitoria en el norte de España.");
-        descripcionBoule.setLineWrap(true);
-        descripcionBoule.setWrapStyleWord(true);
-        descripcionBoule.setEditable(false);
-		descripcionBoule.setFont(font);
-		descripcionBoule.setOpaque(false);
-		
-		setLayout(new GridLayout(0, 4, 5, 5));
-		
-		add(labelBara);
-        add(descripcionBara);
-        add(labelZubi);
-        add(descripcionZubi);
-        add(labelGarbe);
-        add(descripcionGarbe);
-        add(labelBoule);
-        add(descripcionBoule);
-		
-		setVisible(true);
-		setName("Cines");
-	}
+    private JLabel labelBara, labelZubi, labelGarbe, labelBoule;
+    private JPanel panelImagenes, panelDescripcion;
+    private JTextArea descripcionArea;
+    
+    public PanelInformacionCines() {
+        Font font = new Font("Times New Roman", Font.BOLD, 20);
 
-	
+        panelImagenes = new JPanel();
+        panelDescripcion = new JPanel(new GridLayout(1, 1));
+
+        // CINES (IMAGENES Y DESCRIPCIONES)
+        
+        labelBara = crearEtiquetaConEvento("images/BarakaldoMaxCenter.jpg", "Max Center es un centro comercial de Baracaldo, en la provincia vasca de Vizcaya. Es la mayor zona de ocio y restauración de la provincia.", font);
+        labelZubi = crearEtiquetaConEvento("images/BilbaoZubi.jpg", "Tiendas variadas, restaurantes y cine en un centro comercial cubierto y elegante con un diseño que aporta sensación de amplitud.", font);
+        labelGarbe = crearEtiquetaConEvento("images/SanSebastianGarbera.jpg", "Centro comercial moderno con boutiques chic, artículos para el hogar y varios restaurantes.", font);
+        labelBoule = crearEtiquetaConEvento("images/VitoriaBoulevard.jpg", "El Boulevard es un maxicentro comercial situado en la ciudad de Vitoria en el norte de España.", font);
+        
+        // VENTANA
+        
+        panelImagenes.setLayout(new GridLayout(2, 2, 5, 5));
+
+        panelImagenes.add(labelBara);
+        panelImagenes.add(labelZubi);
+        panelImagenes.add(labelGarbe);
+        panelImagenes.add(labelBoule);
+
+        descripcionArea = new JTextArea();
+        descripcionArea.setEditable(false);
+        descripcionArea.setFont(font);
+        panelDescripcion.add(descripcionArea);
+        
+        setLayout(new BorderLayout());
+        add(panelImagenes, BorderLayout.NORTH);
+        add(panelDescripcion, BorderLayout.CENTER);
+
+        setVisible(true);
+        setName("Cines");
+        
+    }
+    
+    private JLabel crearEtiquetaConEvento(String rutaImagen, String descripcion, Font font) {
+        ImageIcon icono = new ImageIcon(rutaImagen);
+        Image logo = icono.getImage();
+        JLabel etiqueta = new JLabel(new ImageIcon(logo));
+
+        etiqueta.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                descripcionArea.setText(descripcion);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                descripcionArea.setText("");
+            }
+        });
+
+        return etiqueta;
+    }
+    
 }
