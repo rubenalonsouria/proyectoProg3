@@ -6,8 +6,8 @@ public class Sala extends Cine{
 	 protected ArrayList<Integer> numerosButacas; //Lista de todos los numeros de butacs que hay en esta sala
 	 protected int numSala; //Numero de la sala (identificativo)
 	
-	 public Sala(String nombreCine, String localizacion, ArrayList<Integer> numerosButacas, int numSala) {
-		super(nombreCine, localizacion);
+	 public Sala(String nombreCine, String descripcionCine, String imagenCine, ArrayList<Integer> numerosButacas, int numSala) {
+		super(nombreCine, descripcionCine, imagenCine);
 		
 		this.numerosButacas = numerosButacas;
 		this.numSala = numSala;
