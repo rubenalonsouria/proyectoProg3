@@ -1,18 +1,20 @@
 package Cine;
 
-public abstract class Cine{
+public class Cine{
 	/*Hay qeu repasar lo de las clases hijas y madres 
 	 * ya que cada pelicula tiene contiene un cine y
 	 * 
 	 */
 
 	protected String nombreCine;
-	protected String localizacion;
+	protected String descripcionCine;
+	private String imagenCine;
 	
-	public Cine(String nombreCine, String localizacion) {
+	public Cine(String nombreCine, String imagenCine, String descripcionCine) {
 		super();
 		this.nombreCine = nombreCine;
-		this.localizacion = localizacion;
+		this.imagenCine = imagenCine;
+		this.descripcionCine = descripcionCine;
 	}
 
 	public String getNombreCine() {
@@ -23,18 +25,26 @@ public abstract class Cine{
 		this.nombreCine = nombreCine;
 	}
 
-	public String getLocalizacion() {
-		return localizacion;
+	public String getDescripcionCine() {
+		return descripcionCine;
 	}
 
-	public void setLocalizacion(String localizacion) {
-		this.localizacion = localizacion;
+	public void setDescripcionCine(String descripcionCine) {
+		this.descripcionCine = descripcionCine;
+	}
+
+	public String getImagenCine() {
+		return imagenCine;
+	}
+
+	public void setImagenCine(String imagenCine) {
+		this.imagenCine = imagenCine;
 	}
 
 	@Override
 	public String toString() {
-		return "Cine [nombreCine=" + nombreCine + ", localizacion=" + localizacion + "]";
+		return "Cine [nombreCine=" + nombreCine + ", descripcionCine=" + descripcionCine + ", imagenCine=" + imagenCine
+				+ "]";
 	}
-	
 	
 }
