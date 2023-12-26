@@ -47,6 +47,7 @@ public class PanelInformacionCines extends JPanel {
         descripcionArea.setLineWrap(true);
         descripcionArea.setWrapStyleWord(true);
         descripcionArea.setFont(font);
+        descripcionArea.setOpaque(false);
 
         panelDescripcion.setLayout(new BoxLayout(panelDescripcion, BoxLayout.Y_AXIS));
         panelDescripcion.add(descripcionArea);
