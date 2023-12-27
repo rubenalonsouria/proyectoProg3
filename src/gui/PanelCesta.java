@@ -99,6 +99,8 @@ public class PanelCesta extends JPanel {
 				VentanaPricipalNueva.getPanelCentral().repaint();
 			}
 			
+			VentanaPricipalNueva.getPanelCentral().add(new PanelEleccionAsientos());
+			
 			//nuevo panel el metodo de pago que lo coja de lo del inicio de sesion 
 		});
 
