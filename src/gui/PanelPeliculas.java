@@ -34,7 +34,7 @@ public class PanelPeliculas extends JPanel {
 		tablaPeliculas.setRowHeight(500);
 
 		tablaPeliculas.setDefaultRenderer(Object.class, new RenderTablaPeliculas());
-		
+
 		tablaPeliculas.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
