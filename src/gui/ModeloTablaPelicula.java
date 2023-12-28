@@ -40,14 +40,6 @@ public class ModeloTablaPelicula extends DefaultTableModel{
 		Pelicula p = listaPelicula.get(row);
 		switch(column) {
 		case 0: return p.getTitulo();		//tampoco funciona con todos los atributos
-		/*
-		 * case 1: return p.getDuracion(); 
-		 * case 2: return p.getSinopsis(); 
-		 * case 3:return p.getActores(); 
-		 * case 4: return p.getDirectores(); 
-		 * case 5: return p.getGenero(); 
-		 * case 6: return p.getEstrellas();
-		 */
 		default: return null;
 		}
 	}

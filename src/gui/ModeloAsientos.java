@@ -1,19 +1,57 @@
 package gui;
 
-import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
+
+import javax.swing.table.DefaultTableModel;abstract
+
 
 public class ModeloAsientos extends DefaultTableModel {
-    public ModeloAsientos(Object[] columnNames, int rowCount) {
-        super(columnNames, rowCount);
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private ArrayList<String[]> lista;
+    public ModeloAsientos(ArrayList<String[]> l) {
+        super();
+        lista = l;
     }
 
-    @Override
-    public Class<?> getColumnClass(int columnIndex) {
-        return Integer.class; // Todas las columnas contendrán valores enteros (1 o 0)
-    }
-
+   
     @Override
     public boolean isCellEditable(int row, int column) {
-        return true; // Permitir la edición de celdas para cambiar el estado de los asientos
+        return false; 
     }
+    
+	@Override
+	public void removeRow(int row) {
+		lista.remove(row);
+	}
+
+	@Override
+	public int getRowCount() {
+		if (lista == null) {
+			return 0;
+		}
+		return lista.size();
+	}
+	
+	@Override
+	public Object getValueAt(int row, int column) {
+		
+		String[] o = lista.get(row);
+		
+		switch(column) {
+		case 0: return o[0];
+		case 1: return o[1];
+		case 2: return o[2]; 
+		case 3: return o[3]; 
+		case 4: return o[4]; 
+		case 5: return o[5]; 
+		case 6: return o[6];
+		case 7: return o[7]; 
+		case 8: return o[8]; 
+		case 9: return o[9]; 
+		default: return null;
+		}
+	}
 }

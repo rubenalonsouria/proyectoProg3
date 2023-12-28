@@ -228,7 +228,7 @@ public class VentanaPricipalNueva extends JFrame {
 
 		add(panelCentral, BorderLayout.CENTER);
         
-		setBounds(100, 100, 1600, 900);
+		setBounds(100, 100, 1600, 1000);
 		setLocationRelativeTo(null);
 		setResizable(false);
 		setVisible(true);

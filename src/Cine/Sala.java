@@ -12,7 +12,7 @@ public class Sala extends Cine{
 		this.numerosButacas = numerosButacas;
 		this.numSala = numSala;
 	}
-
+	
 	public ArrayList<Integer> getNumerosButacas() {
 		return numerosButacas;
 	}

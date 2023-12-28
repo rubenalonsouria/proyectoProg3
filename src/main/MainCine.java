@@ -44,13 +44,13 @@ public class MainCine {
 
 	public static void cargarPeliculas() {
 		listaPeliculas.clear();
-		
+
 		Connection con = BaseDeDatos.initBD("deustoCine.db");
 		BaseDeDatos.borrarTodasLasPeliculas(con);
 		try {
 			Scanner sc = new Scanner(new FileReader("Ficheros/peliculas"));
 			String primeraLinea = sc.nextLine(); // Primera linea no la queremos
-			
+
 			String linea;
 			while (sc.hasNext()) {
 				linea = sc.nextLine();
@@ -95,7 +95,7 @@ public class MainCine {
 				// Creo la pelicula y la añado a la lista
 				Pelicula peli = new Pelicula(titulo, duracion, sipnosis, actoresArray, directoresArray, genero, null) {
 				};
-				BaseDeDatos.anadirPelicula( titulo, genero, Valoracion.aceptable); //TODO hay qeu cambiar esto
+				BaseDeDatos.anadirPelicula(titulo, genero, Valoracion.aceptable); // TODO hay qeu cambiar esto
 				BaseDeDatos.closeBD(con);
 				listaPeliculas.add(peli);
 			}
@@ -109,7 +109,7 @@ public class MainCine {
 		mapaCorreoValoresUsuarios.clear();
 		listaAdministradores.clear();
 		listaClientes.clear();
-		
+
 		BaseDeDatos.borrarTodosLosClientes();
 		try {
 			Scanner sc = new Scanner(new FileReader("Ficheros/usuarios"));
@@ -140,8 +140,7 @@ public class MainCine {
 					};
 					listaClientes.add(cliente);
 					BaseDeDatos.anadirCliente(cliente);
-					
-					
+
 				}
 
 			}
@@ -160,21 +159,23 @@ public class MainCine {
 		// Ejemplos de logger
 		// logger.info("Se ha mostrado un mensaje en consola");
 		// logger.warning("Mensaje de warning"); logger.severe("Mensaje de error");
-		
-		
-		/*BASE DE DATOS*/
-		Connection con = BaseDeDatos.initBD("deustoCine.db");
-		BaseDeDatos.crearTablas(con);
-		BaseDeDatos.closeBD(con);
-		
-		/*METODOS*/
+
+		/* METODOS */
 
 		cargarPeliculas();
 		cargaDeUsuarios();
-		
-		/*VENTANA*/
+
+		/* BASE DE DATOS */
+		Connection con = BaseDeDatos.initBD("deustoCine.db");
+		BaseDeDatos.crearTablas(con);
+		for (Pelicula p : listaPeliculas) {
+			String n = p.getTitulo().replace(" ", "");
+			BaseDeDatos.crearFilasAsientos(n);
+		}
+		BaseDeDatos.closeBD(con);
+		/* VENTANA */
 		VentanaPricipalNueva v = new VentanaPricipalNueva();
-		
+
 	}
 
 }
