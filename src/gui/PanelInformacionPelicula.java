@@ -1,9 +1,7 @@
 package gui;
 
-import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.LayoutManager;
+import java.awt.BorderLayout;
+import java.awt.Font;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -11,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -22,57 +21,89 @@ public class PanelInformacionPelicula extends JPanel {
 
     private static final long serialVersionUID = 1L;
     private JButton botonVolver, botonComprar;
-    private JLabel labelTitulo, labelDuracion, labelSinopsis, labelDirectores, labelGenero, labelValoracion,
-            labelValoracionIcono;
+    private JLabel labelTitulo, labelDuracion, labelSinopsis, labelDirectores, labelActores, labelGenero,
+            labelValoracion, labelValoracionIcono;
     private JTextField textDuracion, textActores, textDirectores, textGenero;
     private JTextArea textSinopsis;
 
     public PanelInformacionPelicula(Pelicula p, JPanel estePanel) {
-        setLayout((LayoutManager) new BoxLayout(this, BoxLayout.Y_AXIS));
+        Font font1 = new Font("Times New Roman", Font.BOLD, 20);
+        Font font2 = new Font("Times New Roman", Font.PLAIN, 15);
+
+        setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+
+        // PANEL IZQUIERDA
+        JPanel panelPeliculaIzquierda = new JPanel();
+        panelPeliculaIzquierda.setLayout(new BoxLayout(panelPeliculaIzquierda, BoxLayout.Y_AXIS));
 
         botonVolver = new JButton("Volver");
         botonComprar = new JButton("Añadir al carro");
 
-        //HACE FALTA AÑADIR POSTER Y ORDENARLO BIEN (ADEMAS DE AÑADIR COMENTARIOS)
-        
         labelTitulo = new JLabel(p.getTitulo());
+        labelTitulo.setFont(font1);
+
+        panelPeliculaIzquierda.add(Box.createVerticalGlue());
+        panelPeliculaIzquierda.add(labelTitulo);
+        panelPeliculaIzquierda.add(Box.createVerticalGlue());
+        panelPeliculaIzquierda.add(botonComprar);
+        panelPeliculaIzquierda.add(botonVolver);
+        panelPeliculaIzquierda.add(Box.createVerticalGlue());
+
+        add(panelPeliculaIzquierda);
+
+        // PANEL DERECHA
+        JPanel panelPeliculaDerecha = new JPanel();
+        panelPeliculaDerecha.setLayout(new BoxLayout(panelPeliculaDerecha, BoxLayout.Y_AXIS));
+
         labelDuracion = new JLabel("Duración: ");
         labelSinopsis = new JLabel("Sinopsis: ");
         labelDirectores = new JLabel("Directores: ");
+        labelActores = new JLabel("Actores: ");
         labelGenero = new JLabel("Género: ");
-        labelValoracion = new JLabel("Valoración: ");
-        labelValoracionIcono = new JLabel();
 
+        textDuracion = new JTextField(p.getDuracion());
+        textDuracion.setEditable(false);
+        textDuracion.setOpaque(false);
+        textDuracion.setFont(font2);
         
-        //Hay que hacer que si no eres admin no lo puedes modificar.
-        textDuracion = new JTextField(p.getDuracion()); //HAY QUE AÑADIR LAS DURACIONES 
         textActores = new JTextField(String.join(", ", p.getActores()));
+        textActores.setEditable(false);
+        textActores.setOpaque(false);
+        textActores.setFont(font2);
+        
         textDirectores = new JTextField(String.join(", ", p.getDirectores()));
+        textDirectores.setEditable(false);
+        textDirectores.setOpaque(false);
+        textDirectores.setFont(font2);
+        
         textGenero = new JTextField(p.getGenero().toString());
+        textGenero.setEditable(false);
+        textGenero.setOpaque(false);
+        textGenero.setFont(font2);
+        
         textSinopsis = new JTextArea(p.getSinopsis());
         textSinopsis.setLineWrap(true);
         textSinopsis.setWrapStyleWord(true);
         textSinopsis.setEditable(false);
+        textSinopsis.setOpaque(false);
+        textSinopsis.setFont(font2);
+        
+        panelPeliculaDerecha.add(labelSinopsis);
+        panelPeliculaDerecha.add(new JScrollPane(textSinopsis));
+        panelPeliculaDerecha.add(labelGenero);
+        panelPeliculaDerecha.add(textGenero);
+        panelPeliculaDerecha.add(labelDirectores);
+        panelPeliculaDerecha.add(textDirectores);
+        panelPeliculaDerecha.add(labelActores);
+        panelPeliculaDerecha.add(textActores);
+        panelPeliculaDerecha.add(labelDuracion);
+        panelPeliculaDerecha.add(textDuracion);
 
-        // Añadir componentes al panel
-        add(labelTitulo);
-        add(labelDuracion);
-        add(textDuracion);
-        add(labelSinopsis);
-        add(textSinopsis);
-        add(labelDirectores);
-        add(textDirectores);
-        add(labelGenero);
-        add(textGenero);
-        add(labelValoracion);
+        add(panelPeliculaDerecha);
 
-        // Añadir un espacio vertical entre los botones y la información de la película
-        add(Box.createVerticalStrut(10));
-
-        add(botonVolver);
-        add(botonComprar);
+        // ACTION LISTENERS
         botonVolver.addActionListener((e) -> {
-			if (VentanaPricipalNueva.getPanelCentral().getComponentCount() > 0) {
+        	if (VentanaPricipalNueva.getPanelCentral().getComponentCount() > 0) {
 				VentanaPricipalNueva.getPanelCentral().remove(0);
 				VentanaPricipalNueva.getPanelCentral().revalidate();
 				VentanaPricipalNueva.getPanelCentral().repaint();
@@ -83,7 +114,7 @@ public class PanelInformacionPelicula extends JPanel {
         });
 
         botonComprar.addActionListener((e) -> {
-			if (VentanaIniciarSesion.isSesionIniciada()) {
+        	if (VentanaIniciarSesion.isSesionIniciada()) {
 				Cliente c = VentanaIniciarSesion.clienteIniciado();
 				String correo = c.getCorreo();
 				String titulo = p.getTitulo();
