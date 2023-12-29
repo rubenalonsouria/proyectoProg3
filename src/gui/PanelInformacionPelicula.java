@@ -2,6 +2,8 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -100,27 +102,24 @@ public class PanelInformacionPelicula extends JPanel {
         panelPeliculaDerecha.add(textDuracion);
 
         add(panelPeliculaDerecha);
-
+        
         // ACTION LISTENERS
         botonVolver.addActionListener((e) -> {
-        	if (VentanaPricipalNueva.getPanelCentral().getComponentCount() > 0) {
-				VentanaPricipalNueva.getPanelCentral().remove(0);
-				VentanaPricipalNueva.getPanelCentral().revalidate();
-				VentanaPricipalNueva.getPanelCentral().repaint();
-			}
-			VentanaPricipalNueva.getPanelCentral().add(estePanel);
-			VentanaPricipalNueva.getPanelCentral().repaint();
-			VentanaPricipalNueva.getPanelCentral().revalidate();
+        	volverAInicio(estePanel);
         });
 
         botonComprar.addActionListener((e) -> {
         	if (VentanaIniciarSesion.isSesionIniciada()) {
-				Cliente c = VentanaIniciarSesion.clienteIniciado();
-				String correo = c.getCorreo();
-				String titulo = p.getTitulo();
-				BaseDeDatos.anadirCarritoDeCliente(correo, titulo);	//TODO poner un Jspin y habra qeu poner un render de seleccion de asiento y el hilo de a;adiendo...
-				JOptionPane.showMessageDialog(null, "Añadida con exito", null, JOptionPane.INFORMATION_MESSAGE);
-				//cambioBool = true;
+				if(VentanaIniciarSesion.isEsAdmin()) {
+					JOptionPane.showMessageDialog(null, "Cambia de cuenta para continuar", null, JOptionPane.INFORMATION_MESSAGE);
+				} else {
+					Cliente c = VentanaIniciarSesion.clienteIniciado();
+					String correo = c.getCorreo();
+					String titulo = p.getTitulo();
+					BaseDeDatos.anadirCarritoDeCliente(correo, titulo);	//TODO poner un Jspin y habra qeu poner un render de seleccion de asiento y el hilo de a;adiendo...
+					JOptionPane.showMessageDialog(null, "Añadida con exito", null, JOptionPane.INFORMATION_MESSAGE);
+					//cambioBool = true;
+				}
 			} else {
 				JOptionPane.showMessageDialog(null, "Primero inicia Sesion o Registrate", null, JOptionPane.INFORMATION_MESSAGE);
 				
@@ -128,5 +127,40 @@ public class PanelInformacionPelicula extends JPanel {
 			
 			//cambioBool = false;
         });
+        
+        this.addKeyListener((KeyListener) new KeyListener() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+            }
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub			
+			}
+			@Override
+			public void keyReleased(KeyEvent e) {
+                // Si la tecla presionada es la tecla Escape (código 27)
+                if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                    volverAInicio(estePanel);
+                }
+				
+			}
+        });
+        
+        this.setFocusable(true);
+        this.requestFocusInWindow();
+        
     }
+    
+    private void volverAInicio(JPanel estePanel) {
+        if (VentanaPricipalNueva.getPanelCentral().getComponentCount() > 0) {
+            VentanaPricipalNueva.getPanelCentral().remove(0);
+            VentanaPricipalNueva.getPanelCentral().revalidate();
+            VentanaPricipalNueva.getPanelCentral().repaint();
+        }
+        VentanaPricipalNueva.getPanelCentral().add(estePanel);
+        VentanaPricipalNueva.getPanelCentral().repaint();
+        VentanaPricipalNueva.getPanelCentral().revalidate();
+    }
+    
 }
