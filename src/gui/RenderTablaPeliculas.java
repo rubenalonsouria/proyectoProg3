@@ -9,15 +9,19 @@ public class RenderTablaPeliculas extends DefaultTableCellRenderer {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-		
+	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,int row, int column) {
+				
 		JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-		// Verificamos si el valor es una instancia de ImageIcon
-		if (value instanceof ImageIcon) {
-			label.setIcon((ImageIcon) value);
-			label.setText(null); // Limpiamos cualquier texto
-			label.setHorizontalAlignment(JLabel.CENTER); // Alineamos la imagen al centro
+		ImageIcon foto = new ImageIcon(String.format("images/%s.jpg", value));
+		label.setIcon(foto); 
+		label.setHorizontalAlignment(JLabel.CENTER); 
+		
+		if (isSelected) {
+			label.setBackground(table.getSelectionBackground());
+			label.setForeground(table.getSelectionForeground());
 		}
+		label.setText(null);
+		label.setOpaque(true);
 		return label;
 	}
 

@@ -4,32 +4,21 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
+import javax.swing.plaf.synth.SynthOptionPaneUI;
+
 import Pelicula.Genero;
+import Pelicula.Pelicula;
 import Pelicula.Valoracion;
 import Usuarios.Cliente;
 
 public class BaseDeDatos {
-	/*
-	 * Al ejecutar una sentencia sql tenemos 2 opciones: - Modificar la base de
-	 * datos: CREATE TABLE, UPDATE, DELETE, INSERT, DROP, MODIFY
-	 * st.executeUpdate(sql);
-	 * 
-	 * - No modifica la base de datos, sólo accede al contenido: SELECT ResultSet rs
-	 * = st.executeQuery(sql);
-	 */
-
-	/*
-	 * Cuando se captura una excepción podemos hacer 2 cosas:
-	 * 
-	 * - Darle tratamiento a esa excepción en el catch - Propagar la excepción -> Si
-	 * un método propaga una excepción,lo tiene que indicar en la cabecer
-	 * 
-	 */
 
 	public static Connection initBD(String nomBD) {
 		Connection con = null;
@@ -64,6 +53,7 @@ public class BaseDeDatos {
 		String sql = "CREATE TABLE IF NOT EXISTS Cliente (correo String, nombre String, metodoDePago String, historialDeCompras String)";
 		String sql2 = "CREATE TABLE IF NOT EXISTS Pelicula (titulo String, genero Genero, estrellas Valoracion)";
 		String sql3 = "CREATE TABLE IF NOT EXISTS Carrito(correo String, titulo String)";
+
 		// Añadir sesiones y y qeu la de carrito salga el precio de la sesion y mas
 		// cosas
 
@@ -72,17 +62,62 @@ public class BaseDeDatos {
 			st.executeUpdate(sql);
 			st.executeUpdate(sql2);
 			st.executeUpdate(sql3);
+			for (Pelicula p : MainCine.getListaPeliculas()) {
+				String nombre = p.getTitulo().replace(" ", "");
+				st.executeUpdate(String.format(
+						"CREATE TABLE IF NOT EXISTS Asientos%s (c1 String, c2 String, c3 String, c4 String, c5 String, c6 String, c7 String, c8 String, c9 String, c10 String)",
+						nombre));
+			}
 			st.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
+	public static void setFilasAsientos(String nombrePelicula, String numeroAsiento ) {//No creo que funcione
+		 try {
+		        Connection con = BaseDeDatos.initBD("deustoCine.db");
+		        Statement st = con.createStatement();
+
+		        String sql = String.format("UPDATE Asientos%s SET estado = 1 WHERE rowid = %d", nombrePelicula, numeroAsiento);
+		        st.executeUpdate(sql);
+
+		        st.close();
+		        BaseDeDatos.closeBD(con);
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+		
+	}
+	public static void crearFilasAsientos(String nombre) {
+	    try {
+	        Connection con = BaseDeDatos.initBD("deustoCine.db");
+	        Statement st = con.createStatement();
+
+	        // Verificar si ya existen filas en la tabla para esta película
+	        String countQuery = String.format("SELECT COUNT(*) FROM Asientos%s", nombre);
+	        ResultSet rs = st.executeQuery(countQuery);
+	        rs.next();
+	        int rowCount = rs.getInt(1);
+
+	        if (rowCount < 20) { // Verificar si hay menos de 20 filas
+	            int rowsToAdd = 20 - rowCount;
+	            for (int i = 0; i < rowsToAdd; i++) {
+	                String sql = String.format("INSERT INTO Asientos%s (c1, c2, c3, c4, c5, c6, c7, c8, c9, c10) VALUES (0, 0, 0, 0, 0, 0, 0, 0, 0, 0)", nombre);
+	                st.executeUpdate(sql);
+	            }
+	        }
+
+	        st.close();
+	        BaseDeDatos.closeBD(con);
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	}
+
 
 	public static void anadirPelicula(String titulo, Genero genero, Valoracion estrellas) {
 		String sql = String.format("INSERT INTO Pelicula VALUES('%s','%s','%s')", titulo, genero.toString(),
 				estrellas.toString());
-		// String sql = "INSERT INTO Pelicula (titulo, genero, estrellas) VALUES (?, ?,
-		// ?)";
 
 		try {
 			Connection con = BaseDeDatos.initBD("deustoCine.db");
@@ -111,7 +146,9 @@ public class BaseDeDatos {
 	}
 
 	public static void quitarCarritoDeCliente(String correo, String nombrePelicula) { // TODO probar si funciona
-		String sql = String.format("DELETE FROM Carrito WHERE correo = '%s' AND titulo = '%s' LIMIT 1", correo, nombrePelicula);
+		String sql = String.format(
+				"DELETE FROM Carrito WHERE ROWID IN (SELECT ROWID FROM Carrito WHERE correo = '%s' AND titulo = '%s' LIMIT 1)",
+				correo, nombrePelicula);
 
 		try {
 			Connection con = BaseDeDatos.initBD("deustoCine.db");
@@ -214,7 +251,6 @@ public class BaseDeDatos {
 				String titulo = rs.getString("titulo");
 				l.add(titulo);
 
-				
 			}
 			rs.close();
 			st.close();
@@ -223,6 +259,32 @@ public class BaseDeDatos {
 			e.printStackTrace();
 		}
 		return l;
+	}
+	public static ArrayList<String[]> obtenerAsientos(String pelicula) {
+		String sql = String.format("SELECT * FROM Asientos%s", pelicula);
+		List<String[]> l = new ArrayList<>();
+
+		try {
+	        Connection con = BaseDeDatos.initBD("deustoCine.db");
+	        Statement st = con.createStatement();
+	        ResultSet rs = st.executeQuery(sql);
+	        ResultSetMetaData rsmd = rs.getMetaData();
+	        int columnsNumber = rsmd.getColumnCount();
+
+	        while (rs.next()) {
+	            String[] rowData = new String[columnsNumber];
+	            for (int i = 0; i < columnsNumber; i++) {
+	                rowData[i] = rs.getString(i + 1); // ResultSet index is 1-based
+	            }
+	            l.add(rowData);
+	        }
+			rs.close();
+			st.close();
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return (ArrayList<String[]>) l;
 	}
 
 }

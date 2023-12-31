@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -226,9 +227,8 @@ public class VentanaPricipalNueva extends JFrame {
 		add(panelCuentaSuperior, BorderLayout.NORTH);
 
 		add(panelCentral, BorderLayout.CENTER);
-		// add(panelCentral, BorderLayout.CENTER);
-
-		setBounds(100, 100, 1200, 800);
+        
+		setBounds(100, 100, 1600, 1000);
 		setLocationRelativeTo(null);
 		setResizable(false);
 		setVisible(true);
