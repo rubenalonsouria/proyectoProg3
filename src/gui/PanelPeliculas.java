@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
@@ -31,6 +32,7 @@ public class PanelPeliculas extends JPanel {
 		modelo = new ModeloTablaPelicula(listaPeliculas);
 		tablaPeliculas = new JTable(modelo);
 		scrollPanel = new JScrollPane(tablaPeliculas);
+		scrollPanel.setPreferredSize(new Dimension(1400, 750));
 		tablaPeliculas.setRowHeight(500);
 
 		tablaPeliculas.setDefaultRenderer(Object.class, new RenderTablaPeliculas());

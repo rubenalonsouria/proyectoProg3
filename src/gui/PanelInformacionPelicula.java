@@ -2,8 +2,11 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -18,10 +21,14 @@ import javax.swing.JTextField;
 import Pelicula.Pelicula;
 import Usuarios.Cliente;
 import main.BaseDeDatos;
+import main.MainCine;
 
 public class PanelInformacionPelicula extends JPanel {
 
     private static final long serialVersionUID = 1L;
+    
+    private static Logger logger = Logger.getLogger(MainCine.class.getName());
+    
     private JButton botonVolver, botonComprar;
     private JLabel labelTitulo, labelDuracion, labelSinopsis, labelDirectores, labelActores, labelGenero,
             labelValoracion, labelValoracionIcono;
@@ -105,10 +112,12 @@ public class PanelInformacionPelicula extends JPanel {
         
         // ACTION LISTENERS
         botonVolver.addActionListener((e) -> {
+        	logger.log(Level.INFO, "SE HA PULSADO EL BOTÓN VOLVER"); 
         	volverAInicio(estePanel);
         });
 
         botonComprar.addActionListener((e) -> {
+        	logger.log(Level.INFO, "SE HA PULSADO EL BOTÓN COMPRAR"); 
         	if (VentanaIniciarSesion.isSesionIniciada()) {
 				if(VentanaIniciarSesion.isEsAdmin()) {
 					JOptionPane.showMessageDialog(null, "Cambia de cuenta para continuar", null, JOptionPane.INFORMATION_MESSAGE);
@@ -128,27 +137,16 @@ public class PanelInformacionPelicula extends JPanel {
 			//cambioBool = false;
         });
         
-        this.addKeyListener((KeyListener) new KeyListener() {
+        estePanel.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-
-            }
-			@Override
-			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub			
-			}
-			@Override
-			public void keyReleased(KeyEvent e) {
-                // Si la tecla presionada es la tecla Escape (código 27)
                 if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                    logger.log(Level.INFO, "SE HA PULSADO LA TECLA ESCAPE");
                     volverAInicio(estePanel);
                 }
-				
-			}
+            }
         });
-        
-        this.setFocusable(true);
-        this.requestFocusInWindow();
+
         
     }
     

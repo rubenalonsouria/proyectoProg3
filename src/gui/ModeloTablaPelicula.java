@@ -11,7 +11,7 @@ import Pelicula.Pelicula;
 public class ModeloTablaPelicula extends DefaultTableModel{
 	private static final long serialVersionUID = 1L;
 	List<Pelicula> listaPelicula;
-	List<String> titulo = Arrays.asList("TITULO");
+	List<String> titulo = Arrays.asList("PELICULAS DISPONIBLES:");
 	
 	public ModeloTablaPelicula(List<Pelicula> listaPelicula) {
 		super();
