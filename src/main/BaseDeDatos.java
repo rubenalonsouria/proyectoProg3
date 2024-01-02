@@ -73,47 +73,51 @@ public class BaseDeDatos {
 			e.printStackTrace();
 		}
 	}
-	public static void setFilasAsientos(String nombrePelicula, String numeroAsiento ) {//No creo que funcione
-		 try {
-		        Connection con = BaseDeDatos.initBD("deustoCine.db");
-		        Statement st = con.createStatement();
 
-		        String sql = String.format("UPDATE Asientos%s SET estado = 1 WHERE rowid = %d", nombrePelicula, numeroAsiento);
-		        st.executeUpdate(sql);
+	public static void setFilasAsientos(String nombrePelicula, String numeroAsiento) {// No creo que funcione
+		try {
+			Connection con = BaseDeDatos.initBD("deustoCine.db");
+			Statement st = con.createStatement();
 
-		        st.close();
-		        BaseDeDatos.closeBD(con);
-		    } catch (SQLException e) {
-		        e.printStackTrace();
-		    }
-		
+			String sql = String.format("UPDATE Asientos%s SET estado = 1 WHERE rowid = %d", nombrePelicula,
+					numeroAsiento);
+			st.executeUpdate(sql);
+
+			st.close();
+			BaseDeDatos.closeBD(con);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 	}
+
 	public static void crearFilasAsientos(String nombre) {
-	    try {
-	        Connection con = BaseDeDatos.initBD("deustoCine.db");
-	        Statement st = con.createStatement();
+		try {
+			Connection con = BaseDeDatos.initBD("deustoCine.db");
+			Statement st = con.createStatement();
 
-	        // Verificar si ya existen filas en la tabla para esta película
-	        String countQuery = String.format("SELECT COUNT(*) FROM Asientos%s", nombre);
-	        ResultSet rs = st.executeQuery(countQuery);
-	        rs.next();
-	        int rowCount = rs.getInt(1);
+			// Verificar si ya existen filas en la tabla para esta película
+			String countQuery = String.format("SELECT COUNT(*) FROM Asientos%s", nombre);
+			ResultSet rs = st.executeQuery(countQuery);
+			rs.next();
+			int rowCount = rs.getInt(1);
 
-	        if (rowCount < 20) { // Verificar si hay menos de 20 filas
-	            int rowsToAdd = 20 - rowCount;
-	            for (int i = 0; i < rowsToAdd; i++) {
-	                String sql = String.format("INSERT INTO Asientos%s (c1, c2, c3, c4, c5, c6, c7, c8, c9, c10) VALUES (0, 0, 0, 0, 0, 0, 0, 0, 0, 0)", nombre);
-	                st.executeUpdate(sql);
-	            }
-	        }
+			if (rowCount < 20) { // Verificar si hay menos de 20 filas
+				int rowsToAdd = 20 - rowCount;
+				for (int i = 0; i < rowsToAdd; i++) {
+					String sql = String.format(
+							"INSERT INTO Asientos%s (c1, c2, c3, c4, c5, c6, c7, c8, c9, c10) VALUES (0, 0, 0, 0, 0, 0, 0, 0, 0, 0)",
+							nombre);
+					st.executeUpdate(sql);
+				}
+			}
 
-	        st.close();
-	        BaseDeDatos.closeBD(con);
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }
+			st.close();
+			BaseDeDatos.closeBD(con);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
-
 
 	public static void anadirPelicula(String titulo, Genero genero, Valoracion estrellas) {
 		String sql = String.format("INSERT INTO Pelicula VALUES('%s','%s','%s')", titulo, genero.toString(),
@@ -239,7 +243,7 @@ public class BaseDeDatos {
 		return l;
 	}
 
-	public static List<String> obtenerListaCarrito(String Correo) {// TODO probar si funciona
+	public static List<String> obtenerListaCarrito(String Correo) {
 		String sql = String.format("SELECT titulo FROM Carrito where correo ='%s'", Correo);
 		List<String> l = new ArrayList<>();
 
@@ -260,24 +264,25 @@ public class BaseDeDatos {
 		}
 		return l;
 	}
+
 	public static ArrayList<String[]> obtenerAsientos(String pelicula) {
 		String sql = String.format("SELECT * FROM Asientos%s", pelicula);
 		List<String[]> l = new ArrayList<>();
 
 		try {
-	        Connection con = BaseDeDatos.initBD("deustoCine.db");
-	        Statement st = con.createStatement();
-	        ResultSet rs = st.executeQuery(sql);
-	        ResultSetMetaData rsmd = rs.getMetaData();
-	        int columnsNumber = rsmd.getColumnCount();
+			Connection con = BaseDeDatos.initBD("deustoCine.db");
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			ResultSetMetaData rsmd = rs.getMetaData();
+			int columnsNumber = rsmd.getColumnCount();
 
-	        while (rs.next()) {
-	            String[] rowData = new String[columnsNumber];
-	            for (int i = 0; i < columnsNumber; i++) {
-	                rowData[i] = rs.getString(i + 1); // ResultSet index is 1-based
-	            }
-	            l.add(rowData);
-	        }
+			while (rs.next()) {
+				String[] rowData = new String[columnsNumber];
+				for (int i = 0; i < columnsNumber; i++) {
+					rowData[i] = rs.getString(i + 1);
+				}
+				l.add(rowData);
+			}
 			rs.close();
 			st.close();
 			con.close();
@@ -285,6 +290,29 @@ public class BaseDeDatos {
 			e.printStackTrace();
 		}
 		return (ArrayList<String[]>) l;
+	}
+
+	public static void editarAsientos(int[] rows, int[] columns, String pelicula) {
+	    try {
+	        Connection conn = BaseDeDatos.initBD("deustoCine.db");
+	        Statement st = conn.createStatement();
+
+	        for (int r : rows) {
+                int rs = columns[r];
+
+	            for (int i = 0; i < columns.length; i++) {
+	                int c = columns[i];
+	                String columnName = "c" + c;
+	                String sql = String.format("UPDATE Asientos%s SET %s = 1 WHERE ID = %d", pelicula, columnName, r);
+	                st.executeUpdate(sql);
+	            }
+	        }
+
+	        st.close();
+	        BaseDeDatos.closeBD(conn);
+	    } catch (SQLException e) {
+	        System.out.println("Error al actualizar los datos: " + e.getMessage());
+	    }
 	}
 
 }

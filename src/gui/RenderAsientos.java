@@ -1,6 +1,8 @@
 package gui;
 
 import java.awt.Component;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -10,6 +12,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 public class RenderAsientos extends DefaultTableCellRenderer {
 
 	private static final long serialVersionUID = 1L;
+	//private Set<Point> selectedCells = new HashSet<>();
 
 	@Override
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
@@ -27,7 +30,7 @@ public class RenderAsientos extends DefaultTableCellRenderer {
 			}
 
 		}
-
+		
 		if (isSelected) {
 			label.setBackground(table.getSelectionBackground());
 			label.setForeground(table.getSelectionForeground());

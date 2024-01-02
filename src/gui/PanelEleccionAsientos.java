@@ -61,7 +61,7 @@ public class PanelEleccionAsientos extends JPanel {
 		tablaAsientos = new JTable(tableModel);
 		botonCompra = new JButton("Comprar");
 		JScrollPane scrollPane = new JScrollPane(tablaAsientos);
-
+		scrollPane.setPreferredSize(new Dimension(1400, 750));
 		this.tablaAsientos.setRowHeight(50);
 
 		tablaAsientos.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
@@ -121,12 +121,14 @@ public class PanelEleccionAsientos extends JPanel {
 
 			loadingThread.start();
 			dialog.setVisible(true);
+			//HILO//
+		
+			BaseDeDatos.editarAsientos(selectedRows , selectedColumns, pelicula.replace(" ", ""));
 
-		});
-		//HILO//
-		
-		
 		//seguir desarollarndo, guardar en la tabla
+		});
+		
+		
 		add(scrollPane, BorderLayout.CENTER);
 		add(pantalla, BorderLayout.SOUTH);
 		add(botonCompra, BorderLayout.EAST);
