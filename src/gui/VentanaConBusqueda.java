@@ -25,7 +25,7 @@ public class VentanaConBusqueda extends JFrame {
     public VentanaConBusqueda() {
     	
         setTitle("Ventana con Búsqueda");
-        setSize(400, 400);
+        setSize(400, 200);
         setLocationRelativeTo(null);
         setVisible(true);
 
@@ -71,7 +71,6 @@ public class VentanaConBusqueda extends JFrame {
     }
 
     private void realizarBusqueda(String textoBusqueda) {
-        // Implementar funcion de búsqueda aquí
         try {
             // Simulación de búsqueda
         	logger.log(Level.INFO, "BUSCANDO: " + textoBusqueda);

@@ -133,11 +133,14 @@ public class VentanaPricipalNueva extends JFrame {
 			
 		});
 
+		/*
 		botonBuscarSuperior.addActionListener((e) -> {
 			logger.log(Level.INFO, "SE HA PULSADO EL BOTÓN BUSQUEDA");
 			setVisible(true);
 			new VentanaConBusqueda();
 		});
+		*/
+		
 		botonIdentificarseSuperior.addActionListener((e) -> {
 			if (VentanaIniciarSesion.isSesionIniciada() == true) {
 				if (getPanelCentral().getComponentCount() > 0) {
@@ -217,7 +220,7 @@ public class VentanaPricipalNueva extends JFrame {
 
 
 		panelCuentaIzquierdaSuperior.add(labelLogo, BorderLayout.WEST);
-		panelCuentaIzquierdaSuperior.add(botonBuscarSuperior, BorderLayout.WEST);
+		//panelCuentaIzquierdaSuperior.add(botonBuscarSuperior, BorderLayout.WEST);
 		panelCuentaIzquierdaSuperior.add(botonPeliculasSuperior, BorderLayout.WEST);
 		panelCuentaIzquierdaSuperior.add(botonCineSuperior, BorderLayout.WEST);
 		panelCuentaIzquierdaSuperior.add(botonPrecioSuperior, BorderLayout.WEST);
