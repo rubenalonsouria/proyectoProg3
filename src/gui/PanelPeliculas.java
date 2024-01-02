@@ -20,6 +20,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.UIManager;
 import javax.swing.table.TableColumn;
 
 import Pelicula.Pelicula;
@@ -62,6 +63,8 @@ public class PanelPeliculas extends JPanel {
         
         buscar.add(buscarItem); //Boton buscar por nombre dentro de Boton Buscar
         menuBar.add(buscar); //Boton Buscar
+        
+        buscar.addSeparator(); //Separador
         
         filtrar.add(AccionItem);
         filtrar.add(CienciaFiccionItem);

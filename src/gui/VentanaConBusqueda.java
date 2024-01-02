@@ -71,18 +71,23 @@ public class VentanaConBusqueda extends JFrame {
     }
 
     private void realizarBusqueda(String textoBusqueda) {
-        try {
-            // Simulación de búsqueda
-        	logger.log(Level.INFO, "BUSCANDO: " + textoBusqueda);
+        if (textoBusqueda.isEmpty()) {
+        	logger.log(Level.INFO, "NO SE REALIZÓ LA BUSQUEDA POR QUE EL CAMPO ESTA VACIO");
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese un término de búsqueda.");
+            return;  // No realizar la búsqueda si el texto está vacío
+        }
+
+        try { //FALTA LA LOGICA DE BUSQUEDA
+            logger.log(Level.INFO, "BUSCANDO: " + textoBusqueda);
             Thread.sleep(1000);
             logger.log(Level.INFO, "MOSTRANDO RESULTADO: " + textoBusqueda);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        JOptionPane.showMessageDialog(this, "Busqueda completada de " + textoBusqueda);
-    
+        JOptionPane.showMessageDialog(this, "Búsqueda completada de " + textoBusqueda);
     }
+
     
     
     
