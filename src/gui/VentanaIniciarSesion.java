@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,13 +18,12 @@ import javax.swing.JTextField;
 
 import domain.Administrador;
 import domain.Cliente;
-import domain.Usuario;
 import main.MainCine;
 
 public class VentanaIniciarSesion extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private static boolean sesionIniciada = false;
-	private JTextField textField; // Poner el nobre de cada componente con el que es
+	private JTextField textField; 
 	private JLabel lblNewLabel, lblNewLabel_1;
 	private JPasswordField password;
 	private JButton btnNewButton, btnNewButton_1;
@@ -113,11 +111,6 @@ public class VentanaIniciarSesion extends JFrame {
 						}
 
 					} else {
-						/*
-						 * opcion de con un panel panelAdmin = new JPanel(new GridLayout(1,2));
-						 * botonAdminNo = new JButton("No"); botonAdminSi = new JButton("Si");
-						 * panelAdmin.add(botonAdminNo); panelAdmin.add(botonAdminSi);
-						 */
 
 						Object t = "Se ha detectado que eres administrador" + "\n"
 								+ "Quieres iniciar Sesion como admin?";

@@ -2,7 +2,6 @@ package gui;
 
 import java.awt.FlowLayout;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -18,8 +17,6 @@ import domain.Cliente;
 public class PanelCesta extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	// private JList<String> jlist;
-	// private DefaultListModel<String> modeloLista;
 	private ModeloTablaCesta modeloTabla;
 	private JTable tabla;
 	private JScrollPane scrollpaneltabla;
@@ -89,20 +86,21 @@ public class PanelCesta extends JPanel {
 			int row = tabla.getSelectedRow();
 			int veces = Integer.parseInt((String) tabla.getValueAt(row, 1));
 			String pelicula = (String) tabla.getValueAt(row, 0);
-			
-			for (int i = 0; i < veces ; i++) {
+
+			for (int i = 0; i < veces; i++) {
 				BaseDeDatos.quitarCarritoDeCliente(VentanaIniciarSesion.clienteIniciado().getCorreo(), pelicula);
 			}
-			
+
 			if (VentanaPricipalNueva.getPanelCentral().getComponentCount() > 0) {
 				VentanaPricipalNueva.getPanelCentral().remove(0);
 				VentanaPricipalNueva.getPanelCentral().revalidate();
 				VentanaPricipalNueva.getPanelCentral().repaint();
 			}
-			
-			VentanaPricipalNueva.getPanelCentral().add(new PanelEleccionAsientos((String) modeloTabla.getValueAt(tabla.getSelectedRow(), 0),(int) spiner.getValue()));
-			
-			//nuevo panel el metodo de pago que lo coja de lo del inicio de sesion 
+
+			VentanaPricipalNueva.getPanelCentral().add(new PanelEleccionAsientos(
+					(String) modeloTabla.getValueAt(tabla.getSelectedRow(), 0), (int) spiner.getValue()));
+
+			// nuevo panel el metodo de pago que lo coja de lo del inicio de sesion
 		});
 
 		tabla.getSelectionModel().addListSelectionListener(new ListSelectionListener() {

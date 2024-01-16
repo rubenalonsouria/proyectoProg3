@@ -5,9 +5,7 @@ import java.util.ArrayList;
 
 public class Sesion extends Pelicula{
 	//La sesion es de pelicula, qeu seran las horas en las que estara disponible
-	
-	//protected Pelicula pelicula;no hace falta por que su madre es pelicula
-	protected Sala sala;
+		protected Sala sala;
 	protected LocalDate fecha;
 	protected boolean variable3D;
 	

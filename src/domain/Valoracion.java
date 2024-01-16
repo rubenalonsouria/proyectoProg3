@@ -1,5 +1,5 @@
 package domain;
 
 public enum Valoracion {
-muyMala, mala, aceptable, buena, muyBuena
+MUYMALA, MALA, ACEPTABLE, BUENA, MUYBUENA
 }

@@ -131,25 +131,25 @@ public class PanelMetodoDePago extends JPanel {
 			ArrayList<String> datos = new ArrayList<String>();
 			if (comboOpciones.getSelectedItem().equals("Tarjeta")) {
 				logger.log(Level.INFO, "SE HA ELEGIDO TARJETA");
-				m = MetodoDePago.tarjeta;
+				m = MetodoDePago.TARJETA;
 				datos.add(textoTarjeta.getText());
 				datos.add(textCVV.getText());
 				datos.add(TextoFecha.getText());
 
 			} else if (comboOpciones.getSelectedItem().equals("Bizum")) {
 				logger.log(Level.INFO, "SE HA ELEGIDO BIZUM");
-				m = MetodoDePago.bizum;
+				m = MetodoDePago.BIZUM;
 				datos.add(textoNumeroTlf.getText());
 
 			} else if (comboOpciones.getSelectedItem().equals("PayPal")) {
 				logger.log(Level.INFO, "SE HA ELEGIDO PAYPAL");
-				m = MetodoDePago.payPal;
+				m = MetodoDePago.PAYPAL;
 				datos.add(textCorreo.getText());
 				datos.add(textPassword.getText());
 
 			} else if (comboOpciones.getSelectedItem().equals("Pago en cine") && pagoEnCine.isSelected()) {
 				logger.log(Level.INFO, "SE HA ELEGIDO CINE");
-				m = MetodoDePago.cine;
+				m = MetodoDePago.CINE;
 				datos.add("pago en cine");
 			} else {
 				JOptionPane.showMessageDialog(null, "No se ha guardado" + "\n" + "Comprueba los campos.");

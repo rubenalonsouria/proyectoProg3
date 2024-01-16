@@ -2,11 +2,9 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -14,9 +12,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.ScrollPaneLayout;
-
-import domain.Cliente;
 import main.MainCine;
 import main.Utilidades;
 
@@ -109,7 +104,6 @@ public class VentanaPricipalNueva extends JFrame {
 		botonCineSuperior.addActionListener((e) -> {
 			logger.log(Level.INFO, "SE HA PULSADO EL BOTÓN CINE"); 
 			if (getPanelCentral().getComponentCount() > 0) {
-				//getPanelCentral().getComponent(0).setVisible(false);
 				getPanelCentral().remove(0);
 				getPanelCentral().revalidate();
 				getPanelCentral().repaint();
@@ -133,14 +127,6 @@ public class VentanaPricipalNueva extends JFrame {
 			getPanelCentral().repaint();	
 			
 		});
-
-		/*
-		botonBuscarSuperior.addActionListener((e) -> {
-			logger.log(Level.INFO, "SE HA PULSADO EL BOTÓN BUSQUEDA");
-			setVisible(true);
-			new VentanaConBusqueda();
-		});
-		*/
 		
 		botonIdentificarseSuperior.addActionListener((e) -> {
 			if (VentanaIniciarSesion.isSesionIniciada() == true) {
@@ -163,13 +149,12 @@ public class VentanaPricipalNueva extends JFrame {
 		botonPrecioSuperior.addActionListener((e) -> {
 			logger.log(Level.INFO, "SE HA PULSADO EL BOTÓN PRECIOS"); 
 			if (getPanelCentral().getComponentCount() > 0) {
-				//getPanelCentral().getComponent(0).setVisible(false);
 				getPanelCentral().remove(0);
 				getPanelCentral().revalidate();
 				getPanelCentral().repaint();
 			}
 			panelPrecios = new PanelPrecios();
-			getPanelCentral().add(panelPrecios); //CAMBIAR (SOLO PARA TEST)
+			getPanelCentral().add(panelPrecios); 
 			getPanelCentral().revalidate();
 			getPanelCentral().repaint();	
 			
@@ -184,11 +169,9 @@ public class VentanaPricipalNueva extends JFrame {
 		botonAdminSuperior.setToolTipText("Ventana Administrador");
 		botonAdminSuperior.setVisible(false);
 
-		// Ad esAdministrador = ;
-
 //ACTION LISTENERS
 
-		if (VentanaIniciarSesion.isEsAdmin()) { // No entra a este bucle
+		if (VentanaIniciarSesion.isEsAdmin()) {
 			botonAdminSuperior.addActionListener((e) -> {
 				logger.log(Level.INFO, "SE HA PULSADO EL BOTÓN ADMIN");
 				botonAdminSuperior.setVisible(false);
@@ -221,7 +204,6 @@ public class VentanaPricipalNueva extends JFrame {
 
 
 		panelCuentaIzquierdaSuperior.add(labelLogo, BorderLayout.WEST);
-		//panelCuentaIzquierdaSuperior.add(botonBuscarSuperior, BorderLayout.WEST);
 		panelCuentaIzquierdaSuperior.add(botonPeliculasSuperior, BorderLayout.WEST);
 		panelCuentaIzquierdaSuperior.add(botonCineSuperior, BorderLayout.WEST);
 		panelCuentaIzquierdaSuperior.add(botonPrecioSuperior, BorderLayout.WEST);

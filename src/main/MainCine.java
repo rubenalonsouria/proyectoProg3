@@ -9,15 +9,12 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.logging.Logger;
 import java.util.logging.Level;
-
-import clasesEnDesuso.VentanaPrincipal;
 import db.BaseDeDatos;
 import domain.Administrador;
 import domain.Cliente;
 import domain.Genero;
 import domain.Pelicula;
 import domain.Valoracion;
-import gui.PanelMetodoDePago;
 import gui.VentanaPricipalNueva;
 
 public class MainCine {
@@ -82,21 +79,10 @@ public class MainCine {
 				// convertir los Strings en el Enum (Consultado a una IA)
 				Genero genero = Genero.valueOf(partes[5]);
 
-				/*
-				 * Hay que pensar que hacemos al principio cuando leemos las peliculas del
-				 * fichero: (De momento a null)
-				 * 
-				 * * Por defecto que salga ha 5 y despues que el usuario despues de verla, lo
-				 * valore y al cerrar la applicacion que se guarde en el fichero.
-				 * 
-				 */
-
-				// Valoracion valoracion = Valoracion.valueOf(partes[6]);
-
 				// Creo la pelicula y la añado a la lista
 				Pelicula peli = new Pelicula(titulo, duracion, sipnosis, actoresArray, directoresArray, genero, null) {
 				};
-				BaseDeDatos.anadirPelicula(titulo, genero, Valoracion.aceptable); // TODO hay qeu cambiar esto
+				BaseDeDatos.anadirPelicula(titulo, genero, Valoracion.ACEPTABLE);
 				BaseDeDatos.closeBD(con);
 				listaPeliculas.add(peli);
 			}
@@ -175,7 +161,7 @@ public class MainCine {
 		}
 		BaseDeDatos.closeBD(con);
 		/* VENTANA */
-		VentanaPricipalNueva v = new VentanaPricipalNueva();
+		new VentanaPricipalNueva();
 
 	}
 

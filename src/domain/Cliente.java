@@ -44,13 +44,6 @@ public class Cliente extends Usuario{
 		this.metodoDePago = metodoDePago;
 	}
 
-	/*
-	 * public int getNumeroTarjeta() { return numeroTarjeta; }
-	 * 
-	 * public void setNumeroTarjeta(int numeroTarjeta) { this.numeroTarjeta =
-	 * numeroTarjeta; }
-	 */
-
 	public int getPuntos() {
 		return puntos;
 	}

@@ -3,14 +3,9 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.logging.Logger;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -20,9 +15,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import domain.Cliente;
-import domain.Usuario;
 import main.MainCine;
-import main.Utilidades;
 
 public class VentanaRegistro extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -32,8 +25,6 @@ public class VentanaRegistro extends JFrame {
 			fechaNacimientoLabel;
 	protected JPasswordField contraseñaTextField;
 	protected JButton botonRegistrarse, botonVolver;
-	private static Logger logger = Logger.getLogger(MainCine.class.getName());
-	
 	public VentanaRegistro(JFrame ventanaAnterior, JFrame ventanaPrincipal) {
 
 		nameLabel = new JLabel("Nombre: ");
@@ -41,9 +32,6 @@ public class VentanaRegistro extends JFrame {
 
 		surnameLabel = new JLabel("Apellidos: ");
 		surnameTextField = new JTextField(20);
-
-//		ageLabel = new JLabel("Edad: ");
-//		ageTextField = new JTextField(20);
 
 		correoLabel = new JLabel("Correo Electronico: ");
 		correoTextField = new JTextField(20);
@@ -124,8 +112,6 @@ public class VentanaRegistro extends JFrame {
 		panelRegistroF.add(nameTextField);
 		panelRegistroL.add(surnameLabel);
 		panelRegistroF.add(surnameTextField);
-		// panel1.add(ageLabel);
-		// panel1.add(ageTextField);
 		panelRegistroL.add(correoLabel);
 		panelRegistroF.add(correoTextField);
 		panelRegistroL.add(contraseñaLabel);
@@ -139,8 +125,6 @@ public class VentanaRegistro extends JFrame {
 		panelAcciones.add(botonRegistrarse);
 		panelAcciones.add(botonVolver);
 
-		//panelRegistro.setLayout(new GridLayout(8, 2));
-		//add(panel1, BorderLayout.WEST);
 
 		setBounds(400, 100, 800, 500);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);

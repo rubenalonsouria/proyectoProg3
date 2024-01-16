@@ -2,21 +2,10 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GraphicsEnvironment;
-import java.awt.GridLayout;
-import java.awt.LayoutManager;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -24,8 +13,6 @@ import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
-import javax.swing.SwingUtilities;
-import javax.swing.Timer;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -39,7 +26,6 @@ public class PanelEleccionAsientos extends JPanel {
 	private ModeloAsientos tableModel;
 	private JLabel pantalla;
 	private ArrayList<String[]> listaAsientos;
-	private int seleccionActual = 0;
 	private JButton botonCompra;
 
 	public PanelEleccionAsientos(String pelicula, int numeroEntradas) {
@@ -57,7 +43,9 @@ public class PanelEleccionAsientos extends JPanel {
 
 		listaAsientos = BaseDeDatos.obtenerAsientos(pelicula.replace(" ", ""));
 		tableModel = new ModeloAsientos(listaAsientos, columnNames) {
+			private static final long serialVersionUID = 1L;
 		};
+
 		tablaAsientos = new JTable(tableModel);
 		botonCompra = new JButton("Comprar");
 		JScrollPane scrollPane = new JScrollPane(tablaAsientos);
@@ -66,8 +54,6 @@ public class PanelEleccionAsientos extends JPanel {
 
 		tablaAsientos.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		tablaAsientos.getTableHeader().setReorderingAllowed(false);
-
-		// tableModel.setColumnIdentifiers(columnNames);
 
 		tablaAsientos.setDefaultRenderer(Object.class, new RenderAsientos());
 
@@ -89,7 +75,6 @@ public class PanelEleccionAsientos extends JPanel {
 						int lastSelectedColumn = tablaAsientos.getSelectedColumn();
 						tablaAsientos.changeSelection(lastSelectedRow, lastSelectedColumn, false, false);
 					} else {
-						seleccionActual = seleccionadas;
 					}
 				}
 			}
@@ -97,7 +82,7 @@ public class PanelEleccionAsientos extends JPanel {
 		botonCompra.addActionListener((e) -> {
 			int[] selectedRows = tablaAsientos.getSelectedRows();
 			int[] selectedColumns = tablaAsientos.getSelectedColumns();
-			//HILO//
+			// HILO//
 			JDialog dialog = new JDialog();
 			dialog.setTitle("Cargando...");
 			dialog.setModal(true);
@@ -121,14 +106,14 @@ public class PanelEleccionAsientos extends JPanel {
 
 			loadingThread.start();
 			dialog.setVisible(true);
-			//HILO//
-		
-			BaseDeDatos.editarAsientos(selectedRows , selectedColumns, pelicula.replace(" ", ""));
+			// HILO//
 
-		//seguir desarollarndo, guardar en la tabla
+			BaseDeDatos.editarAsientos(selectedRows, selectedColumns, pelicula.replace(" ", ""));
+
+			// seguir desarollarndo, guardar en la tabla
+
 		});
-		
-		
+
 		add(scrollPane, BorderLayout.CENTER);
 		add(pantalla, BorderLayout.SOUTH);
 		add(botonCompra, BorderLayout.EAST);

@@ -3,7 +3,7 @@ package domain;
 import java.util.ArrayList;
 
 public class Entrada extends Pelicula{
-//PENSAR MEJOR ATRIBUTOS ESTA PROVISIONAL
+//ESTA PROVISIONAL
 	protected double precio;
 	protected Cliente cliente;
 	protected Sesion sesion;

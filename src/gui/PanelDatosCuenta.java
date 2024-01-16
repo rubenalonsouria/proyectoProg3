@@ -1,8 +1,5 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -19,7 +16,6 @@ public class PanelDatosCuenta extends JPanel {
 			datosCuentaFechaNacimiento;
 	private JPasswordField datosCuentaPassword;
 	private JButton editarDatosCuenta, salirDatosCuenta, guardarDatosCuenta, cerrarSesionDatosCuenta, metodoDePago;
-	private PanelMetodoDePago panelMetodoDePago;
 
 	public PanelDatosCuenta() {
 		editarDatosCuenta = new JButton("Editar");
@@ -53,10 +49,6 @@ public class PanelDatosCuenta extends JPanel {
 				datosCuentaDni.setText(VentanaIniciarSesion.clienteIniciado().getDni());
 				datosCuentaDni.setEditable(false);
 
-				// datosCuentaFechaNacimiento = new
-				// JTextField(VentanaIniciarSesion.clienteIniciado().getFechaNacimineto().toString());
-				// datosCuentaFechaNacimiento.setEditable(false);
-
 				add(datosCuentaCorreo);
 				add(datosCuentaPassword);
 				add(datosCuentaNombre);
@@ -81,10 +73,6 @@ public class PanelDatosCuenta extends JPanel {
 
 				datosCuentaDni.setText(VentanaIniciarSesion.administradorIniciado().getDni());
 				datosCuentaDni.setEditable(false);
-
-				// datosCuentaFechaNacimiento = new
-				// JTextField(VentanaIniciarSesion.administradorIniciado().getFechaNacimineto().toString());
-				// datosCuentaFechaNacimiento.setEditable(false);
 
 				add(datosCuentaCorreo);
 				add(datosCuentaPassword);
@@ -115,7 +103,8 @@ public class PanelDatosCuenta extends JPanel {
 				VentanaIniciarSesion.setclienteIniciado(null);
 				VentanaIniciarSesion.setSesionIniciada(false);
 				setVisible(false);
-			});add(cerrarSesionDatosCuenta);
+			});
+			add(cerrarSesionDatosCuenta);
 
 			guardarDatosCuenta.addActionListener((a) -> {
 				if (VentanaIniciarSesion.clienteIniciado() != null) {
@@ -156,24 +145,24 @@ public class PanelDatosCuenta extends JPanel {
 				datosCuentaNombre.setEditable(false);
 				datosCuentaApellido.setEditable(false);
 				datosCuentaDni.setEditable(false);
-			});add(guardarDatosCuenta);
+			});
+			add(guardarDatosCuenta);
 
 			metodoDePago.addActionListener((a) -> {
-				if (VentanaPricipalNueva.getPanelCentral().getComponentCount() > 0) { //Solucion para
+				if (VentanaPricipalNueva.getPanelCentral().getComponentCount() > 0) {
 					VentanaPricipalNueva.getPanelCentral().remove(0);
 					VentanaPricipalNueva.getPanelCentral().revalidate();
 					VentanaPricipalNueva.getPanelCentral().repaint();
 				}
-				VentanaPricipalNueva.getPanelCentral().add(panelMetodoDePago = new PanelMetodoDePago(VentanaIniciarSesion.clienteIniciado(), this));
-				
+				VentanaPricipalNueva.getPanelCentral()
+						.add(new PanelMetodoDePago(VentanaIniciarSesion.clienteIniciado(), this));
 
 			});
 			if (!VentanaIniciarSesion.isEsAdmin()) {
 				add(metodoDePago);
-			};
+			}
 
 		}
-		// setPreferredSize(new Dimension(200, 200));
 		setVisible(true);
 		setName("Datos");
 
