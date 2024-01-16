@@ -2,6 +2,7 @@ package gui;
 
 import javax.swing.*;
 
+import Pelicula.Pelicula;
 import main.MainCine;
 
 import java.awt.*;
@@ -9,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -72,23 +74,39 @@ public class VentanaConBusqueda extends JFrame {
 
     private void realizarBusqueda(String textoBusqueda) {
         if (textoBusqueda.isEmpty()) {
-        	logger.log(Level.INFO, "NO SE REALIZÓ LA BUSQUEDA POR QUE EL CAMPO ESTA VACIO");
+            logger.log(Level.INFO, "NO SE REALIZÓ LA BUSQUEDA POR QUE EL CAMPO ESTA VACIO");
             JOptionPane.showMessageDialog(this, "Por favor, ingrese un término de búsqueda.");
-            return;  // No realizar la búsqueda si el texto está vacío
+            return;
         }
 
-        try { //FALTA LA LOGICA DE BUSQUEDA
+        ArrayList<Pelicula> listaPeliculas = MainCine.getListaPeliculas();
+        ArrayList<Pelicula> peliculasEncontradas = new ArrayList<>();
+
+        for (Pelicula pelicula : listaPeliculas) {
+            if (pelicula.getTitulo().toLowerCase().contains(textoBusqueda.toLowerCase())) {
+                peliculasEncontradas.add(pelicula);
+            }
+        }
+
+        if (!peliculasEncontradas.isEmpty()) {
             logger.log(Level.INFO, "BUSCANDO: " + textoBusqueda);
+            StringBuilder mensaje = new StringBuilder("Películas encontradas:\n");
+            for (Pelicula pelicula : peliculasEncontradas) {
+                mensaje.append(pelicula.getTitulo()).append("\n");
+            }
+            JOptionPane.showMessageDialog(this, mensaje.toString());
+        } else {
+
+            logger.log(Level.INFO, "NO SE ENCONTRARON PELÍCULAS CON LA BÚSQUEDA: " + textoBusqueda);
+            JOptionPane.showMessageDialog(this, "No se encontraron películas con la búsqueda: " + textoBusqueda);
+        }
+
+        try {
             Thread.sleep(1000);
-            logger.log(Level.INFO, "MOSTRANDO RESULTADO: " + textoBusqueda);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        JOptionPane.showMessageDialog(this, "Búsqueda completada de " + textoBusqueda);
+        logger.log(Level.INFO, "Búsqueda completada de " + textoBusqueda);
     }
-
-    
-    
-    
 }

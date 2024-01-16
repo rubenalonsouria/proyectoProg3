@@ -25,7 +25,7 @@ public class VentanaPricipalNueva extends JFrame {
 	
 	private static Logger logger = Logger.getLogger(MainCine.class.getName());
 
-	private JLabel labelLogo;
+	private JLabel labelLogo, labelDeustoCine;
 	private JButton botonIdentificarseSuperior, botonCineSuperior, botonPeliculasSuperior, botonBuscarSuperior,
 			botonUsuarioSuperior, botonPrecioSuperior, botonCarritoSuperior;
 	public static JButton botonAdminSuperior;
@@ -65,6 +65,7 @@ public class VentanaPricipalNueva extends JFrame {
 		panelCuentaDerechaSuperior = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
 		labelLogo = new JLabel(new ImageIcon("images/deustocinelogo.png"));
+		labelDeustoCine = new JLabel(new ImageIcon("images/deustoCine.jpg"));
 
 		botonIdentificarseSuperior = new JButton(new ImageIcon("images/iconoCuenta.png"));
 		botonIdentificarseSuperior.setToolTipText("Iniciar sesión o registrarse");
@@ -229,6 +230,7 @@ public class VentanaPricipalNueva extends JFrame {
 		panelCuentaSuperior.add(panelCuentaDerechaSuperior, BorderLayout.EAST);
 		add(panelCuentaSuperior, BorderLayout.NORTH);
 
+		panelCentral.add(labelDeustoCine, BorderLayout.CENTER);
 		add(panelCentral, BorderLayout.CENTER);
         
 		setBounds(100, 100, 1600, 1000);

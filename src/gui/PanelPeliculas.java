@@ -17,6 +17,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -78,6 +79,11 @@ public class PanelPeliculas extends JPanel {
         
         menuBar.add(filtrar);
         
+
+
+        // Repite este bloque para los demás géneros
+
+        
         buscarItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -86,10 +92,14 @@ public class PanelPeliculas extends JPanel {
                 ventanaBusqueda.setVisible(true);
             }
         });
-
         
         this.add(menuBar, BorderLayout.NORTH);
 		
+
+
+    
+
+        
         //JTABLE
         
 		ArrayList<Pelicula> listaPeliculas = MainCine.getListaPeliculas();
