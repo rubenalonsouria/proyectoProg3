@@ -1,0 +1,4 @@
+El proyecto es ejecutado desde la clase MainCine.java, que se encuentra en la carpeta src/main.
+Para la poder acceder a todas las funcionalidades, es necesario iniciar sesion (o registrarse si es la primera vez) Esto se hace desde el botón superior izquierdo.
+Para acceder como usuario normal (cliente) puedes usar como correo electronico de usuario haritz.carvalho@opendeusto.es y contraseña 2004.
+Para acceder como admin puedes usar como correo electronico de usuario iker.diez.perez@opendeusto.es y contraseña 0.
