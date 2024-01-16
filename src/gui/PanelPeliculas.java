@@ -24,7 +24,7 @@ import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.table.TableColumn;
 
-import Pelicula.Pelicula;
+import domain.Pelicula;
 import main.MainCine;
 
 public class PanelPeliculas extends JPanel {
@@ -78,12 +78,7 @@ public class PanelPeliculas extends JPanel {
         filtrar.add(TerrorItem);
         
         menuBar.add(filtrar);
-        
-
-
-        // Repite este bloque para los demás géneros
-
-        
+   
         buscarItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

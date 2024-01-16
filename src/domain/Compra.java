@@ -1,9 +1,5 @@
-package Entradas;
+package domain;
 import java.time.LocalDate;
-import Cine.Cine;
-import Pelicula.Pelicula;
-import Usuarios.Cliente;
-import Usuarios.MetodoDePago;
 
 public class Compra {
 	protected static int idCompra;

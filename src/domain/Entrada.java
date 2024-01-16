@@ -1,12 +1,6 @@
-package Entradas;
+package domain;
 
 import java.util.ArrayList;
-
-import Pelicula.Genero;
-import Pelicula.Pelicula;
-import Pelicula.Sesion;
-import Pelicula.Valoracion;
-import Usuarios.Cliente;
 
 public class Entrada extends Pelicula{
 //PENSAR MEJOR ATRIBUTOS ESTA PROVISIONAL

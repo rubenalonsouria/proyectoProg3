@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.ScrollPaneLayout;
 
-import Usuarios.Cliente;
+import domain.Cliente;
 import main.MainCine;
 import main.Utilidades;
 

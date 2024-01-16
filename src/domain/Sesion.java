@@ -1,9 +1,7 @@
-package Pelicula;
+package domain;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-
-import Cine.Sala;
 
 public class Sesion extends Pelicula{
 	//La sesion es de pelicula, qeu seran las horas en las que estara disponible

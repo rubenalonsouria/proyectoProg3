@@ -18,9 +18,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import Pelicula.Pelicula;
-import Usuarios.Cliente;
-import main.BaseDeDatos;
+import db.BaseDeDatos;
+import domain.Cliente;
+import domain.Pelicula;
 import main.MainCine;
 
 public class PanelInformacionPelicula extends JPanel {

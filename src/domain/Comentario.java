@@ -1,9 +1,7 @@
-package Pelicula;
+package domain;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-
-import Usuarios.Usuario;
 
 public class Comentario extends Pelicula{
 	//Los comentarios los puede eliminar el administrador si no son adecuados

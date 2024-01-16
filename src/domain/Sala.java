@@ -1,4 +1,4 @@
-package Cine;
+package domain;
 
 import java.util.ArrayList;
 

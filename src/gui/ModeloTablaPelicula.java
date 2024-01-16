@@ -6,7 +6,7 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
-import Pelicula.Pelicula;
+import domain.Pelicula;
 
 public class ModeloTablaPelicula extends DefaultTableModel{
 	private static final long serialVersionUID = 1L;

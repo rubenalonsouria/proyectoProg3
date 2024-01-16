@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import Usuarios.MetodoDePago;
+import domain.MetodoDePago;
 
 public class Utilidades {
 	public static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

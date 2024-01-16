@@ -27,10 +27,10 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-import Pelicula.Pelicula;
-import Usuarios.Administrador;
-import Usuarios.Cliente;
-import Usuarios.MetodoDePago;
+import domain.Administrador;
+import domain.Cliente;
+import domain.MetodoDePago;
+import domain.Pelicula;
 import gui.ModeloTablaPelicula;
 import gui.VentanaConBusqueda;
 import gui.VentanaIdentificarse;

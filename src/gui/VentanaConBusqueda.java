@@ -2,7 +2,7 @@ package gui;
 
 import javax.swing.*;
 
-import Pelicula.Pelicula;
+import domain.Pelicula;
 import main.MainCine;
 
 import java.awt.*;

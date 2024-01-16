@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-import Cine.Cine;
+import domain.Cine;
 
 public class PanelInformacionCines extends JPanel {
     private static final long serialVersionUID = 1L;

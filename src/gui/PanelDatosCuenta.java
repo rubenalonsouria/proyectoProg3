@@ -8,8 +8,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import Usuarios.Administrador;
-import Usuarios.Cliente;
+import domain.Administrador;
+import domain.Cliente;
 import main.MainCine;
 
 public class PanelDatosCuenta extends JPanel {

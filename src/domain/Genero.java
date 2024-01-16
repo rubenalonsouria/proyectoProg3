@@ -1,4 +1,4 @@
-package Pelicula;
+package domain;
 
 public enum Genero {
 

@@ -17,9 +17,9 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import Usuarios.Administrador;
-import Usuarios.Cliente;
-import Usuarios.Usuario;
+import domain.Administrador;
+import domain.Cliente;
+import domain.Usuario;
 import main.MainCine;
 
 public class VentanaIniciarSesion extends JFrame {

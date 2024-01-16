@@ -1,8 +1,5 @@
-package Usuarios;
+package domain;
 import java.time.LocalDate;
-
-import Cine.Cine;
-import Pelicula.Pelicula;
 
 public class Administrador extends Usuario {
 	protected Cine cine;

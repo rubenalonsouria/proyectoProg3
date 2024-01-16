@@ -10,12 +10,13 @@ import java.util.Scanner;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
-import Pelicula.Genero;
-import Pelicula.Pelicula;
-import Pelicula.Valoracion;
-import Usuarios.Administrador;
-import Usuarios.Cliente;
 import clasesEnDesuso.VentanaPrincipal;
+import db.BaseDeDatos;
+import domain.Administrador;
+import domain.Cliente;
+import domain.Genero;
+import domain.Pelicula;
+import domain.Valoracion;
 import gui.PanelMetodoDePago;
 import gui.VentanaPricipalNueva;
 

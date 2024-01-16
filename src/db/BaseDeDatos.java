@@ -1,4 +1,4 @@
-package main;
+package db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,10 +13,11 @@ import java.util.List;
 
 import javax.swing.plaf.synth.SynthOptionPaneUI;
 
-import Pelicula.Genero;
-import Pelicula.Pelicula;
-import Pelicula.Valoracion;
-import Usuarios.Cliente;
+import domain.Cliente;
+import domain.Genero;
+import domain.Pelicula;
+import domain.Valoracion;
+import main.MainCine;
 
 public class BaseDeDatos {
 

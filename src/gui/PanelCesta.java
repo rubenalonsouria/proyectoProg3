@@ -11,8 +11,9 @@ import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import Usuarios.Cliente;
-import main.BaseDeDatos;
+
+import db.BaseDeDatos;
+import domain.Cliente;
 
 public class PanelCesta extends JPanel {
 

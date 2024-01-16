@@ -1,4 +1,4 @@
-package Pelicula;
+package domain;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;

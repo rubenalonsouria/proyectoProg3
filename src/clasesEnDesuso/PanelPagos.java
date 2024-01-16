@@ -16,8 +16,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import Usuarios.Cliente;
-import Usuarios.MetodoDePago;
+import domain.Cliente;
+import domain.MetodoDePago;
 import main.MainCine;
 import main.Utilidades;
 

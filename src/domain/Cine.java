@@ -1,4 +1,4 @@
-package Cine;
+package domain;
 
 public class Cine{
 	/*Hay qeu repasar lo de las clases hijas y madres 

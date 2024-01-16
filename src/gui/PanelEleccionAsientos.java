@@ -29,7 +29,7 @@ import javax.swing.Timer;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import main.BaseDeDatos;
+import db.BaseDeDatos;
 
 public class PanelEleccionAsientos extends JPanel {
 
